@@ -1,0 +1,54 @@
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field-required-marker {
+    display: none
+}
+
+.center-content { 
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.info {
+    text-align: center;
+    padding-top: 4em;
+}
+
+.input {
+    width: 25em;
+}
+
+.login-card {
+    margin: 2em;
+    width: fit-content;
+}
+
+.login-card-content {
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 5em;
+    padding-bottom: 3em;
+}
+
+.login-title {
+    margin-bottom: 5em;
+}
+
+.mat-card-title {
+    font-weight: 600;
+}
+
+.submit-button {
+    margin-top: 1em;
+    width: 100%;
+}
+
+a:link, a:active, a:hover, a:visited {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}
+
