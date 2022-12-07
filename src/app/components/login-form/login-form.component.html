@@ -1,13 +1,20 @@
 <div class="login-card">
     <mat-card class="login-card-content">
-        <div class="center-content login-title">
-            <mat-card-title>{{ 'login-form.title' | translate }}</mat-card-title>
+        <div class="login-title">
+            <div class="center-content">
+                <mat-card-title>{{ 'login-form.title' | translate }}</mat-card-title> 
+            </div>
+            <div class="center-content">
+                <mat-error *ngIf="!isSuccess">
+                    {{ 'login-form.errors.negative-response' | translate }}
+                </mat-error>  
+            </div>
         </div>
 
         <div class="center-content">
             <mat-card-content>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <div>
+                    <div>   
                         <mat-form-field class="input">
                             <mat-label>{{ 'account.username' | translate }}</mat-label>
                             <input type="text" matInput formControlName="username">

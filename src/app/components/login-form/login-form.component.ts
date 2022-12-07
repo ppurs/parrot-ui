@@ -13,7 +13,11 @@ export class LoginFormComponent implements OnInit {
     password:['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {}
+  isSuccess: boolean;
+
+  constructor(private fb: FormBuilder) {
+    this.isSuccess = true;
+  }
 
   ngOnInit(): void {}
 
@@ -22,8 +26,13 @@ export class LoginFormComponent implements OnInit {
       this.loginForm.markAllAsTouched();
     }
     else {
-      //pass data to backend
+      //pass data to backend and get response
+      this.isSuccess = this.getResponseFromLogin();
     }
+  }
+
+  getResponseFromLogin(): boolean {
+    return true;
   }
 
 }

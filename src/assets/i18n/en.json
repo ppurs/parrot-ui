@@ -5,6 +5,7 @@
         "account-question": "Don't have an account?",
         "register-link": "Register here",
         "errors": {
+            "negative-response": "Invalid username or password. Try again.",
             "username": "Enter your username.",
             "password": "Enter your password."
         }
