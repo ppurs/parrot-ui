@@ -1,6 +1,7 @@
-::ng-deep .mat-form-field-underline {
+/*::ng-deep .mat-form-field-underline {
     display: none;
 }
+*/
 
 ::ng-deep .mat-form-field-required-marker {
     display: none
@@ -14,7 +15,7 @@
 
 .info {
     text-align: center;
-    padding-top: 4em;
+    padding-top: 5em;
 }
 
 .input {
@@ -27,8 +28,8 @@
 }
 
 .login-card-content {
-    padding-left: 3em;
-    padding-right: 3em;
+    padding-left: 4em;
+    padding-right: 4em;
     padding-top: 5em;
     padding-bottom: 3em;
 }
@@ -41,8 +42,12 @@
     font-weight: 600;
 }
 
+.mat-form-field {
+    margin-bottom: 0.5em;
+}
+
 .submit-button {
-    margin-top: 1em;
+    margin-top: 1.5em;
     width: 100%;
 }
 
