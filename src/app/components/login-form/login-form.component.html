@@ -1,7 +1,7 @@
 <div class="login-card">
     <mat-card class="login-card-content">
         <div class="center-content login-title">
-            <mat-card-title>Login</mat-card-title>
+            <mat-card-title>{{ 'login-form.title' | translate }}</mat-card-title>
         </div>
 
         <div class="center-content">
@@ -9,30 +9,30 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div>
                         <mat-form-field class="input">
-                            <mat-label>Username</mat-label>
+                            <mat-label>{{ 'account.username' | translate }}</mat-label>
                             <input type="text" matInput formControlName="username">
                             <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-                                Enter your username.
+                                {{ 'login-form.errors.username' | translate }}
                             </mat-error> 
                         </mat-form-field> 
                     </div>
                     <div>
                         <mat-form-field class="input">
-                            <mat-label>Password</mat-label>
+                            <mat-label>{{ 'account.password' | translate }}</mat-label>
                             <input type="password" matInput formControlName="password">
                             <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-                                Enter your password.
+                                {{ 'login-form.errors.password' | translate }}
                             </mat-error> 
                         </mat-form-field>
                     </div>     
-                    <button mat-raised-button color="primary" type="submit" class="submit-button">LOG IN</button> 
+                    <button mat-raised-button color="primary" type="submit" class="submit-button">{{ 'login-form.button' | translate }}</button> 
                 </form>
             </mat-card-content>
         </div>
         
-        <div class="info">Don't have an account?</div>
+        <div class="info">{{ 'login-form.account-question' | translate }}</div>
         <div class="center-content">
-            <a routerLink="/register">Register here</a>
+            <a routerLink="/register">{{ 'login-form.register-link' | translate }}</a>
         </div>
         
     </mat-card>

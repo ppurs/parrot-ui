@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,8 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'parrot-ui';
 
-  constructor( private router: Router) {}
-
-  public loginBtnClick() {
-    this.router.navigateByUrl('/login');
-  }
-
-  public registrationBtnClick() {
-    this.router.navigateByUrl('/register');
+  constructor( private translate: TranslateService ) {
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 }

@@ -1,7 +1,7 @@
 <div class="registration-card">
     <mat-card class="registration-card-content">
         <div class="center-content registration-title">
-            <mat-card-title>Create account</mat-card-title>
+            <mat-card-title>{{ 'registration-form.title' | translate }}</mat-card-title>
         </div>
 
         <div class="center-content">
@@ -9,52 +9,52 @@
                 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
                     <div>
                         <mat-form-field class="input" >
-                            <mat-label>Username</mat-label>
+                            <mat-label>{{ 'account.username' | translate }}</mat-label>
                             <input type="text" matInput formControlName="username">
                             <mat-error *ngIf="username?.hasError('nonuniqueUsername')">
-                                Username already exists.
+                                {{ 'registration-form.errors.username.nonunique' | translate }}
                             </mat-error> 
                             <mat-error *ngIf="username?.hasError('required')">
-                                Username is required.
+                                {{ 'registration-form.errors.username.required' | translate }}
                             </mat-error> 
                         </mat-form-field> 
                     </div>
                     <div>
                         <mat-form-field class="input" >
-                            <mat-label>Email</mat-label>
+                            <mat-label>{{ 'account.email' | translate }}</mat-label>
                             <input type="email" matInput formControlName="email">
                             <mat-error *ngIf="email?.hasError('email')">
-                                Invalid email adress format.
+                                {{ 'registration-form.errors.email.invalid' | translate }}
                             </mat-error> 
                             <mat-error *ngIf="email?.hasError('required')">
-                                Email is required.
+                                {{ 'registration-form.errors.email.required' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="input" >
-                            <mat-label>Password</mat-label>
+                            <mat-label>{{ 'account.password' | translate }}</mat-label>
                             <input type="password" matInput formControlName="password"> 
                             <mat-error *ngIf="password?.hasError('minlength')">
-                                Password should contain minimum 8 characters.
+                                {{ 'registration-form.errors.password.min-length' | translate }}
                             </mat-error> 
                             <mat-error *ngIf="password?.hasError('maxlength')">
-                                Password should contain maximum 32 characters.
+                                {{ 'registration-form.errors.password.max-length' | translate }}
                             </mat-error>
                             <mat-error *ngIf="password?.hasError('required')">
-                                Password is required.
+                                {{ 'registration-form.errors.password.required' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div> 
                     <div>
                         <mat-form-field class="input" >
-                            <mat-label>Confirm password</mat-label>
+                            <mat-label>{{ 'registration-form.password-repetition' | translate }}</mat-label>
                             <input type="password" matInput formControlName="passwordRepetition">
                             <mat-error *ngIf="passwordRepetition?.hasError('passwordMatchError')">
-                                Password and confirmed password do not match.
+                                {{ 'registration-form.errors.password-repetition.different' | translate }}
                             </mat-error> 
                             <mat-error *ngIf="passwordRepetition?.hasError('required')">
-                                Re-type password is required.
+                                {{ 'registration-form.errors.password-repetition.required' | translate }}
                             </mat-error> 
                         </mat-form-field>
                     </div>   
@@ -63,17 +63,17 @@
                     <div class="checkbox-position">
                         <mat-checkbox formControlName="acceptTerms" [disableRipple]="true"></mat-checkbox> 
                     </div>
-                    <div class="checkbox-label">Accept the <a routerLink="/register">Terms of service</a> and <a routerLink="/register">Privacy Policy</a>.<span
+                    <div class="checkbox-label">{{ 'registration-form.accept-checkbox.accept' | translate }}<a routerLink="/register"> {{ 'registration-form.accept-checkbox.terms' | translate }}</a> {{ 'registration-form.accept-checkbox.and' | translate }} <a routerLink="/register">{{ 'registration-form.accept-checkbox.privacy-policy' | translate }}</a>.<span
                         *ngIf="acceptTerms?.touched && acceptTerms?.hasError('required')" class="error-asterisk">*</span></div> 
-                    <button mat-raised-button color="primary" type="submit" class="submit-button">REGISTER</button> 
+                    <button mat-raised-button color="primary" type="submit" class="submit-button">{{ 'registration-form.button' | translate }}</button> 
                     </div>
                 </form>
             </mat-card-content>
         </div>
 
-        <div class="info">Already have an account?</div>
+        <div class="info">{{ 'registration-form.account-question' | translate }}</div>
         <div class="center-content">
-            <a routerLink="/login">Login here</a>
+            <a routerLink="/login">{{ 'registration-form.login-link' | translate }}</a>
         </div>
         
     </mat-card>

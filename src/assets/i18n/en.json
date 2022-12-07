@@ -1,0 +1,51 @@
+{
+    "login-form": {
+        "title": "Login",
+        "button": "LOG IN",
+        "account-question": "Don't have an account?",
+        "register-link": "Register here",
+        "errors": {
+            "username": "Enter your username.",
+            "password": "Enter your password."
+        }
+    },
+
+    "registration-form": {
+        "title": "Create account",
+        "password-repetition": "Confirm passsword",
+        "accept-checkbox": {
+            "accept": "Accept the",
+            "terms": "Terms of service",
+            "and": "and",
+            "privacy-policy": "Privacy Policy"
+        },
+        "button": "REGISTER",
+        "account-question": "Already have an account?",
+        "login-link": "Login here",
+        "errors": {
+            "username": {
+                "required": "Username is required.",
+                "nonunique": "Username already exists."
+            },
+            "email": {
+                "required": "Email is required.",
+                "invalid-format": "Invalid email adress format."
+            },
+            "password": {
+                "required": "Password is required.",
+                "min-length": "Password should contain minimum 8 characters.",
+                "max-length": "Password should contain maximum 32 characters."
+            },
+            "password-repetition": {
+                "required":"Password confirmation is required.",
+                "different": "Password and confirmed password do not match."
+            }
+        }
+    },
+
+    "account": {
+        "username": "Username",
+        "password": "Password",
+        "email": "Email"
+    }
+}
