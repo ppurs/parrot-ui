@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +16,8 @@ export class LoginFormComponent implements OnInit {
 
   isSuccess: boolean;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private router: Router ) {
     this.isSuccess = true;
   }
 
@@ -28,6 +30,10 @@ export class LoginFormComponent implements OnInit {
     else {
       //pass data to backend and get response
       this.isSuccess = this.getResponseFromLogin();
+      
+      if( this.isSuccess ) {
+        this.router.navigate(['']);
+      }
     }
   }
 
