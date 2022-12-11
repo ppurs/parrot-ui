@@ -1,4 +1,4 @@
-# ParrotUi
+# ParrotUI
 
 ## Development server
 
