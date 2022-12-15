@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FacadeService } from 'src/app/services/facade/facade.service';
 
 @Component({
   selector: 'app-login-form',
@@ -16,7 +17,8 @@ export class LoginFormComponent implements OnInit {
 
   isSuccess: boolean;
 
-  constructor(private fb: FormBuilder,
+  constructor(private facade: FacadeService,
+              private fb: FormBuilder,
               private router: Router ) {
     this.isSuccess = true;
   }
@@ -32,6 +34,7 @@ export class LoginFormComponent implements OnInit {
       this.isSuccess = this.getResponseFromLogin();
       
       if( this.isSuccess ) {
+        this.facade.setUserData( null );
         this.router.navigate(['']);
       }
     }
