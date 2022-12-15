@@ -9,5 +9,5 @@
 
 To run app in docker container:
 1. First download and install docker environment https://docs.docker.com/get-docker/.
-2. Run ```docker-compose up -d``` in the parrot-ui root directory.
+2. Run ```docker-compose up --build -d``` in the parrot-ui root directory.
 3. Navigate to `http://localhost:4200/`.
