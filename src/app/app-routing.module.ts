@@ -4,7 +4,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-//import { AddTermsPageComponent } from './components/add-terms-page/add-terms-page.component';
+import { AddTranslationsPageComponent } from './components/add-translations-page/add-translations-page.component';
 
 const routes: Routes = [
   {
@@ -15,10 +15,10 @@ const routes: Routes = [
         path: '',
         component: MainPageComponent   
       },
-      /*{
+      {
         path: 'add',
-        component: AddTermsPageComponent   
-      }*/
+        component: AddTranslationsPageComponent   
+      }
     ]
   },
   { path: 'login', component: LoginFormComponent },

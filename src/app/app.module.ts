@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { AddTranslationsPageComponent } from './components/add-translations-page/add-translations-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,21 +24,19 @@ import { RegistrationFormComponent } from './components/registration-form/regist
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MainPageComponent } from './components/main-page/main-page.component';
-//import { NewTranslationTileComponent } from './components/new-translation-tile/new-translation-tile.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-//import { AddTermsPageComponent } from './components/add-terms-page/add-terms-page.component';
-
+import { NewTranslationTileComponent } from './components/new-translation-tile/new-translation-tile.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    AddTranslationsPageComponent,
     LoginFormComponent,
-    MainPageComponent,
-  //  NewTranslationTileComponent,
-    RegistrationFormComponent,
     MainLayoutComponent,
-   // AddTermsPageComponent,
+    MainPageComponent,
+    NewTranslationTileComponent,
+    RegistrationFormComponent,
   ],
   imports: [
     AppRoutingModule,

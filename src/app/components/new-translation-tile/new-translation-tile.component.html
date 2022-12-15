@@ -1,0 +1,63 @@
+<div class="margintile">
+    <mat-expansion-panel [expanded]="isCurrent()" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ state.tileHeader | translate }}
+            </mat-panel-title>
+            <div [ngSwitch]="getStatus()" class="status-icon">
+                <mat-spinner *ngSwitchCase="'loading'" [diameter]="20"></mat-spinner>
+                <mat-icon *ngSwitchCase="'successful'" class="success-icon">done</mat-icon>
+                <mat-icon *ngSwitchCase="'unsuccessfull'" class="failed-icon">close icon</mat-icon>
+            </div>
+        </mat-expansion-panel-header>
+        
+        <form [formGroup]="termAdditionForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col">
+                <div class="center-block">
+                    <mat-form-field class="input">
+                        <mat-label>{{ 'translation-addition-tile.term' | translate }}</mat-label>
+                        <input type="text" matInput formControlName="term">
+                        <mat-error *ngIf="termAdditionForm.get('term')?.hasError('required')">
+                            {{ 'translation-addition-tile.required-error' | translate }}
+                        </mat-error> 
+                    </mat-form-field> 
+
+                    <mat-form-field class="input">
+                        <mat-label>{{ 'translation-addition-tile.translation' | translate }}</mat-label>
+                        <input type="text" matInput formControlName="translation">
+                        <mat-error *ngIf="termAdditionForm.get('translation')?.hasError('required')">
+                            {{ 'translation-addition-tile.required-error' | translate }}
+                        </mat-error> 
+                    </mat-form-field> 
+                </div>
+                </div>
+           
+           
+                <div class="col">
+                    <div class="center-block">
+                    <mat-form-field class="input">
+                        <mat-label>{{ 'translation-addition-tile.type' | translate }}</mat-label>    
+                        <mat-select disableOptionCentering panelClass="bottom-position" formControlName="type">                 
+                            <mat-option *ngFor="let type of Types" [value]="type">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="termAdditionForm.get('type')?.hasError('required')">
+                            {{ 'translation-addition-tile.required-error' | translate }}
+                        </mat-error> 
+                    </mat-form-field> 
+                
+                    <mat-form-field class="input">
+                        <mat-label>{{ 'translation-addition-tile.description' | translate }}</mat-label>
+                        <textarea type="text" matInput cdkTextareaAutosize formControlName="description"></textarea>
+                    </mat-form-field> 
+                    </div>
+                </div>
+            </div>
+            <div class="center-content">
+                <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="isBtnDisabled()">{{ state.processStatus.btnLabel | translate }}</button> 
+            </div>
+        </form>
+    </mat-expansion-panel>
+</div>

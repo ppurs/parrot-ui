@@ -48,5 +48,23 @@
         "username": "Username",
         "password": "Password",
         "email": "Email"
+    },
+
+    "navbar": {
+        "from": "From",
+        "to": "To"
+    },
+
+    "translation-addition-tile": {
+        "default-header": "Add new translation",
+        "term": "Term",
+        "translation": "Translation",
+        "type": "Type",
+        "description": "Description",
+        "required-error": "This field is required.",
+        "button": {
+            "add": "ADD",
+            "copy": "COPY CONTENT"
+        }
     }
 }
