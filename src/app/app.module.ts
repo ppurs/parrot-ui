@@ -10,12 +10,22 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatExpansionModule } from '@angular/material/expansion'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MainPageComponent } from './components/main-page/main-page.component';
+//import { NewTranslationTileComponent } from './components/new-translation-tile/new-translation-tile.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+//import { AddTermsPageComponent } from './components/add-terms-page/add-terms-page.component';
 
 
 
@@ -23,7 +33,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
   declarations: [
     AppComponent,
     LoginFormComponent,
-    RegistrationFormComponent
+    MainPageComponent,
+  //  NewTranslationTileComponent,
+    RegistrationFormComponent,
+    MainLayoutComponent,
+   // AddTermsPageComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -41,8 +55,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatExpansionModule,
     MatFormFieldModule,   
+    MatIconModule,
     MatInputModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatToolbarModule,
     NgbModule,
     ReactiveFormsModule
   ],
