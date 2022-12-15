@@ -9,7 +9,7 @@ export class CurrentState implements AdditionTileState {
 
     constructor( tile: NewTranslationTileComponent ) {
         this.tile = tile;
-        this.tileHeader = "term-addition-tile.default-header";
+        this.tileHeader = "translation-addition-tile.default-header";
         this.processStatus = TermAdditionStatus.CURRENT;
     }
 
