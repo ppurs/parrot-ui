@@ -26,6 +26,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { NewTranslationTileComponent } from './components/new-translation-tile/new-translation-tile.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { NewTranslationTileComponent } from './components/new-translation-tile/n
     MainPageComponent,
     NewTranslationTileComponent,
     RegistrationFormComponent,
+    NavbarComponent,
   ],
   imports: [
     AppRoutingModule,

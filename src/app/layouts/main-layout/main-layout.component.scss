@@ -1,22 +1,9 @@
-.mat-toolbar {
-    position: relative;
-}
-
-.mat-button {
-    font-size: large;
-    color: white;
-}
-
-.person-icon {
-    margin-right: 0.5em;
-}
-
-.spacer {
-    flex: 1 1 auto;
-}
-
-.colorBack {
-    background-color: green;
-    color: white;
-    height: inherit;
+.router-container {
+    width: 100%;
+    top: 64px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
 }

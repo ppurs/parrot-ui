@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { AdditionTileState } from './states/addition-tile-state';
@@ -13,6 +13,9 @@ import { TermAdditionStatus } from './states/term-addition-status';
 })
 export class NewTranslationTileComponent implements OnInit {
 
+  @Output()
+  createNewTile = new EventEmitter();
+
   termAdditionForm = this.fb.group({
     term: ['', Validators.required ],
     translation: ['', Validators.required ],
@@ -22,6 +25,7 @@ export class NewTranslationTileComponent implements OnInit {
 
   Types: string[];
   state: AdditionTileState;
+  isExpanded: boolean = false;
 
   constructor( private facade: FacadeService, 
                private fb: FormBuilder) { 
@@ -31,6 +35,10 @@ export class NewTranslationTileComponent implements OnInit {
 
   ngOnInit(): void {
     this.Types = this.facade.getTermTypes();
+  }
+
+  ngAfterViewInit(): void {
+    this.isExpanded = true;
   }
 
   get term() {
@@ -61,6 +69,8 @@ export class NewTranslationTileComponent implements OnInit {
     if ( this.validationCheck() && this.term?.value != null  ) {    
       this.state = new SubmittedState(this, this.term.value);
       this.disableInputs();
+      this.createNewTile.emit();
+     
      
       return true;
     }

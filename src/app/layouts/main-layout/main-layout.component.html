@@ -1,34 +1,6 @@
-<mat-toolbar class="mat-elevation-z6" color="primary">
-    <!--LOGO PLACE?-->
-    <span>PARROT</span>
+  <app-navbar></app-navbar>
 
-    <!--list of pages possible to visit (data from backend)-->
+<div class="router-container">
+    <router-outlet></router-outlet>
+</div>
 
-    <span class="spacer"></span>
-
-    <!-- <span>Language: </span> -->
-    <!-- <span>{{ 'navbar.from' | translate }}: </span> -->
-    <!-- <span>ENG </span> -->
-    <!--dropdown with languages/icons-->
-    <!-- <span>{{ 'navbar.to' | translate }}: </span> -->
-    <!-- <span>ENG</span> -->
-    <!--dropdown with languagesicons-->
-
-    <a mat-button>
-        <mat-icon class="person-icon">person</mat-icon>
-        <!--USERNAME PLACE-->
-        <span>Username</span> 
-    </a>  
-    <!--userdata someway-->
-
-</mat-toolbar>
-<router-outlet></router-outlet>
-
-<!--
-<nav mat-tab-nav-bar class="colorBack">
-    <a mat-tab-link *ngFor="let link of links; index as i"
-       [href]="link"
-       (click)="activeLink = link"
-       [active]="activeLink == link"> {{titles[i]}} </a>
-  </nav> 
--->

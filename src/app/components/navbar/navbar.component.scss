@@ -1,0 +1,23 @@
+.mat-toolbar {
+    position: fixed;
+    top: 0px;
+}
+
+.mat-button {
+    font-size: large;
+    color: white;
+}
+
+.person-icon {
+    margin-right: 0.5em;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.colorBack {
+    background-color: green;
+    color: white;
+    height: inherit;
+}
