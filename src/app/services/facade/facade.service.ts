@@ -36,6 +36,6 @@ export class FacadeService {
   }
 
   getUserLanguages(): TransaltionLanguages {
-    return { from: ['eng'], to: ['eng'] };
+    return { from: ['English', 'Polish'], to: ['English', 'Polish'] };
   }
 }
