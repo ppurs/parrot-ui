@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTranslationsPageComponent } from './add-translations-page.component';
+import { AddTranslationsPageComponent } from './translations-page.component';
 
 describe('AddTranslationsPageComponent', () => {
   let component: AddTranslationsPageComponent;

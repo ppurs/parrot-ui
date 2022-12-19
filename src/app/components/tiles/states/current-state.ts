@@ -1,4 +1,4 @@
-import { NewTranslationTileComponent } from "../new-translation-tile.component";
+import { NewTranslationTileComponent } from "../new-translation-tile/new-translation-tile.component";
 import { AdditionTileState } from "./addition-tile-state";
 import { TermAdditionStatus } from "./term-addition-status";
    

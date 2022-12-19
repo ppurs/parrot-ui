@@ -1,6 +1,6 @@
-import { TermAdditionStatus } from "./term-addition-status";
 import { AdditionTileState } from "./addition-tile-state";
-import { NewTranslationTileComponent } from "../new-translation-tile.component";
+import { NewTranslationTileComponent } from "../new-translation-tile/new-translation-tile.component";
+import { TermAdditionStatus } from "./term-addition-status";
 
 export class SubmittedState implements AdditionTileState {
     tile: NewTranslationTileComponent;
@@ -18,7 +18,7 @@ export class SubmittedState implements AdditionTileState {
     }
 
     onBtnClick(): void {
-        //copy values
+        this.tile.duplicateFormContent();
     }
 
 }

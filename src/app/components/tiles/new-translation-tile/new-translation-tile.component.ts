@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { AdditionTileState } from './states/addition-tile-state';
-import { CurrentState } from './states/current-state';
-import { SubmittedState } from './states/submitted-state';
-import { TermAdditionStatus } from './states/term-addition-status';
+import { AdditionTileState } from '../states/addition-tile-state';
+import { CurrentState } from '../states/current-state';
+import { SubmittedState } from '../states/submitted-state';
+import { TermAdditionStatus } from '../states/term-addition-status';
 
 @Component({
   selector: 'app-new-translation-tile',
@@ -15,6 +15,8 @@ export class NewTranslationTileComponent implements OnInit {
 
   @Output()
   createNewTile = new EventEmitter();
+  @Output()
+  duplicateFormValues = new EventEmitter();
 
   termAdditionForm = this.fb.group({
     term: ['', Validators.required ],
@@ -51,6 +53,11 @@ export class NewTranslationTileComponent implements OnInit {
 
   isBtnDisabled(): boolean {
     return this.state.processStatus.btnDisabled;
+  }
+
+  duplicateFormContent(): void {
+    //copy form values and create new?? : deep copy? prototype pattern? 
+    this.duplicateFormValues.emit();
   }
 
   getStatus(): string {
