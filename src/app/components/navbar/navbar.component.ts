@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSelectTrigger } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { NavbarNavigation } from 'src/app/models/navbar-navigation';
 import { TransaltionLanguages } from 'src/app/models/translation-languages';
@@ -39,6 +38,18 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     
+  }
+
+  onLanguageChoose(lang: string, type: string): void {
+    if ( type == 'from' ) {
+      this.currentLangFrom = lang;
+    }
+    else if ( type == 'to' ) {
+      this.currentLangTo = lang;
+    }
+
+    //request to backend
+    //refresh website
   }
 
   onLogoClick(): void {

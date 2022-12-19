@@ -4,11 +4,15 @@
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 1px !important;
     border-bottom-right-radius: 1px !important;
-    width: 12.5em !important;
+    min-width: 6em !important;
 }
 
-::ng-deep .cdk-overlay-connected-position-bounding-box {
-    align-items: center !important;
+::ng-deep .details-panel {
+    width: 11.5em;
+}
+
+::ng-deep .language-panel {
+    min-width: 6em;
 }
 
 .mat-toolbar {
@@ -22,8 +26,8 @@
 }
 
 .mat-button {
-    padding-left: 0.25em !important;
-    padding-right: 0.25em !important;
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
     font-size: large;
     color: white;
 }
@@ -51,13 +55,16 @@
 }
 
 #user-button {
-    padding-left: 1.5em !important;
-    padding-right: 1.5em !important;
+    margin-left: 0.25em;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
     align-items: center;
 }
 
 .language-choose {
-    font-size: 18px !important;
-    margin-right: 2em;
-    padding-top: 0em;
+    font-size: 16px !important;
+}
+
+.lang-spacer {
+    width: 0.5em;
 }
