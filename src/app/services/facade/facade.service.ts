@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { offset } from '@popperjs/core';
+import { Observable, of } from 'rxjs';
+import { NavbarNavigation } from 'src/app/models/navbar-navigation';
+import { TransaltionLanguages } from 'src/app/models/translation-languages';
 import { User } from 'src/app/models/user';
 //import { AccountService } from '../account/account.service';
 
@@ -11,7 +15,7 @@ export class FacadeService {
 
   getUserData(): User | null {
     //return this.account.userData;
-    return null;
+    return {username: 'Username', email: '', accountType: 'Free account' };
   }
 
   setUserData( loogedUser: User | null ) {
@@ -25,5 +29,13 @@ export class FacadeService {
 
   addNewTerm(): boolean {
     return true;
+  }
+
+  getNavbarNavigation(): string[] {
+    return ['quiz', 'translations', 'labels' ];
+  }
+
+  getUserLanguages(): TransaltionLanguages {
+    return { from: ['eng'], to: ['eng'] };
   }
 }

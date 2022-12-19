@@ -4,7 +4,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddTranslationsPageComponent } from './components/translations-page/translations-page.component';
+import { TranslationsPageComponent } from './components/translations-page/translations-page.component';
 
 const routes: Routes = [
   {
@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'translations',
-        component: AddTranslationsPageComponent   
+        component: TranslationsPageComponent,   
       }
     ]
   },

@@ -1,27 +1,51 @@
-<mat-toolbar class="mat-elevation-z6" color="primary">
-    <!--LOGO PLACE?-->
-    <span>PARROT</span>
+<mat-toolbar class="mat-elevation-z4" color="primary">
+    <!--LOGO PLACE-->
+    <div class="logo">
+        <a mat-button (click)="onLogoClick()">
+            <span>PARROT</span>
+        </a>
+    </div>
 
-    <!--list of pages possible to visit (data from backend)-->
+    <div *ngFor="let link of activeLinks">
+        <a mat-button (click)="onNavigationClick(link)">
+            <span>{{ link.header }}</span> 
+        </a>  
+    </div>
 
     <span class="spacer"></span>
 
-    <!-- <span>Language: </span> -->
-    <!-- <span>{{ 'navbar.from' | translate }}: </span> -->
-    <!-- <span>ENG </span> -->
-    <!--dropdown with languages/icons-->
-    <!-- <span>{{ 'navbar.to' | translate }}: </span> -->
-    <!-- <span>ENG</span> -->
-    <!--dropdown with languagesicons-->
-
+  <!--
+    <span>{{ 'navbar.from' | translate }}:</span>
+  
     <a mat-button>
-        <mat-icon class="person-icon">person</mat-icon>
-        <!--USERNAME PLACE-->
-        <span>Username</span> 
-    </a>  
-    <!--userdata someway-->
+        <span>{{currentLangFrom}}</span>
+    </a>
+
+
+    <span>{{ 'navbar.to' | translate }}:</span>
+    <a mat-button>
+        <span>{{currentLangTo}}</span>
+    </a> 
+-->
+
+    <div>
+        <a mat-button [matMenuTriggerFor]="userAccount" id="user-button">
+            <mat-icon class="person-icon">person</mat-icon>
+            <span>{{accountDetails?.username}}</span> 
+        </a> 
+    </div>
 
 </mat-toolbar>
+
+
+<mat-menu #userAccount="matMenu" panelClass="menu-position" class="menu">
+    <ng-template matMenuContent>
+        <button mat-menu-item class="info-item" disabled="true">{{accountDetails?.accountType}}</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item class="logout-button">{{ 'navbar.logout' | translate }}</button>
+    </ng-template>
+</mat-menu>
+
 
 <!--
 <nav mat-tab-nav-bar class="colorBack">

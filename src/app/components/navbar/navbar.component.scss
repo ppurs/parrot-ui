@@ -1,15 +1,35 @@
+::ng-deep .mat-menu-panel {
+    margin-top: 14px;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 1px !important;
+    border-bottom-right-radius: 1px !important;
+    width: 12.5em !important;
+}
+
+::ng-deep .cdk-overlay-connected-position-bounding-box {
+    align-items: center !important;
+}
+
 .mat-toolbar {
     position: fixed;
+    z-index: 2;
     top: 0px;
 }
 
+.logo {
+    margin-right: 0.5em;
+}
+
 .mat-button {
+    padding-left: 0.25em !important;
+    padding-right: 0.25em !important;
     font-size: large;
     color: white;
 }
 
 .person-icon {
-    margin-right: 0.5em;
+    margin-right: 0.25em;
 }
 
 .spacer {
@@ -20,4 +40,24 @@
     background-color: green;
     color: white;
     height: inherit;
+}
+
+.info-item {
+    color: black;
+}
+
+.logout-button {
+    color: green;
+}
+
+#user-button {
+    padding-left: 1.5em !important;
+    padding-right: 1.5em !important;
+    align-items: center;
+}
+
+.language-choose {
+    font-size: 18px !important;
+    margin-right: 2em;
+    padding-top: 0em;
 }

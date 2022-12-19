@@ -14,44 +14,43 @@
         <form [formGroup]="termAdditionForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col">
-                <div class="center-block">
-                    <mat-form-field class="input">
-                        <mat-label>{{ 'translation-addition-tile.term' | translate }}</mat-label>
-                        <input type="text" matInput formControlName="term">
-                        <mat-error *ngIf="termAdditionForm.get('term')?.hasError('required')">
-                            {{ 'translation-addition-tile.required-error' | translate }}
-                        </mat-error> 
-                    </mat-form-field> 
+                    <div class="center-block">
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-addition-tile.term' | translate }}</mat-label>
+                            <input type="text" matInput formControlName="term">
+                            <mat-error *ngIf="termAdditionForm.get('term')?.hasError('required')">
+                                {{ 'translation-addition-tile.required-error' | translate }}
+                            </mat-error> 
+                        </mat-form-field> 
 
-                    <mat-form-field class="input">
-                        <mat-label>{{ 'translation-addition-tile.translation' | translate }}</mat-label>
-                        <input type="text" matInput formControlName="translation">
-                        <mat-error *ngIf="termAdditionForm.get('translation')?.hasError('required')">
-                            {{ 'translation-addition-tile.required-error' | translate }}
-                        </mat-error> 
-                    </mat-form-field> 
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-addition-tile.translation' | translate }}</mat-label>
+                            <input type="text" matInput formControlName="translation">
+                            <mat-error *ngIf="termAdditionForm.get('translation')?.hasError('required')">
+                                {{ 'translation-addition-tile.required-error' | translate }}
+                            </mat-error> 
+                        </mat-form-field> 
+                    </div>
                 </div>
-                </div>
-           
            
                 <div class="col">
                     <div class="center-block">
-                    <mat-form-field class="input">
-                        <mat-label>{{ 'translation-addition-tile.type' | translate }}</mat-label>    
-                        <mat-select disableOptionCentering panelClass="bottom-position" formControlName="type">                 
-                            <mat-option *ngFor="let type of Types" [value]="type">
-                                {{type}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="termAdditionForm.get('type')?.hasError('required')">
-                            {{ 'translation-addition-tile.required-error' | translate }}
-                        </mat-error> 
-                    </mat-form-field> 
-                
-                    <mat-form-field class="input">
-                        <mat-label>{{ 'translation-addition-tile.description' | translate }}</mat-label>
-                        <textarea type="text" matInput cdkTextareaAutosize formControlName="description"></textarea>
-                    </mat-form-field> 
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-addition-tile.type' | translate }}</mat-label>    
+                            <mat-select disableOptionCentering panelClass="bottom-position" formControlName="type">                 
+                                <mat-option *ngFor="let type of Types" [value]="type">
+                                    {{type}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="termAdditionForm.get('type')?.hasError('required')">
+                                {{ 'translation-addition-tile.required-error' | translate }}
+                            </mat-error> 
+                        </mat-form-field> 
+                    
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-addition-tile.description' | translate }}</mat-label>
+                            <textarea type="text" matInput cdkTextareaAutosize formControlName="description"></textarea>
+                        </mat-form-field> 
                     </div>
                 </div>
             </div>

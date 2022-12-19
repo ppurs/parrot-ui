@@ -6,7 +6,7 @@ import { NewTranslationTileComponent } from '../tiles/new-translation-tile/new-t
   templateUrl: './translations-page.component.html',
   styleUrls: ['./translations-page.component.scss']
 })
-export class AddTranslationsPageComponent implements OnInit {
+export class TranslationsPageComponent implements OnInit {
   @ViewChild('tileContainer', {read: ViewContainerRef}) tileContainer!: ViewContainerRef;
   tiles: Array<ComponentRef<NewTranslationTileComponent>> = [];
 
@@ -44,5 +44,5 @@ export class AddTranslationsPageComponent implements OnInit {
 }
 
 
-//TODO: dodac focus na nowo dodany komponent, najlpeiej na term input(?)
+//TODO: mozna dodac focus na nowo dodany komponent, najlepiej na term input(?)
 //      odsubskrybować adda po dodaniu nowej tile

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { AdditionTileState } from '../states/addition-tile-state';
@@ -29,7 +29,8 @@ export class NewTranslationTileComponent implements OnInit {
   state: AdditionTileState;
   isExpanded: boolean = false;
 
-  constructor( private facade: FacadeService, 
+  constructor( private cdref: ChangeDetectorRef,
+               private facade: FacadeService, 
                private fb: FormBuilder) { 
     this.Types = [];
     this.state = new CurrentState(this);
@@ -41,6 +42,7 @@ export class NewTranslationTileComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.isExpanded = true;
+    this.cdref.detectChanges();
   }
 
   get term() {
@@ -77,7 +79,6 @@ export class NewTranslationTileComponent implements OnInit {
       this.state = new SubmittedState(this, this.term.value);
       this.disableInputs();
       this.createNewTile.emit();
-     
      
       return true;
     }

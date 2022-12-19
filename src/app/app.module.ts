@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AddTranslationsPageComponent } from './components/translations-page/translations-page.component';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,12 +13,14 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -27,17 +29,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslationsPageComponent } from './components/translations-page/translations-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddTranslationsPageComponent,
     LoginFormComponent,
     MainLayoutComponent,
     MainPageComponent,
     NavbarComponent,
     NewTranslationTileComponent,
     RegistrationFormComponent,
+    TranslationsPageComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -55,10 +58,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,   
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatSelectModule,
     MatProgressSpinnerModule,
     MatTabsModule,
