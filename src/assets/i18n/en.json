@@ -46,13 +46,13 @@
 
     "account": {
         "username": "Username",
-        "password": "Password",
-        "email": "Email"
+        "password": "Password"
     },
 
     "navbar": {
         "from": "From",
-        "to": "To"
+        "to": "To",
+        "logout": "Log out"
     },
 
     "translation-addition-tile": {
