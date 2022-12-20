@@ -1,0 +1,31 @@
+.margintile { 
+    // margin-left: 5em;
+    // margin-right: 5em;
+     margin-bottom: 1em;
+}
+
+.filter-panel {
+    background-color: #33691E;
+}
+
+.mat-expansion-panel {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.mat-expansion-panel-header {
+    padding: 1em;
+    font-weight: 100 !important;
+}
+
+.mat-expansion-panel-header-title {
+    color: white
+  }
+
+  .apply-button {
+    background-color: white;
+    float: right;
+    height: 2.5em;
+}

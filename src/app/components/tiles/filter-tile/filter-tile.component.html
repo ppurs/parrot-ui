@@ -1,0 +1,21 @@
+<div class="margintile">
+    <!-- TODO: hide on click behind panel-->
+    <mat-expansion-panel #tile (expandedChange)="changeArrowIcon()" class="filter-panel" hideToggle>
+        <mat-expansion-panel-header collapsedHeight="2.5em" expandedHeight="3em">
+            <mat-panel-title>
+                <!--ARROW ICON-->
+                <mat-icon *ngIf="!isExpanded">arrow_drop_down</mat-icon>
+                <mat-icon *ngIf="isExpanded">arrow_drop_up</mat-icon>
+                {{ 'filter-tile.header' | translate }}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col-9">
+                <ng-content></ng-content>
+            </div>
+            <div class="col-auto">
+                <button (click)="onSubmit()" mat-stroked-button color='primary' class="apply-button">{{'filter-tile.submit-button' | translate}}</button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</div>

@@ -31,7 +31,7 @@ export class TranslationsPageComponent implements OnInit {
   }
 
 
-  addTile() {
+  addTile(): void {
     const componentClass = NewTranslationTileComponent;
     const options = { index: 0}
     const newTile = this.tileContainer.createComponent(componentClass, options );
