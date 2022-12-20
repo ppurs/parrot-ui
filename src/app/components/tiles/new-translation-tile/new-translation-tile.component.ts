@@ -23,7 +23,7 @@ export class NewTranslationTileComponent implements OnInit {
     translation: ['', Validators.required ],
     type: ['', Validators.required ],        
     description: ['']   
-  })
+  });
 
   Types: string[];
   state: AdditionTileState;
