@@ -1,6 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegistrationService } from 'src/app/services/registration/registration.service';
 import { passwordMatchValidator, uniqueUsernameValidator } from './registration-validators';
 
 @Component({
@@ -9,11 +11,11 @@ import { passwordMatchValidator, uniqueUsernameValidator } from './registration-
   styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent implements OnInit {
-
   registrationForm = this.fb.group({
     username: ['',  {
                     validators: [
                       Validators.required,
+                      Validators.pattern("[a-zA-Z0-9_]*"),
                       uniqueUsernameValidator
                     ],
                     updateOn: 'blur'
@@ -42,8 +44,9 @@ export class RegistrationFormComponent implements OnInit {
     ]
   });
 
-  
   constructor(private fb: FormBuilder,
+              //private http: HttpClient,
+              private registration: RegistrationService,
               private router: Router ) {}
 
   ngOnInit(): void {}
@@ -74,8 +77,28 @@ export class RegistrationFormComponent implements OnInit {
       this.registrationForm.markAllAsTouched();
     }
     else {
-      //pass data to backend
+      this.sendRegisterData();
       this.router.navigateByUrl('/login');
     }
+  }
+
+  /*validateUsername(): void {
+    this.registration.validateUserUnique("baranekShawn")
+  }*/
+
+  sendRegisterData(): void {
+    const data = {
+      username: this.username?.value,
+      password: this.password?.value,
+      email: this.email?.value
+    } 
+
+    // const data = {
+    //   username: "baranekShawn",
+    //   password: "password123",
+    //   email: "email@email.com"
+    // } 
+
+    this.registration.register( data );
   }
 }

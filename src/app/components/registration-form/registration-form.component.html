@@ -1,3 +1,5 @@
+<!--<button mat-raised-button (click)="validateUsername()">VALIDATE USERNAME</button>
+<button mat-raised-button (click)="sendRegisterData()">SEND REGISTER DATA</button>-->
 <div class="registration-card">
     <mat-card class="registration-card-content">
         <div class="center-content registration-title">
@@ -11,6 +13,9 @@
                         <mat-form-field class="input" >
                             <mat-label>{{ 'account.username' | translate }}</mat-label>
                             <input type="text" matInput formControlName="username">
+                            <mat-error *ngIf="username?.hasError('pattern')">
+                                {{ 'registration-form.errors.username.pattern' | translate }}
+                            </mat-error> 
                             <mat-error *ngIf="username?.hasError('nonuniqueUsername')">
                                 {{ 'registration-form.errors.username.nonunique' | translate }}
                             </mat-error> 
