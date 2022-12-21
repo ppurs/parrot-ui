@@ -25,6 +25,7 @@
         "login-link": "Login here",
         "errors": {
             "username": {
+                "pattern": "Username should be combine of letters/numbers and '_' only.",
                 "required": "Username is required.",
                 "nonunique": "Username already exists."
             },
