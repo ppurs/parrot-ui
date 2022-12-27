@@ -17,7 +17,7 @@
  
     <span class="language-choose">{{ 'navbar.from' | translate }}:</span>
     <a mat-button class="language-choose" [matMenuTriggerFor]="languageFromChoose">
-        <span>{{currentLangFrom}}</span>
+        <span>{{currentLangs.languageFrom}}</span>
         <mat-icon>arrow_drop_down</mat-icon>
     </a> 
   
@@ -25,7 +25,7 @@
 
     <span class="language-choose">{{ 'navbar.to' | translate }}:</span>
     <a mat-button class="language-choose" [matMenuTriggerFor]="languageToChoose">
-        <span>{{currentLangTo}}</span>
+        <span>{{currentLangs.languageTo}}</span>
         <mat-icon>arrow_drop_down</mat-icon>
     </a> 
 
@@ -42,7 +42,7 @@
     <ng-template matMenuContent>
         <button mat-menu-item class="info-item" disabled="true">{{accountDetails?.accountType}}</button>
         <mat-divider></mat-divider>
-        <button mat-menu-item class="logout-button">{{ 'navbar.logout' | translate }}</button>
+        <button mat-menu-item class="logout-button" (click)="logout()">{{ 'navbar.logout' | translate }}</button>
     </ng-template>
 </mat-menu>
 

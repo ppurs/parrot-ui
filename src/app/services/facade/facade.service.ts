@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { offset } from '@popperjs/core';
-import { Observable, of } from 'rxjs';
-import { NavbarNavigation } from 'src/app/models/navbar-navigation';
 import { TransaltionLanguages } from 'src/app/models/translation-languages';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/auth/models/user';
 //import { AccountService } from '../account/account.service';
 
 @Injectable({

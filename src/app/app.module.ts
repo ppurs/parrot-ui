@@ -1,10 +1,10 @@
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FilterTileComponent } from './components/tiles/filter-tile/filter-tile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
@@ -25,26 +25,28 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewTranslationTileComponent } from './components/tiles/new-translation-tile/new-translation-tile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
-import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslationsFilterFormComponent } from './components/forms/translations-filter-form/translations-filter-form.component';
 import { TranslationsPageComponent } from './components/translations-page/translations-page.component';
+//import { QuizTileComponent } from './components/tiles/quiz-tile/quiz-tile.component';
+//import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterTileComponent,
-    LoginFormComponent,
     MainLayoutComponent,
     MainPageComponent,
     NavbarComponent,
     NewTranslationTileComponent,
-    RegistrationFormComponent,
     TranslationsFilterFormComponent,
-    TranslationsPageComponent
+    TranslationsPageComponent,
+    //QuizTileComponent,
+    //QuizPageComponent
   ],
   imports: [
+    AuthModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,

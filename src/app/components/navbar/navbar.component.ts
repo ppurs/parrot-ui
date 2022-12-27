@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavbarNavigation } from 'src/app/models/navbar-navigation';
-import { TransaltionLanguages } from 'src/app/models/translation-languages';
-import { User } from 'src/app/models/user';
+import { CurrentLanguages } from 'src/app/models/current-languages';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-
+import { NavbarNavigation } from 'src/app/models/navbar-navigation';
+import { Router } from '@angular/router';
+import { TransaltionLanguages } from 'src/app/models/translation-languages';
+import { User } from 'src/app/auth/models/user';
+import { AuthService } from 'src/app/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,8 +16,7 @@ export class NavbarComponent implements OnInit {
   activeLinks: NavbarNavigation[];
   accountDetails: User | null;
   languages?: TransaltionLanguages;
-  currentLangFrom: string = 'English';
-  currentLangTo: string = 'English';
+  currentLangs: CurrentLanguages = {languageFrom: 'English', languageTo: 'English'};
 
   private readonly navigations: NavbarNavigation[] = [
     //{ header: 'Quiz', route: '/quiz' },
@@ -25,7 +25,8 @@ export class NavbarComponent implements OnInit {
   ]
 
   constructor(private facade: FacadeService,
-              private router: Router ) { 
+              private router: Router,
+              private auth: AuthService ) { 
     this.activeLinks = [];
     this.accountDetails = null;
   }
@@ -37,15 +38,15 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    
+    this.auth.logout();
   }
 
   onLanguageChoose(lang: string, type: string): void {
     if ( type == 'from' ) {
-      this.currentLangFrom = lang;
+      this.currentLangs.languageFrom = lang;
     }
     else if ( type == 'to' ) {
-      this.currentLangTo = lang;
+      this.currentLangs.languageTo = lang;
     }
 
     //request to backend

@@ -1,9 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegistrationService } from 'src/app/services/registration/registration.service';
-import { passwordMatchValidator, uniqueUsernameValidator } from './registration-validators';
+import { POSTRegister } from 'src/app/auth/models/post-register';
+import { AccountService } from 'src/app/auth/services/account/account.service';
+import { passwordMatchValidator } from './validators/password-match-validator';
+import { UniqueUsernameValidator } from './validators/unique-user-validator';
+
+//TODO: add default langs choose
 
 @Component({
   selector: 'app-registration-form',
@@ -16,12 +19,12 @@ export class RegistrationFormComponent implements OnInit {
                     validators: [
                       Validators.required,
                       Validators.pattern("[a-zA-Z0-9_]*"),
-                      uniqueUsernameValidator
                     ],
+                    asyncValidators: [UniqueUsernameValidator.createValidator(this.account)],
                     updateOn: 'blur'
                 }
               ],
-    email: ['', [
+    email: ['', [                           //email exists validation??
                   Validators.required, 
                   Validators.email
                 ]
@@ -45,8 +48,7 @@ export class RegistrationFormComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder,
-              //private http: HttpClient,
-              private registration: RegistrationService,
+              private account: AccountService,
               private router: Router ) {}
 
   ngOnInit(): void {}
@@ -73,32 +75,32 @@ export class RegistrationFormComponent implements OnInit {
 
   onSubmit() {
     if ( this.registrationForm.invalid ) {
-      console.log("invalid");
       this.registrationForm.markAllAsTouched();
     }
     else {
       this.sendRegisterData();
-      this.router.navigateByUrl('/login');
     }
   }
 
-  /*validateUsername(): void {
-    this.registration.validateUserUnique("baranekShawn")
-  }*/
+  private onSuccess() {
+    this.router.navigate(['/login']);
+  }
 
-  sendRegisterData(): void {
-    const data = {
-      username: this.username?.value,
-      password: this.password?.value,
-      email: this.email?.value
-    } 
+  private sendRegisterData(): void {
+    const data: POSTRegister = {
+      username: <string>this.username?.value ,
+      password: <string>this.password?.value,
+      email: <string>this.email?.value
+    }
 
-    // const data = {
-    //   username: "baranekShawn",
-    //   password: "password123",
-    //   email: "email@email.com"
-    // } 
-
-    this.registration.register( data );
+    this.account.register( data ).subscribe( res => {
+      if ( res.result ) {
+        this.onSuccess();
+      }
+      else {
+        //error (from backend) statement
+        console.log(res.errors);
+      }
+    });
   }
 }

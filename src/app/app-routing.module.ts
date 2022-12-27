@@ -1,14 +1,15 @@
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslationsPageComponent } from './components/translations-page/translations-page.component';
+//import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
+import { AppGuard } from './auth/helpers/app-guard/app-guard.service';
 
 const routes: Routes = [
   {
-    path: '',                       
+    path: '',
+    canActivate: [AppGuard],                       
     component: MainLayoutComponent,
     children: [
       {
@@ -18,11 +19,13 @@ const routes: Routes = [
       {
         path: 'translations',
         component: TranslationsPageComponent,   
-      }
+      }/*, 
+      {
+        path: 'quiz',
+        component: QuizPageComponent,
+      }*/
     ]
   },
-  { path: 'login', component: LoginFormComponent },
-  { path: 'register', component: RegistrationFormComponent }
 ];
 
 @NgModule({
