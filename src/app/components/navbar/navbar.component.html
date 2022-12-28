@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z4"  color="primary">
+<mat-toolbar *ngIf="!isLoading" class="mat-elevation-z4"  color="primary">
     <!--LOGO PLACE-->
     <div class="logo">
         <a mat-button (click)="onLogoClick()">
@@ -17,7 +17,7 @@
  
     <span class="language-choose">{{ 'navbar.from' | translate }}:</span>
     <a mat-button class="language-choose" [matMenuTriggerFor]="languageFromChoose">
-        <span>{{currentLangs.languageFrom}}</span>
+        <span>{{currentLangs?.languageFrom?.name}}</span>
         <mat-icon>arrow_drop_down</mat-icon>
     </a> 
   
@@ -25,39 +25,37 @@
 
     <span class="language-choose">{{ 'navbar.to' | translate }}:</span>
     <a mat-button class="language-choose" [matMenuTriggerFor]="languageToChoose">
-        <span>{{currentLangs.languageTo}}</span>
+        <span>{{currentLangs?.languageTo?.name}}</span>
         <mat-icon>arrow_drop_down</mat-icon>
     </a> 
 
     <div>
         <a mat-button [matMenuTriggerFor]="userAccount" id="user-button">
             <mat-icon class="person-icon">person</mat-icon>
-            <span>{{accountDetails?.username}}</span> 
+            <span>{{username}}</span> 
         </a> 
     </div>
 </mat-toolbar>
 
-
-<mat-menu #userAccount="matMenu" class="details-panel" color="primary">
-    <ng-template matMenuContent>
-        <button mat-menu-item class="info-item" disabled="true">{{accountDetails?.accountType}}</button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item class="logout-button" (click)="logout()">{{ 'navbar.logout' | translate }}</button>
-    </ng-template>
-</mat-menu>
-
 <mat-menu #languageFromChoose="matMenu" class="language-panel">
     <ng-template matMenuContent>
-        <button mat-menu-item *ngFor="let lang of languages?.from" (click)="onLanguageChoose(lang, 'from')">{{lang}}</button>
+        <button mat-menu-item *ngFor="let lang of languages" (click)="onLanguageChoose(lang, 'from')">{{lang.name}}</button>
     </ng-template>
 </mat-menu>
 
 <mat-menu #languageToChoose="matMenu" class="language-panel">
     <ng-template matMenuContent>
-        <button mat-menu-item *ngFor="let lang of languages?.to" (click)="onLanguageChoose(lang, 'to')">{{lang}}</button>
+        <button mat-menu-item *ngFor="let lang of languages" (click)="onLanguageChoose(lang, 'to')">{{lang.name}}</button>
     </ng-template>
 </mat-menu>
 
+<mat-menu #userAccount="matMenu" class="details-panel" color="primary">
+    <ng-template matMenuContent>
+        <button mat-menu-item class="info-item" disabled="true">{{accountType}}</button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item class="logout-button" (click)="logout()">{{ 'navbar.logout' | translate }}</button>
+    </ng-template>
+</mat-menu>
 
 <!--
 <nav mat-tab-nav-bar class="colorBack">

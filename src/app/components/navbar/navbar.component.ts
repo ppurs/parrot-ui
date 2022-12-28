@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { CurrentLanguages } from 'src/app/models/current-languages';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { NavbarNavigation } from 'src/app/models/navbar-navigation';
 import { Router } from '@angular/router';
-import { TransaltionLanguages } from 'src/app/models/translation-languages';
-import { User } from 'src/app/auth/models/user';
 import { AuthService } from 'src/app/auth/services/auth/auth.service';
+import { Language } from 'src/app/models/language';
+
+//TODO: delay for load navbar data
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +14,14 @@ import { AuthService } from 'src/app/auth/services/auth/auth.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  @Output() isLoaded = new EventEmitter();
+
+  accountType: string = 'Free account';
   activeLinks: NavbarNavigation[];
-  accountDetails: User | null;
-  languages?: TransaltionLanguages;
-  currentLangs: CurrentLanguages = {languageFrom: 'English', languageTo: 'English'};
+  currentLangs?: CurrentLanguages;
+  isLoading: boolean;
+  languages?: Language[];
+  username?: string;
 
   private readonly navigations: NavbarNavigation[] = [
     //{ header: 'Quiz', route: '/quiz' },
@@ -28,28 +33,30 @@ export class NavbarComponent implements OnInit {
               private router: Router,
               private auth: AuthService ) { 
     this.activeLinks = [];
-    this.accountDetails = null;
+    this.isLoading = true;
   }
 
   ngOnInit(): void {
+    this.loadNavbarData();
     this.setNavbarNavigation();
-    this.languages = this.facade.getUserLanguages();
-    this.accountDetails = this.facade.getUserData();
   }
 
   logout(): void {
     this.auth.logout();
   }
 
-  onLanguageChoose(lang: string, type: string): void {
-    if ( type == 'from' ) {
-      this.currentLangs.languageFrom = lang;
-    }
-    else if ( type == 'to' ) {
-      this.currentLangs.languageTo = lang;
+  onLanguageChoose(lang: Language, type: string): void {
+    if ( this.currentLangs ) {
+      if ( type == 'from' ) {
+        this.currentLangs.languageFrom = lang;
+      }
+      else if ( type == 'to' ) {
+        this.currentLangs.languageTo = lang;
+      }
+
+      this.facade.changeCurrentLanguages(this.currentLangs);
     }
 
-    //request to backend
     //refresh website
   }
 
@@ -59,6 +66,19 @@ export class NavbarComponent implements OnInit {
 
   onNavigationClick(link: NavbarNavigation): void {
     this.router.navigate([link.route]);
+  }
+
+  private loadNavbarData(): void {
+    this.facade.getNavbarData().subscribe(
+      res => {
+        this.username = res.username;
+        this.currentLangs = res.currentLanguages;
+        this.languages = res.languages;
+
+        this.isLoading = false;
+        this.isLoaded.emit();
+      }
+    );
   }
 
   private setNavbarNavigation(): void {

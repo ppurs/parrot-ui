@@ -8,3 +8,10 @@
     bottom: 0;
     z-index: 1;
 }
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

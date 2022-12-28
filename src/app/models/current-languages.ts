@@ -1,5 +1,7 @@
-export interface CurrentLanguages {
-    languageFrom: string,
-	languageTo: string
+import { Language } from "./language";
 
+export interface CurrentLanguages {
+    languageFrom: Language,
+	languageTo: Language
 }
+

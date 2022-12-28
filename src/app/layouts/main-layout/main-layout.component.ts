@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-main-layout',
@@ -6,15 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
+  isLoaded: boolean;
 
-  constructor() { }
+  constructor() {
+    this.isLoaded = false;
+   }
 
   ngOnInit(): void {
   }
 
-    /*links = ['#100', '#101', '#102'];
-  titles = ['Tab A', 'Tab B', 'Tab C'];
-  activeLink = this.links[1];*/
-  
-
+  renderLayout() {
+    this.isLoaded = true;
+  }
 }
