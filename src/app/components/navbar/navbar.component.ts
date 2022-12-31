@@ -6,8 +6,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth/auth.service';
 import { Language } from 'src/app/models/language';
 
-//TODO: delay for load navbar data
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -47,17 +45,40 @@ export class NavbarComponent implements OnInit {
 
   onLanguageChoose(lang: Language, type: string): void {
     if ( this.currentLangs ) {
-      if ( type == 'from' ) {
-        this.currentLangs.languageFrom = lang;
-      }
-      else if ( type == 'to' ) {
-        this.currentLangs.languageTo = lang;
+      const oldLangs = {...this.currentLangs};
+      var changed = false;
+
+      switch ( type ) {
+        case 'from': {
+          if ( this.currentLangs.languageFrom.id != lang.id ) {
+            this.currentLangs.languageFrom = lang;
+            changed = true;
+          } 
+          break;
+        }
+        case 'to': {
+          if ( this.currentLangs.languageTo.id != lang.id ) {
+            this.currentLangs.languageTo = lang;
+            changed = true;
+          } 
+          break;
+        }
       }
 
-      this.facade.changeCurrentLanguages(this.currentLangs);
+      if( changed ) {
+        this.facade.changeCurrentLanguages(this.currentLangs).subscribe( res => {
+          if (!res.result) {
+            const currentRoute = this.router.url;
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+              this.router.navigate([currentRoute]));
+          }
+          else {
+            this.currentLangs = oldLangs;
+            //show error message
+          }
+        })
+      }
     }
-
-    //refresh website
   }
 
   onLogoClick(): void {
