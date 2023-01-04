@@ -1,4 +1,4 @@
-import { FormBuilder, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { WordType } from "src/app/models/word-type";
 import { FacadeService } from "src/app/services/facade/facade.service";
 import { ActiveState } from "../states/active.state";
@@ -12,31 +12,35 @@ export class TranslationTile {
     Types!: WordType[];
     state!: TileState;
 
-    translationForm = this.fb.group({
+    translationForm: FormGroup = this.fb.group({
         term: ['', Validators.required ],
         translation: ['', Validators.required ],
         type: [ <number><unknown>undefined, Validators.required ],        
-        description: ['']   
+        description: ['']
       });
 
     constructor( protected facade: FacadeService,
-                private fb: FormBuilder ) {
+                protected fb: FormBuilder ) {
     }
 
-    get term() {
+    get term(): AbstractControl<any, any> | null {
         return this.translationForm.get('term');
     }
 
-    get translation() {
+    get translation(): AbstractControl<any, any> | null {
         return this.translationForm.get('translation');
     }
 
-    get type() {
+    get type(): AbstractControl<any, any> | null {
         return this.translationForm.get('type');
     }
 
-    get description() {
+    get description(): AbstractControl<any, any> | null {
         return this.translationForm.get('description');
+    }
+
+    get resetStatistics(): AbstractControl<any, any> | null {
+        return null;
     }
 
     changeState( state: TileState ): void {
@@ -45,12 +49,10 @@ export class TranslationTile {
     }
 
     fillTileForm( content: Translation ): void {
-        this.translationForm.setValue({
-          term: content.wordFrom,
-          translation: content.wordTo,
-          type: content.wordTypeId,
-          description: content.description ?? ''
-        });
+        this.term?.setValue( content.wordFrom );
+        this.translation?.setValue( content.wordTo );
+        this.type?.setValue( content.wordTypeId );
+        this.description?.setValue( content.description ?? '' );
       }
 
     getCurrentTranslation(): Translation {

@@ -24,8 +24,8 @@ export class FacadeService {
     return this.translationService.deleteTranslation(payload);
   }
 
-  editTranslation( payload: Translation ): Observable<RequestResponse> {
-    return this.translationService.editTranslation(payload);
+  editTranslation( payload: Translation, resetStatisctics?: boolean ): Observable<RequestResponse> {
+    return this.translationService.editTranslation(payload, resetStatisctics);
   }
 
   changeCurrentLanguages(payload: CurrentLanguages): Observable<RequestResponse> {

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { Translation } from 'src/app/models/translation';
@@ -41,9 +41,15 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
                private cdref: ChangeDetectorRef ) { 
     super( facade, new FormBuilder );
 
+    this.translationForm.addControl('resetStatistics', this.fb.control<boolean>(false));
+
     this.tileOptions = FOUND_OPTIONS;
     this.translationChanged = false;
     this.showDeleteMessage = false;
+  }
+
+  override get resetStatistics() {
+    return this.translationForm.get('resetStatistics');
   }
 
   ngOnInit(): void {
@@ -71,7 +77,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
   }
 
   override getCurrentTranslation(): Translation {
-    this.content.wordFrom = this.term?.value ?? '';
+      this.content.wordFrom = this.term?.value ?? '';
       this.content.wordTo = this.translation?.value ?? '';
       this.content.wordTypeId = this.type?.value ?? -1;
       this.content.description = this.description?.value ?? '';
@@ -103,6 +109,8 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
   }
 
   override tryChangeStateToInactive(): boolean {
+    console.log( this.resetStatistics?.value );
+
     if ( !this.checkFormValuesChange() ) {
       this.showDeleteMessage = false;
       this.changeState( this.initialState );
@@ -117,6 +125,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
      if ( this.validationCheck() && this.term?.value != null  ) {    
        this.changeState( new SubmittedState() );
        this.isExpanded = false;
+       this.resetStatistics?.setValue(false);
        this.cdref.detectChanges();
   
        return true;
@@ -129,7 +138,8 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
     if( this.term?.value != this.content.wordFrom ||
         this.translation?.value != this.content.wordTo || 
         this.type?.value != this.content.wordTypeId ||
-        this.description?.value != ( this.content.description ?? '' ) ) {
+        this.description?.value != ( this.content.description ?? '' ) ||
+        this.resetStatistics?.value ) {
       return true;
     }
     

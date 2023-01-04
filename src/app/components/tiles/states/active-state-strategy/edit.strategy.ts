@@ -17,11 +17,13 @@ export class EditStrategy implements ActiveStateStrategy {
             return;
         }
 
+        const resetStats: boolean = this.tile.resetStatistics?.value;
+
         if ( this.tile.tryChangeStateToSubmitted && !this.tile.tryChangeStateToSubmitted() ) {
             return;
         }
 
-       this.facade.editTranslation( this.tile.getCurrentTranslation() ).subscribe( res => {
+       this.facade.editTranslation( this.tile.getCurrentTranslation(), resetStats ).subscribe( res => {
             var isSuccess: boolean = false;
 
             if ( res.result ) {

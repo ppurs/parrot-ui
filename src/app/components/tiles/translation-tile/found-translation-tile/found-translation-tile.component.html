@@ -38,6 +38,10 @@
                                 {{ 'translation-tile.required-error' | translate }}
                             </mat-error> 
                         </mat-form-field> 
+                        
+                        <div *ngIf="isActive()">
+                            <mat-checkbox formControlName="resetStatistics" [disableRipple]="true"> {{'translation-tile.reset-stats' | translate}}</mat-checkbox>
+                        </div>
                     </div>
                 </div>
            
@@ -62,6 +66,7 @@
                     </div>
                 </div>
             </div>
+        
             <div class="center-content">
                 <button mat-raised-button *ngIf="!isBtnHidden()" color="primary" type="submit" class="submit-button">{{ 'translation-tile.button.edit' | translate }}</button> 
             </div>

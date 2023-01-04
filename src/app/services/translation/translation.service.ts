@@ -65,7 +65,7 @@ export class TranslationService {
     );
   }
 
-  editTranslation( translation: Translation, resetQuizData?: boolean ): Observable<RequestResponse> {
+  editTranslation( translation: Translation, resetStatistics?: boolean ): Observable<RequestResponse> {
     return this.http.post<AddTranslationResponse>( 
       this.TRANSLATION_API + '/edit/' + translation.translationId, 
       {
@@ -75,7 +75,7 @@ export class TranslationService {
         wordTo: translation.wordTo,
         description: translation.description,
         wordTypeId: translation.wordTypeId,
-        resetQuizData: resetQuizData
+        resetStatistics
       },
       {headers: HEADERS} )
     .pipe(
