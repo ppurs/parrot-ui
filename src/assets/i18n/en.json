@@ -1,4 +1,21 @@
 {
+    "account": {
+        "username": "Username",
+        "password": "Password",
+        "email": "Email"
+    },
+
+    "delete-confirmation": {
+        "msg": "Are you sure to delete translation: {{value}}?",
+        "confirm": "YES",
+        "cancel": "NO"
+    },
+
+    "filter-tile": {
+        "header": "Filters",
+        "submit-button": "Apply"
+    },
+
     "login-form": {
         "title": "Login",
         "button": "LOG IN",
@@ -9,6 +26,12 @@
             "username": "Enter your username.",
             "password": "Enter your password."
         }
+    },
+
+    "navbar": {
+        "from": "From",
+        "to": "To",
+        "logout": "Log out"
     },
 
     "registration-form": {
@@ -45,20 +68,21 @@
         }
     },
 
-    "account": {
-        "username": "Username",
-        "password": "Password",
-        "email": "Email"
+    "translations-filter-form": {
+        "lang-from": "From language term",
+        "lang-to": "To language term",
+        "type": "Type"
     },
 
-    "navbar": {
-        "from": "From",
-        "to": "To",
-        "logout": "Log out"
+    "translations-page": {
+        "load-more": "Load-more-translations"
     },
 
-    "translation-addition-tile": {
-        "default-header": "Add new translation",
+    "translation-tile": {
+        "default-header": {
+            "add": "Add new translation",
+            "edit": "Edit translation"
+        },
         "term": "Term",
         "translation": "Translation",
         "type": "Type",
@@ -66,18 +90,10 @@
         "required-error": "This field is required.",
         "button": {
             "add": "ADD",
-            "copy": "COPY CONTENT"
+            "edit": "SAVE"
         }
-    },
-
-    "filter-tile": {
-        "header": "Filters",
-        "submit-button": "Apply"
-    },
-
-    "translations-filter-form": {
-        "lang-from": "From language term",
-        "lang-to": "To language term",
-        "type": "Type"
     }
+
+    
+    
 }

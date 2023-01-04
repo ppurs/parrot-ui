@@ -1,0 +1,70 @@
+<div class="margintile">
+    <mat-expansion-panel [expanded]="isExpanded" hideToggle>
+            <mat-expansion-panel-header *ngIf="!showDeleteMessage" collapsedHeight="2.5em">
+                <mat-panel-title>
+                    <span> {{ term?.value }}</span>
+                </mat-panel-title>
+
+                <app-tile-actions-bar *ngIf="!isActionBarHidden()" [options]="tileOptions" (selectedAction)="onActionSelect($event)"></app-tile-actions-bar>
+                <div class="status-info">
+                    <app-status-info *ngIf="getTileStateStatus()" [status]="getTileStateStatus()"></app-status-info>
+                </div>
+                <button *ngIf="isActive()" mat-button color="primary" (click)="discardChanges($event)">CANCEL</button>            
+            </mat-expansion-panel-header>
+
+            <mat-expansion-panel-header *ngIf="showDeleteMessage" collapsedHeight="2.5em">
+                <app-delete-confirmation [msgParam]="{value: term?.value ?? ''}" (confirmation)="deleteConfirmed($event)" class="confirmation"></app-delete-confirmation>
+                <div class="status-info">
+                    <app-status-info *ngIf="getTileStateStatus()" [status]="getTileStateStatus()"></app-status-info>
+                </div>
+            </mat-expansion-panel-header>
+
+        <form [formGroup]="translationForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col">
+                    <div class="center-block">
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-tile.term' | translate }}</mat-label>
+                            <input type="text" matInput formControlName="term">
+                            <mat-error *ngIf="translationForm.get('term')?.hasError('required')">
+                                {{ 'translation-tile.required-error' | translate }}
+                            </mat-error> 
+                        </mat-form-field> 
+
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-tile.translation' | translate }}</mat-label>
+                            <input type="text" matInput formControlName="translation">
+                            <mat-error *ngIf="translationForm.get('translation')?.hasError('required')">
+                                {{ 'translation-tile.required-error' | translate }}
+                            </mat-error> 
+                        </mat-form-field> 
+                    </div>
+                </div>
+           
+                <div class="col">
+                    <div class="center-block">
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-tile.type' | translate }}</mat-label>    
+                            <mat-select disableOptionCentering panelClass="bottom-position" formControlName="type">   
+                                <mat-option *ngFor="let type of Types" [value]="type.id">
+                                    {{type.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="translationForm.get('type')?.hasError('required')">
+                                {{ 'translation-tile.required-error' | translate }}
+                            </mat-error> 
+                        </mat-form-field> 
+                    
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-tile.description' | translate }}</mat-label>
+                            <textarea type="text" matInput cdkTextareaAutosize formControlName="description"></textarea>
+                        </mat-form-field> 
+                    </div>
+                </div>
+            </div>
+            <div class="center-content">
+                <button mat-raised-button *ngIf="!isBtnHidden()" color="primary" type="submit" class="submit-button">{{ 'translation-tile.button.edit' | translate }}</button> 
+            </div>
+        </form>
+    </mat-expansion-panel>
+</div>

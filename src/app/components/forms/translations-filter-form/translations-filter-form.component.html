@@ -17,8 +17,8 @@
         <div class="col-4">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering [placeholder]="'translations-filter-form.type' | translate" panelClass="bottom-position-filter" formControlName="type" multiple>                 
-                    <mat-option *ngFor="let type of Types" [value]="type">
-                        {{type}}
+                    <mat-option *ngFor="let type of Types" [value]="type.id">
+                        {{type.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field> 

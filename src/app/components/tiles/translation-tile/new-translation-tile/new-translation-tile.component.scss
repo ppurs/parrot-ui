@@ -12,24 +12,26 @@
     min-width: 20em !important;
 }
 
-::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-    stroke: #2c3968;
-}
+// ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+//     stroke: #2c3968;
+// }
 
 .term {
     margin-top: 1em;
 }
 
-.success-icon {
-  color: green;
+.status-info {
+    width: 24px;
+    margin-left: 0.5em;
 }
-
-.failed-icon {
-    color: red;
-  }
 
 .mat-expansion-panel {
     padding: 0.5em;
+    width: 100%;
+}
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    align-items: center !important;
 }
 
 .input {
@@ -50,8 +52,7 @@
 
 .margintile { 
     margin-top: 0.5em;
-    margin-left: 20em;
-    margin-right: 20em;
+    width: 100%;
 }
 
 .center-block {
@@ -59,7 +60,3 @@
     margin: auto;
 }
 
-.status-icon {
-    align-self: end;
-    height: 24px;
-}

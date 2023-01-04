@@ -1,0 +1,51 @@
+::ng-deep .loader .mat-progress-spinner circle .mat-spinner circle {
+    stroke: #33691E;
+}
+
+.row { 
+    width: 100%;
+}
+
+.col-8 {
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+button {
+    margin-top: 0.5em;
+}
+
+.load-more {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5em;
+    padding-left: 2em;
+    padding-right: 1em;
+}
+
+#load-more-btn {
+    width: 100%;
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#small-spinner {
+    height: auto;
+    margin-top: 1.5em;
+}
+
+.page { 
+    height: calc( 100% - 5em );
+}
+
+a:link, a:active, a:hover, a:visited {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}

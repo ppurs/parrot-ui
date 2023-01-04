@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit {
 
       if( changed ) {
         this.facade.changeCurrentLanguages(this.currentLangs).subscribe( res => {
-          if (!res.result) {
+          if (res.result) {
             const currentRoute = this.router.url;
             this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
               this.router.navigate([currentRoute]));

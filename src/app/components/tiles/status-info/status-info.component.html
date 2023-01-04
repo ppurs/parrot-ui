@@ -1,0 +1,5 @@
+<div [ngSwitch]="status" class="status-icon">
+    <mat-spinner *ngSwitchCase="'loading'" [diameter]="20"></mat-spinner>
+    <mat-icon *ngSwitchCase="'successful'" class="success-icon">done</mat-icon>
+    <mat-icon *ngSwitchCase="'unsuccessful'" class="failed-icon">close icon</mat-icon>
+</div>

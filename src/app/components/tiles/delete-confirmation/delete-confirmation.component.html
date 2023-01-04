@@ -1,0 +1,10 @@
+<div class="confirmation-info">
+    <div class="msg">
+        <span>{{ 'delete-confirmation.msg' | translate:msgParam }}</span>
+    </div>
+
+    <div class="confirm-buttons">
+        <button mat-button color="primary" (click)="confirm($event)" [disabled]="btnDisabled">{{ 'delete-confirmation.confirm' | translate }}</button>
+        <button mat-button (click)="cancel($event)" [disabled]="btnDisabled">{{ 'delete-confirmation.cancel' | translate }}</button>
+    </div>
+</div>

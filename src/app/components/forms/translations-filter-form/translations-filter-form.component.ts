@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FilterWordsOptions } from 'src/app/models/filter-words-options';
+import { WordType } from 'src/app/models/word-type';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 
 @Component({
@@ -9,14 +11,14 @@ import { FacadeService } from 'src/app/services/facade/facade.service';
 })
 export class TranslationsFilterFormComponent implements OnInit {
   @Output()
-  submitFilter = new EventEmitter();
+  filterApplied = new EventEmitter<FilterWordsOptions>();
   
-  Types: string[];
+  Types: WordType[];
 
   filterForm = this.fb.group({
     fromLang: [''],
     toLang: [''],
-    type: ['']
+    type: [<number[]><unknown>undefined]
   });
 
   constructor( private facade: FacadeService,
@@ -25,13 +27,22 @@ export class TranslationsFilterFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.Types = this.facade.getTermTypes();
+    this.getTypes();
   }
 
   onSubmit(): void {
-    //request to backend
-    this.submitFilter.emit();
+    const payload: FilterWordsOptions = {
+      wordFromPrefix: this.filterForm.get('fromLang')?.value ?? undefined,
+      wordToPrefix: this.filterForm.get('toLang')?.value ?? undefined,
+      wordTypeIds: this.filterForm.get('type')?.value ?? undefined,
+    }
+
+    this.filterApplied.emit(payload);
     console.log("child submitted");
+  }
+
+  private getTypes(): void {
+    this.Types = this.facade.getTermTypes();
   }
 
 }

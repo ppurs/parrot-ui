@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTranslationsPageComponent } from './translations-page.component';
+import { TranslationsPageComponent } from './translations-page.component';
 
 describe('AddTranslationsPageComponent', () => {
-  let component: AddTranslationsPageComponent;
-  let fixture: ComponentFixture<AddTranslationsPageComponent>;
+  let component: TranslationsPageComponent;
+  let fixture: ComponentFixture<TranslationsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddTranslationsPageComponent ]
+      declarations: [ TranslationsPageComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddTranslationsPageComponent);
+    fixture = TestBed.createComponent(TranslationsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

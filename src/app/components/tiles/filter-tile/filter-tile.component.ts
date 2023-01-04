@@ -26,7 +26,7 @@ export class FilterTileComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //request from child component onSubmit()?
+    this.filterContent.onSubmit();
     this.tile.close();
   }
 }

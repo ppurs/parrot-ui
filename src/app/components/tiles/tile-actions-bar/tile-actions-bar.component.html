@@ -1,0 +1,11 @@
+<div>
+    <button *ngIf="error" mat-icon-button (click)="onErrorInfo($event)">
+        <mat-icon class="action-icon">{{errorInfoBtn?.iconName}}</mat-icon>
+    </button>
+
+    <div *ngFor="let option of availableBtns" class="options">
+        <button mat-icon-button (click)="onActionButtonClick($event, option.optionName )">
+            <mat-icon class="action-icon">{{option.iconName}}</mat-icon>
+        </button>
+    </div>
+</div>

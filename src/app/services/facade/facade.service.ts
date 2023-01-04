@@ -1,41 +1,47 @@
 import { Injectable } from '@angular/core';
 import { MainService } from '../main/main.service';
 import { CurrentLanguages } from 'src/app/models/current-languages';
-import { Language } from 'src/app/models/language';
 import { NavbarData } from 'src/app/models/navbar-data';
 import { Observable } from 'rxjs';
+import { TranslationService } from '../translation/translation.service';
+import { WordType } from 'src/app/models/word-type';
+import { Translation } from 'src/app/models/translation';
+import { RequestResponse } from 'src/app/models/requests/request-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacadeService {
 
-  constructor(private mainService: MainService) {}
+  constructor(private mainService: MainService,
+              private translationService: TranslationService) {}
 
-  addNewTerm(): boolean {
-    return true;
+  addNewTranslation(payload: Translation): Observable<RequestResponse> {
+    return this.translationService.addTranslation(payload);
   }
 
-  changeCurrentLanguages(payload: CurrentLanguages): void {
-    this.mainService.changeCurrentLanguages(payload).subscribe(
-      (res) => {
-        if ( !res.result ){
-          //error statement or sth
-          console.log( res.errors);
-        }
-      }
-    );
+  deleteTranslation(payload: Translation): Observable<RequestResponse> {
+    return this.translationService.deleteTranslation(payload);
+  }
+
+  editTranslation( payload: Translation ): Observable<RequestResponse> {
+    return this.translationService.editTranslation(payload);
+  }
+
+  changeCurrentLanguages(payload: CurrentLanguages): Observable<RequestResponse> {
+    return this.mainService.changeCurrentLanguages(payload);
+  }
+
+  getNavbarData(): Observable<NavbarData> {
+    return this.mainService.getNavbarData();
   }
 
   getNavbarNavigation(): string[] {
     return ['quiz', 'translations', 'labels' ];
   }
 
-  getTermTypes(): string[] {
-    return ["noun", "verb"];
+  getTermTypes(): WordType[] {
+    return this.translationService.wordTypes; 
   }
-
-  getNavbarData(): Observable<NavbarData> {
-    return this.mainService.getNavbarData();
-  }
+  
 }

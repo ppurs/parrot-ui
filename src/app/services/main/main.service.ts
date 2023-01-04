@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, UnaryFunction } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { CurrentLanguages } from 'src/app/models/current-languages';
 import { Language } from 'src/app/models/language';
 import { NavbarData } from 'src/app/models/navbar-data';
@@ -28,9 +28,13 @@ export class MainService {
   private readonly NAVBAR_API = '/api/main-navbar';
   private readonly LANGS_API = '/api/languages';
 
+  currentLanguages!: CurrentLanguages;
+
   constructor(private http: HttpClient) {}
 
   changeCurrentLanguages(payload: CurrentLanguages): Observable<RequestResponse> {
+    this.currentLanguages = payload;
+
     return this.http.post<RequestResponse>( 
       this.LANGS_API + '/switch',
       {
@@ -60,6 +64,8 @@ export class MainService {
             languageFrom: <Language>languages.find( lang => { return lang.id === res.languageFromId } ),
             languageTo: <Language>languages.find( lang => { return lang.id === res.languageToId } ),
           }
+
+          this.currentLanguages = currentLanguages;
 
           return {
             username: res.username,

@@ -9,13 +9,17 @@
                 {{ 'filter-tile.header' | translate }}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="row">
-            <div class="col-9">
-                <ng-content></ng-content>
+
+        <ng-template matExpansionPanelContent>
+            <div class="row">
+                <div class="col-9">
+                    <ng-content></ng-content>
+                </div>
+                <div class="col-auto">
+                    <button (click)="onSubmit()" mat-stroked-button color='primary' class="apply-button">{{'filter-tile.submit-button' | translate}}</button>
+                </div>
             </div>
-            <div class="col-auto">
-                <button (click)="onSubmit()" mat-stroked-button color='primary' class="apply-button">{{'filter-tile.submit-button' | translate}}</button>
-            </div>
-        </div>
+        </ng-template>
+        
     </mat-expansion-panel>
 </div>

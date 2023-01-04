@@ -1,10 +1,10 @@
 <app-navbar (isLoaded)="renderLayout()"></app-navbar>
 
-<div *ngIf='!isLoaded; else pageContent' class='spinner'>
+<div *ngIf='!isLoaded; else mainContent' class='spinner'>
     <mat-spinner></mat-spinner>
 </div>
 
-<ng-template #pageContent>
+<ng-template #mainContent>
     <div *ngIf='isLoaded' class="router-container">
         <router-outlet></router-outlet>
     </div>
