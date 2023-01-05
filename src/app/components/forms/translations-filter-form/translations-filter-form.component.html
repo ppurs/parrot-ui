@@ -1,22 +1,22 @@
 <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="col-4">
+    <div class="filters-container">
+        <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <input type="text" [placeholder]="'translations-filter-form.lang-from' | translate" matInput formControlName="fromLang">
                 <!--HINTS-->
             </mat-form-field> 
         </div>
 
-        <div class="col-4">
+        <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <input type="text" [placeholder]="'translations-filter-form.lang-to' | translate" matInput formControlName="toLang">
                 <!--HINTS-->
             </mat-form-field> 
         </div>
 
-        <div class="col-4">
+        <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
-                <mat-select disableOptionCentering [placeholder]="'translations-filter-form.type' | translate" panelClass="bottom-position-filter" formControlName="type" multiple>                 
+                <mat-select disableOptionCentering [placeholder]="'translations-filter-form.type' | translate" panelClass="bottom-position-filter" formControlName="types" multiple>                 
                     <mat-option *ngFor="let type of Types" [value]="type.id">
                         {{type.name}}
                     </mat-option>

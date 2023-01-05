@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-main-layout',

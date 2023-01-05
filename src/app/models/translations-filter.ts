@@ -1,4 +1,4 @@
-export interface FilterWordsOptions {
+export interface TranslationsFilter {
 	wordFromPrefix?: string,
 	wordToPrefix?: string,
 	wordTypeIds?: number[]

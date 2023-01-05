@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FilterWordsOptions } from 'src/app/models/filter-words-options';
+import { TranslationsFilter } from 'src/app/models/translations-filter';
 import { Translation } from 'src/app/models/translation';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 import { AddTranslationsComponent } from '../add-translations/add-translations.component';
@@ -20,7 +20,7 @@ export class TranslationsPageComponent implements OnInit {
   // service for wordList to async view?
   wordList?: Translation[];   
   
-  private filter?: FilterWordsOptions;
+  private filter?: TranslationsFilter;
   private limit: number = DEFAULT_LIMIT;
   private offset: number;
 
@@ -37,7 +37,7 @@ export class TranslationsPageComponent implements OnInit {
     this.getWordList();
   }
 
-  applyFilter(event: FilterWordsOptions): void {
+  applyFilter(event: TranslationsFilter): void {
     this.filter = event;
     this.getWordList();
     this.cdref.detectChanges();

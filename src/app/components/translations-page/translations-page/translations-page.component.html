@@ -1,6 +1,6 @@
 <div *ngIf="!isLoadingPage; else spinner" class="page">
   <app-filter-tile>
-    <app-translations-filter-form (filterApplied)="applyFilter($event)"></app-translations-filter-form>
+    <app-translations-filter-form #filterForm (filterApplied)="applyFilter($event)"></app-translations-filter-form>
   </app-filter-tile>
 
   <div *ngIf="!isLoadingList; else spinner">

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { FilterWordsOptions } from 'src/app/models/filter-words-options';
+import { TranslationsFilter } from 'src/app/models/translations-filter';
 import { RequestResponse } from 'src/app/models/requests/request-response';
 import { ResponseError } from 'src/app/models/requests/response-error';
 import { Translation } from 'src/app/models/translation';
@@ -124,7 +124,7 @@ export class TranslationService {
   }
 
   //add hasNext property? 
-  getTranslationsList( filters?: FilterWordsOptions, limit?: number, offset?: number ): Observable<Translation[]>  {
+  getTranslationsList( filters?: TranslationsFilter, limit?: number, offset?: number ): Observable<Translation[]>  {
     return this.http.post<{results: Translation[]}>( 
       this.TRANSLATION_API + '/list', 
       {

@@ -1,5 +1,5 @@
 import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
-import { TranslationsFilterFormComponent } from '../../forms/translations-filter-form/translations-filter-form.component';
+import { FilterForm } from 'src/app/models/filter-form';
 
 @Component({
   selector: 'app-filter-tile',
@@ -9,8 +9,8 @@ import { TranslationsFilterFormComponent } from '../../forms/translations-filter
 export class FilterTileComponent implements OnInit {
   @ViewChild('tile') tile!: any;
 
-  @ContentChild(TranslationsFilterFormComponent)
-    filterContent!: TranslationsFilterFormComponent;
+  @ContentChild('filterForm')
+    filterContent!: FilterForm;
 
   isExpanded: boolean;
  
