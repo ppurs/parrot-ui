@@ -7,6 +7,9 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewTranslationTileComponent } from './components/tiles/translation-tile/new-translation-tile/new-translation-tile.component';
+import { QuizFilterFormComponent } from './components/forms/quiz-filter-form/quiz-filter-form.component';
+import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
+import { QuizTileComponent } from './components/tiles/quiz-tile/quiz-tile.component';
 import { StatusInfoComponent } from './components/tiles/status-info/status-info.component';
 import { TileActionsBarComponent } from './components/tiles/tile-actions-bar/tile-actions-bar.component';
 import { TranslationsFilterFormComponent } from './components/forms/translations-filter-form/translations-filter-form.component';
@@ -35,8 +38,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-//import { QuizTileComponent } from './components/tiles/quiz-tile/quiz-tile.component';
-//import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +50,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MainPageComponent,
     NavbarComponent,
     NewTranslationTileComponent,
+    QuizFilterFormComponent,
+    QuizPageComponent,
+    QuizTileComponent,
     StatusInfoComponent,
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
-    TranslationsPageComponent,
-    //QuizTileComponent,
-    //QuizPageComponent
+    TranslationsPageComponent
   ],
   imports: [
     AuthModule,

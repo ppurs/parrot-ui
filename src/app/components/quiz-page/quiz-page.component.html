@@ -1,0 +1,23 @@
+<div *ngIf="!isLoadingPage; else spinner" class="page">
+  <app-filter-tile>
+    <app-quiz-filter-form #filterForm (filterApplied)="applyFilter($event)"></app-quiz-filter-form>
+  </app-filter-tile>
+
+      <div class="row">
+        <div class="col-2"></div>  
+        <div class="col-8">
+          <mat-accordion multi="false">
+            <div *ngFor="let tile of quizTiles">
+                <app-quiz-tile [tileData]="tile"></app-quiz-tile>
+            </div>
+          </mat-accordion>
+         </div>   
+        <div class="col-2"></div>
+        </div>
+  </div>
+  
+  <ng-template #spinner>
+    <div class='spinner'>
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>

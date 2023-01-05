@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   username?: string;
 
   private readonly navigations: NavbarNavigation[] = [
-    //{ header: 'Quiz', route: '/quiz' },
+    { header: 'Quiz', route: '/quiz' },
     { header: 'Translations', route: '/translations' },
     //{ header: 'Labels', route: '/labels' },
   ]

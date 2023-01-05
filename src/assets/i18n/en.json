@@ -34,6 +34,11 @@
         "logout": "Log out"
     },
 
+    "quiz-filter-form": {
+        "label": "Label",
+        "type": "Type"
+    },
+
     "registration-form": {
         "title": "Create account",
         "password-repetition": "Confirm passsword",

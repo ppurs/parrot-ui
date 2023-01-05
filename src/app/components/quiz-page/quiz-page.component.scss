@@ -1,0 +1,23 @@
+.row { 
+    width: 100%;
+}
+
+.col-8 {
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+button {
+    margin-top: 0.5em;
+}
+
+.page { 
+    height: calc( 100% - 5em );
+}
+
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

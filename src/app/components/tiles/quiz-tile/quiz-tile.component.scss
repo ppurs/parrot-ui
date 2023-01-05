@@ -1,0 +1,109 @@
+::ng-deep .mat-form-field-required-marker {
+    display: none
+}
+
+::ng-deep .bottom-position {
+    margin-top: 1.7em;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-left: 16px;
+    min-width: 20em !important;
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #2c3968;
+}
+
+.term {
+    margin-top: 1em;
+}
+
+.success-icon {
+  color: green;
+}
+
+.failed-icon {
+    color: red;
+  }
+
+.mat-expansion-panel {
+    padding: 0.5em;
+}
+
+.input {
+    width: 20em;
+    margin-bottom: 1em;
+}
+
+.submit-button {
+    margin-top: 1em;
+    width: 15em;
+}
+
+.center-content { 
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.margintile { 
+    margin-top: 0.5em;
+    // margin-left: 20em;
+    // margin-right: 20em;
+}
+
+.center-block {
+    width: min-content;
+    margin: auto;
+}
+
+.status-icon {
+    align-self: end;
+    height: 24px;
+}
+
+.label {
+    color: #33691E;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    height: 2.5em;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+    transform: translateY(+25%) !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+   margin: 0 !important;
+}
+
+.col {
+    padding-left: 3em;
+}
+
+.col-6 {
+    padding-left: 2.5em;
+}
+
+.answer {
+    width: 20em;
+}
+
+.answer-row {
+    margin-top: 0.5em;
+}
+
+button {
+    height: 2.5em;
+}
+
+#ga-button {
+    margin-left: 1em;
+}

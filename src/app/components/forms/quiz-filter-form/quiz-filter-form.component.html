@@ -1,0 +1,23 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+    <div class="filters-container">
+        <div class="filter-input-box">
+            <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
+                <mat-select disableOptionCentering [placeholder]="'quiz-filter-form.label' | translate" panelClass="bottom-position-filter" formControlName="labels" multiple>                 
+                    <mat-option *ngFor="let label of Labels" [value]="label.id">
+                        {{label.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> 
+        </div>
+        <div class="filter-input-box">
+            <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
+                <mat-select disableOptionCentering [placeholder]="'quiz-filter-form.type' | translate" panelClass="bottom-position-filter" formControlName="types" multiple>                 
+                    <mat-option *ngFor="let type of Types" [value]="type.id">
+                        {{type.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> 
+        </div>
+    </div>
+</form>
+

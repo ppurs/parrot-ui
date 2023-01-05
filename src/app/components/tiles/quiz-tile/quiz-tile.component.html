@@ -1,0 +1,51 @@
+<div class="margintile">
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header collapsedHeight="2.5em">
+            <mat-panel-title>
+               {{tileData.wordFrom}}
+            </mat-panel-title>
+           
+        </mat-expansion-panel-header>
+        
+        
+            <div class="row">
+                <div class="row">
+                    <div class="col">
+                        <div class="input">
+                            <span class="label">Word to guess: </span>
+                            <span>{{tileData.wordFrom}}</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input">
+                            <span class="label">Type: </span>
+                            <span>{{tileData.wordType}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="input">
+                            <span class="label">Description: </span>
+                            <span>{{tileData.description}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row answer-row">
+                    <div class="col-6">
+                        <mat-form-field class="answer" appearance="outline" floatLabel='never'>
+                            <input type="text" placeholder="Answer" matInput [formControl]="userAnswer">
+                        </mat-form-field> 
+                    </div>
+                    <div class="col">
+                        <button mat-stroked-button color="primary" (click)="onCheckClick()">Check</button>
+                        <button id="ga-button" mat-stroked-button color="primary" (click)="onGiveAnswerClick()">Give Answer</button>
+                    </div>
+                </div>
+            </div>
+
+    </mat-expansion-panel>
+</div>
