@@ -16,7 +16,7 @@
             </div>
           </mat-accordion>
 
-          <div *ngIf="getListLength() >= 50">
+          <div *ngIf="hasMore">
             <div *ngIf="!isFetchingMoreWords; else smallSpinner" class="load-more">
               <button mat-button color="primary" id='load-more-btn' (click)="loadMoreWords()">{{ 'translations-page.load-more' | translate }}</button>
             </div>

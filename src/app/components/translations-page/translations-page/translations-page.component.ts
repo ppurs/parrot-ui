@@ -14,11 +14,12 @@ const DEFAULT_LIMIT: number = 50;
 export class TranslationsPageComponent implements OnInit {
   @ViewChild('addedTiles') addedTiles!: AddTranslationsComponent;
 
+  hasMore: boolean;
   isFetchingMoreWords: boolean;
   isLoadingPage: boolean;
   isLoadingList: boolean;
   // service for wordList to async view?
-  wordList?: Translation[];   
+  wordList: Translation[];   
   
   private filter?: TranslationsFilter;
   private limit: number = DEFAULT_LIMIT;
@@ -26,10 +27,12 @@ export class TranslationsPageComponent implements OnInit {
 
   constructor(  private cdref: ChangeDetectorRef,
                 private translationService: TranslationService ) {
+    this.hasMore = false;
     this.isFetchingMoreWords = false;
     this.isLoadingPage = true;
     this.isLoadingList = true;
     this.offset = 0;
+    this.wordList = [];
   }
 
   ngOnInit(): void {
@@ -65,16 +68,14 @@ export class TranslationsPageComponent implements OnInit {
     this.addedTiles.fillActiveTile( event );
   }
 
-  getListLength(): number {
-    return this.wordList?.length ?? 0;
-  }
-
   loadMoreWords(): void {
     this.isFetchingMoreWords = true;
 
     this.translationService.getTranslationsList( this.filter, undefined, this.offset ).subscribe(
       res => {
-        this.wordList?.concat( res );
+        this.hasMore = res.length < this.limit ? true : false;
+
+        this.wordList.push(...res);
         this.offset += this.limit;
         
         this.isFetchingMoreWords = false;
@@ -92,7 +93,10 @@ export class TranslationsPageComponent implements OnInit {
 
     this.translationService.getTranslationsList( this.filter ).subscribe(
       res => {
-        this.wordList = res;
+        this.wordList.push(...res);
+
+        this.hasMore = this.wordList.length < this.limit ? true : false;
+
         this.offset += this.limit;
 
         if ( this.isLoadingPage ) {
