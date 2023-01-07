@@ -37,7 +37,7 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
   onSubmit(): void {
     const payload: QuizFilter = {
       labelIds: this.filterForm.get('labels')?.value ?? undefined,
-      wordTypes: this.filterForm.get('types')?.value ?? undefined
+      wordTypes: this.filterForm.get('wordTypes')?.value ?? undefined
     }
 
     this.filterApplied.emit(payload);
