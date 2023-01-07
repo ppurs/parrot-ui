@@ -73,7 +73,7 @@ export class TranslationsPageComponent implements OnInit {
 
     this.translationService.getTranslationsList( this.filter, undefined, this.offset ).subscribe(
       res => {
-        this.hasMore = res.length < this.limit ? true : false;
+        this.hasMore = res.length < this.limit ? false : true;
 
         this.wordList.push(...res);
         this.offset += this.limit;
@@ -95,7 +95,7 @@ export class TranslationsPageComponent implements OnInit {
       res => {
         this.wordList.push(...res);
 
-        this.hasMore = this.wordList.length < this.limit ? true : false;
+        this.hasMore = this.wordList.length < this.limit ? false : true;
 
         this.offset += this.limit;
 
