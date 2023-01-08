@@ -39,6 +39,25 @@
         "type": "Type"
     },
 
+    "quiz-tile": {
+        "field": {
+            "word-from": "Word to guess",
+            "type": "Type",
+            "description": "Description"
+        },
+        "answer": "Answer",
+        "button": {
+            "check": "Check",
+            "give-answer": "Give Answer",
+            "new-word": "New Word"
+        },
+        "message": {
+            "correct": "Correctly! Well done!",
+            "incorrect": "Try again.",
+            "partly-correct": "Look at the type and description. Try again."
+        }
+    },
+
     "registration-form": {
         "title": "Create account",
         "password-repetition": "Confirm passsword",
@@ -96,6 +115,7 @@
         "reset-stats": "Reset statistics",
         "button": {
             "add": "ADD",
+            "cancel": "CANCEL",
             "edit": "SAVE"
         }
     }

@@ -12,9 +12,13 @@
     min-width: 20em !important;
 }
 
-::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-    stroke: #2c3968;
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    align-items: center !important;
 }
+
+/*::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #2c3968;
+}*/
 
 .term {
     margin-top: 1em;
@@ -66,9 +70,11 @@
 
 .label {
     color: #33691E;
+    font-size: smaller;
+    width: 20em;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+/*::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     height: 2.5em;
   }
 
@@ -82,7 +88,7 @@
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
    margin: 0 !important;
-}
+}*/
 
 .col {
     padding-left: 3em;
@@ -98,12 +104,15 @@
 
 .answer-row {
     margin-top: 0.5em;
-}
-
-button {
-    height: 2.5em;
+    display: flex;
+    align-items: center;
 }
 
 #ga-button {
     margin-left: 1em;
+}
+
+.status-info {
+    display: flex;
+    align-self: center;
 }

@@ -7,11 +7,11 @@
         <div class="col-2"></div>  
         <div class="col-8">
           <mat-accordion multi="false">
-            <div *ngFor="let tile of quizTiles">
-                <app-quiz-tile [tileData]="tile"></app-quiz-tile>
+            <div *ngFor="let tile of getNumberList( noTiles )">
+                <app-quiz-tile></app-quiz-tile>
             </div>
           </mat-accordion>
-         </div>   
+        </div>   
         <div class="col-2"></div>
         </div>
   </div>

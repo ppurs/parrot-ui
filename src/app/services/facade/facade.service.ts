@@ -7,6 +7,9 @@ import { TranslationService } from '../translation/translation.service';
 import { WordType } from 'src/app/models/word-type';
 import { Translation } from 'src/app/models/translation';
 import { RequestResponse } from 'src/app/models/requests/request-response';
+import { QuizTile } from 'src/app/models/quiz-tile';
+import { QuizService } from '../quiz/quiz.service';
+import { QuizFilter } from 'src/app/models/quiz-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,7 @@ import { RequestResponse } from 'src/app/models/requests/request-response';
 export class FacadeService {
 
   constructor(private mainService: MainService,
+              private quizService: QuizService,
               private translationService: TranslationService) {}
 
   addNewTranslation(payload: Translation): Observable<RequestResponse> {
@@ -42,6 +46,10 @@ export class FacadeService {
 
   getTermTypes(): WordType[] {
     return this.translationService.wordTypes; 
+  }
+
+  loadQuizTiles(): Observable<QuizTile[]> {
+    return this.quizService.getQuizTranslations();
   }
   
 }
