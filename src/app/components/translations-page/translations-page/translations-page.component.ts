@@ -42,6 +42,7 @@ export class TranslationsPageComponent implements OnInit {
 
   applyFilter(event: TranslationsFilter): void {
     this.filter = event;
+    this.wordList = [];
     this.getWordList();
     this.cdref.detectChanges();
   }
