@@ -1,3 +1,5 @@
+import { LabelProperties } from "./label-properties"
+
 export interface Translation {
 	translationId?: number,
 	wordFrom: string
@@ -5,4 +7,5 @@ export interface Translation {
 	description?: string
 	wordTypeId: number
 	wordType?: string
+	labels?: LabelProperties[]
 }

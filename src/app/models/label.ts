@@ -1,5 +1,8 @@
+import { LabelProperties } from "./label-properties";
+
 export interface Label {
-    id: number,
-    name: string,
-    //TBD
+    properties: LabelProperties, 
+	usageCount: number,
+	parentLabels: LabelProperties[]
 }
+

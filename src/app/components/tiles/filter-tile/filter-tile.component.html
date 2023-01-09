@@ -11,11 +11,11 @@
         </mat-expansion-panel-header>
 
         <ng-template matExpansionPanelContent>
-            <div class="option-box">
-                <div>
+            <div id="option-box" class="flex-box">
+                <div class="flex-box">
                     <ng-content></ng-content>
                 </div>
-                <div>
+                <div class="flex-box">
                     <button (click)="onSubmit()" mat-stroked-button color='primary' class="apply-button">{{'filter-tile.submit-button' | translate}}</button>
                 </div>
             </div>

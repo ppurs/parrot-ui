@@ -8,6 +8,7 @@ import { Translation } from 'src/app/models/translation';
 import { TranslationFilterHints } from 'src/app/models/translation-filter-hints';
 import { WordType } from 'src/app/models/word-type';
 import { MainService } from '../main/main.service';
+import { LabelProperties } from 'src/app/models/label-properties';
 
 const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -22,9 +23,10 @@ interface DeleteTranslationResponse {
   errors: string[]
 }
 
-interface GetFilterHintsResponse {
-  wordsFrom: string[],
-  wordsTo: string[]
+interface TranslationFilterHintsResponse {
+  results: {
+    word: string
+  }[]
 }
 
 @Injectable({
@@ -111,11 +113,27 @@ export class TranslationService {
     );
   }
 
-  //TODO:
-  //  REQUEST
-  getTranslationFilterHints(payload: TranslationFilterHints): Observable<GetFilterHintsResponse> {
-    return this.http.post<GetFilterHintsResponse>( this.TRANSLATION_API + '/word-list', payload, {headers: HEADERS} )
+  getLabelsToFilter(): Observable<LabelProperties[]> {
+    return this.http.post<{results: LabelProperties[]}>( 
+      this.TRANSLATION_API + '/label-list',
+       {
+        languageFrom: this.mainService.currentLanguages.languageFrom.id,
+        languageTo: this.mainService.currentLanguages.languageTo.id
+       },
+       { headers: HEADERS }).pipe(
+        map( data => data.results
+        ),
+        catchError((err) => {
+          console.error(err);
+          throw err;
+        })
+      );
+  }
+
+  getTranslationFilterHints(payload: TranslationFilterHints): Observable<string[]> {
+    return this.http.post<TranslationFilterHintsResponse>( this.TRANSLATION_API + '/word-list', payload, {headers: HEADERS} )
     .pipe(
+      map( data => data.results.map( obj => obj.word ) ),
       catchError((err) => {
         console.error(err);
         throw err;
@@ -123,7 +141,6 @@ export class TranslationService {
     );
   }
 
-  //add hasNext property? 
   getTranslationsList( filters?: TranslationsFilter, limit?: number, offset?: number ): Observable<Translation[]>  {
     return this.http.post<{results: Translation[]}>( 
       this.TRANSLATION_API + '/list', 
@@ -135,7 +152,8 @@ export class TranslationService {
           languageToId: this.mainService.currentLanguages.languageTo.id,
           wordFromPrefix: filters?.wordFromPrefix,
 	        wordToPrefix: filters?.wordToPrefix,
-	        wordTypeId: filters?.wordTypeIds
+	        wordTypeId: filters?.wordTypeIds,
+          labelIds: filters?.labelIds
         }
       },
       {headers: HEADERS} )

@@ -95,7 +95,8 @@
     "translations-filter-form": {
         "lang-from": "From language term",
         "lang-to": "To language term",
-        "type": "Type"
+        "types": "Types",
+        "labels": "Labels"
     },
 
     "translations-page": {

@@ -1,6 +1,6 @@
 export interface TranslationFilterHints {
-    languageId: number
-	filters: {
+	filters?: {
+        languageId?: number,
         wordTypeIds: number[]
     }
 }

@@ -1,5 +1,6 @@
 export interface TranslationsFilter {
 	wordFromPrefix?: string,
 	wordToPrefix?: string,
-	wordTypeIds?: number[]
+	wordTypeIds?: number[],
+	labelIds?: number[]
 }

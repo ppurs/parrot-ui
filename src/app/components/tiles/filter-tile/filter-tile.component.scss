@@ -1,6 +1,4 @@
 .margintile { 
-    // margin-left: 5em;
-    // margin-right: 5em;
      margin-bottom: 1em;
 }
 
@@ -24,12 +22,16 @@
     color: white
   }
 
-  .apply-button {
+.apply-button {
     background-color: white;
-    //float: right;
     height: 2.5em;
 }
 
-.option-box {
+#option-box {
+    display: flex;
+    margin-right: 1em;
+}
+
+.flex-box {
     display: flex;
 }
