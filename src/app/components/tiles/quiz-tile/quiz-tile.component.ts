@@ -21,6 +21,7 @@ export class QuizTileComponent implements OnInit {
 
   userAnswer = new FormControl<string>('');
 
+  private answerSubscription!: Subscription;
   private tileData!: QuizTile;
   private subscription!: Subscription;
   
@@ -36,6 +37,13 @@ export class QuizTileComponent implements OnInit {
 
   ngOnInit(): void {
     this.setNewContent();
+
+    this.answerSubscription = this.userAnswer.valueChanges.subscribe( () => {
+      if( this.answerStatus.key != 'none') {
+        this.answerStatus = AnswerStatus.NONE;
+      }
+    })
+
     this.subscription = this.quizService.isFetchingMoreTiles$.subscribe( val => {
       if ( this.isLoading ) {
 
@@ -74,6 +82,7 @@ export class QuizTileComponent implements OnInit {
       }
       else{
         this.answerStatus = AnswerStatus.INCORRECT;
+        this.enableAnswerActions();
       }
     
       this.quizService.notifyFailure( this.tileData.content.translationId ).subscribe();
@@ -104,13 +113,13 @@ export class QuizTileComponent implements OnInit {
 
   private disableAnswerActions(): void {
     this.answerBtnsDisabled = true;
-    this.userAnswer.disable();
+    this.userAnswer.disable({emitEvent: false});
     this.showNewWordBtn = true;
   }
 
   private enableAnswerActions(): void {
     this.answerBtnsDisabled = false;
-    this.userAnswer.enable();
+    this.userAnswer.enable({emitEvent: false});
     this.showNewWordBtn = false;
   }
 
