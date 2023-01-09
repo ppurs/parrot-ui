@@ -14,6 +14,11 @@ import { StatusInfoComponent } from './components/tiles/status-info/status-info.
 import { TileActionsBarComponent } from './components/tiles/tile-actions-bar/tile-actions-bar.component';
 import { TranslationsFilterFormComponent } from './components/forms/translations-filter-form/translations-filter-form.component';
 import { TranslationsPageComponent } from './components/translations-page/translations-page//translations-page.component';
+// import { LabelsPageComponent } from './components/labels-page/labels-page/labels-page.component';
+// import { AddLabelsComponent } from './components/labels-page/add-labels/add-labels.component';
+// import { NewLabelTileComponent } from './components/tiles/label-tile/new-label-tile/new-label-tile.component';
+// import { FoundLabelTileComponent } from './components/tiles/label-tile/found-label-tile/found-label-tile.component';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
@@ -21,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -38,6 +44,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+//import { LabelsFilterFormComponent } from './components/forms/labels-filter-form/labels-filter-form.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +63,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     StatusInfoComponent,
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
-    TranslationsPageComponent
+    TranslationsPageComponent,
+    // LabelsPageComponent,
+    // AddLabelsComponent,
+    // NewLabelTileComponent,
+    // FoundLabelTileComponent,
+    // LabelsFilterFormComponent
   ],
   imports: [
     AuthModule,
@@ -65,6 +77,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
