@@ -8,7 +8,7 @@
         </mat-expansion-panel-header>
     </mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="!isLoading" [(expanded)]="isExpanded" hideToggle>
+    <mat-expansion-panel *ngIf="!isLoading" [expanded]="isExpanded" hideToggle>
         <mat-expansion-panel-header collapsedHeight="2.5em">
             <mat-panel-title>
                 <span *ngIf="!isSubmitted(); else answerInfo"> {{currentContent.wordFrom}}</span>
