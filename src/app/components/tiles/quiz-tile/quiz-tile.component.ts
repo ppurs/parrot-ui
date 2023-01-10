@@ -14,24 +14,22 @@ export class QuizTileComponent implements OnInit {
   answerStatus: AnswerStatus;
   answerBtnsDisabled: boolean;
   currentContent!: QuizTileContent;
-  isExpanded: boolean;
   isLoading: boolean;
-  showNewWordBtn: boolean;
   showNoMoreWordsMsg: boolean;
 
   userAnswer = new FormControl<string>('');
 
   private answerSubscription!: Subscription;
-  private tileData!: QuizTile;
+  private tileData!: QuizTile | null;
+  private newWordBtnVisible: boolean;
   private subscription!: Subscription;
   
   constructor( private cdref: ChangeDetectorRef,
                private quizService: QuizService ) {
     this.answerStatus = AnswerStatus.NONE;
     this.answerBtnsDisabled = false;
-    this.isExpanded = false;
     this.isLoading = false;
-    this.showNewWordBtn = false;
+    this.newWordBtnVisible = false;
     this.showNoMoreWordsMsg = false;
   }
 
@@ -57,6 +55,7 @@ export class QuizTileComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.answerSubscription.unsubscribe();
   }
 
   isSubmitted(): boolean {
@@ -65,27 +64,20 @@ export class QuizTileComponent implements OnInit {
 
   onCheckClick(): void {
     this.disableAnswerActions();
-    this.isExpanded = false;
 
-    if( this.userAnswer.value == this.tileData.content.wordTo ) {
+    if( this.userAnswer.value == this.tileData!.content.wordTo ) {
       this.answerStatus = AnswerStatus.CORRECT;
 
-      this.quizService.notifySuccess( this.tileData.content.translationId ).subscribe();
+      this.quizService.notifySuccess( this.tileData!.content.translationId ).subscribe();
     }
     else {
-      const otherAnswer = this.tileData.otherAnswers
+      const otherAnswer = this.tileData!.otherAnswers
         .find( answer => answer.wordTo == this.userAnswer.value );
-      
-      if ( otherAnswer ) {
-        this.currentContent = otherAnswer;
-        this.answerStatus = AnswerStatus.PARTLY_CORRECT;
-      }
-      else{
-        this.answerStatus = AnswerStatus.INCORRECT;
-        this.enableAnswerActions();
-      }
-    
-      this.quizService.notifyFailure( this.tileData.content.translationId ).subscribe();
+
+      this.answerStatus =  otherAnswer ? AnswerStatus.PARTLY_CORRECT : AnswerStatus.INCORRECT;
+      this.enableAnswerActions();
+ 
+      this.quizService.notifyFailure( this.tileData!.content.translationId ).subscribe();
     }
 
     this.cdref.detectChanges();
@@ -97,8 +89,8 @@ export class QuizTileComponent implements OnInit {
 
   onGiveAnswerClick(): void {
     this.disableAnswerActions();
-    this.userAnswer.setValue(this.tileData.content.wordTo);
-    this.quizService.notifyRevealed( this.tileData.content.translationId ).subscribe();
+    this.userAnswer.setValue(this.tileData!.content.wordTo);
+    this.quizService.notifyRevealed( this.tileData!.content.translationId ).subscribe();
   }
 
   onNewWordClick(event: Event): void {
@@ -111,31 +103,39 @@ export class QuizTileComponent implements OnInit {
     this.cdref.detectChanges();
   }
 
+  showNewWordBtn(): boolean {
+    return this.newWordBtnVisible;
+  }
+
   private disableAnswerActions(): void {
     this.answerBtnsDisabled = true;
     this.userAnswer.disable({emitEvent: false});
-    this.showNewWordBtn = true;
+    this.newWordBtnVisible = true;
   }
 
   private enableAnswerActions(): void {
     this.answerBtnsDisabled = false;
     this.userAnswer.enable({emitEvent: false});
-    this.showNewWordBtn = false;
   }
 
   private setNewContent(): void {
     this.userAnswer.setValue('');
+    this.newWordBtnVisible = false;
 
-    const newContent = this.quizService.getQuizTile();
+    if( this.tileData ) {
+      this.quizService.removeQuizTile(this.tileData);
+      this.tileData = null;
+    }
 
-    if( newContent ){
-      this.tileData = newContent;
-      this.currentContent = this.tileData.content;
+    const newData = this.quizService.getQuizTile();
+
+    if( newData ){
+      this.tileData = newData;
+      this.currentContent = this.tileData.content; 
     }
     else {
       this.isLoading = true;
     }
-
-    this.quizService.removeQuizTile(this.tileData);
+    
   }
 }
