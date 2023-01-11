@@ -11,6 +11,8 @@ import { QuizTile } from 'src/app/models/quiz-tile';
 import { QuizService } from '../quiz/quiz.service';
 import { TranslationFilterHints } from 'src/app/models/translation-filter-hints';
 import { LabelProperties } from 'src/app/models/label-properties';
+import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
+//import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,7 @@ export class FacadeService {
               private quizService: QuizService,
               private translationService: TranslationService) {}
 
-  addNewTranslation(payload: Translation): Observable<RequestResponse> {
+  addNewTranslation(payload: Translation): Observable<AddTranslationResponse> {
     return this.translationService.addTranslation(payload);
   }
 
@@ -32,6 +34,10 @@ export class FacadeService {
   editTranslation( payload: Translation, resetStatisctics?: boolean ): Observable<RequestResponse> {
     return this.translationService.editTranslation(payload, resetStatisctics);
   }
+
+  /*editTranslationLabelList( translationId: number, addedIds?: number[], removedIds?: number[] ): Observable<EditTranslationLabelResponse> {
+    return this.translationService.editTranslationLabelList( translationId, addedIds, removedIds );
+  }*/
 
   changeCurrentLanguages(payload: CurrentLanguages): Observable<RequestResponse> {
     return this.mainService.changeCurrentLanguages(payload);
@@ -47,6 +53,10 @@ export class FacadeService {
 
   getNavbarNavigation(): string[] {
     return ['quiz', 'translations', 'labels' ];
+  }
+
+  getLabelSelectList(): LabelProperties[] {
+    return this.translationService.labels;
   }
 
   getTermTypes(): WordType[] {
@@ -67,6 +77,10 @@ export class FacadeService {
 
   loadQuizTiles(): Observable<QuizTile[]> {
     return this.quizService.getQuizTranslations();
+  }
+
+  loadLabelSelectList(): Observable<LabelProperties[]> {
+    return this.translationService.getLabelsToFilter();
   }
   
 }

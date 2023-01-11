@@ -18,7 +18,7 @@ export class QuizService {
   private isFetchigMoreTiles = new BehaviorSubject<boolean>(false);
   isFetchingMoreTiles$ = this.isFetchigMoreTiles.asObservable();
 
-  private filters?: QuizFilter;
+  private filter?: QuizFilter;
   private lastTileIndex: number;
   private noTilesOnPage: number = 10;
   private quizTiles: QuizTile[];
@@ -53,6 +53,8 @@ export class QuizService {
       languageToId: this.mainService.currentLanguages.languageTo.id,
       excludeTranslationIds: notUsedTranslationIds,
       count: tilesCount,
+      wordTypes: this.filter?.wordTypes,
+      labelIds: this.filter?.labelIds
     }
 
     return this.http.post<{results: QuizTileContent[]}>( 
@@ -138,8 +140,8 @@ export class QuizService {
     this.quizTiles = [];
   }
 
-  setFilters( filters: QuizFilter ) {
-    this.filters = filters;
+  setFilters( filter: QuizFilter ) {
+    this.filter = filter;
   }
 
   setNoTilesOnPage( number: number ) {

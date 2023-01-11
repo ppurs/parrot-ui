@@ -37,6 +37,7 @@ export class TranslationsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadWordTypes();
+    this.loadLabelSelectList();
     this.getWordList();
   }
 
@@ -82,6 +83,11 @@ export class TranslationsPageComponent implements OnInit {
         this.isFetchingMoreWords = false;
       }
     );
+  }
+
+  private loadLabelSelectList(): void {
+    this.translationService.getLabelsToFilter().subscribe( res => {
+    });
   }
 
   private loadWordTypes(): void {

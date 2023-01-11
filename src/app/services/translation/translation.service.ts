@@ -3,20 +3,16 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { TranslationsFilter } from 'src/app/models/translations-filter';
 import { RequestResponse } from 'src/app/models/requests/request-response';
-import { ResponseError } from 'src/app/models/requests/response-error';
 import { Translation } from 'src/app/models/translation';
 import { TranslationFilterHints } from 'src/app/models/translation-filter-hints';
 import { WordType } from 'src/app/models/word-type';
 import { MainService } from '../main/main.service';
 import { LabelProperties } from 'src/app/models/label-properties';
+import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
+import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
-
-interface AddTranslationResponse {
-  insertedId: number,
-	result: boolean,
-	errors: ResponseError[]
-}
 
 interface DeleteTranslationResponse {
   result: boolean,
@@ -36,11 +32,12 @@ export class TranslationService {
   private readonly TRANSLATION_API = '/api/translation';
 
   wordTypes!: WordType[];
+  labels!: LabelProperties[];
 
   constructor(private http: HttpClient, 
               private mainService: MainService) {}
 
-  addTranslation(payload: Translation): Observable<RequestResponse> {
+  addTranslation(payload: Translation): Observable<AddTranslationResponse> {
     return this.http.post<AddTranslationResponse>( 
       this.TRANSLATION_API + '/add', 
       {
@@ -49,22 +46,31 @@ export class TranslationService {
         wordFrom: payload.wordFrom,
         wordTo: payload.wordTo,
         description: payload.description,
-        wordTypeId: payload.wordTypeId
+        wordTypeId: payload.wordTypeId,
       }, 
       { headers: HEADERS } )
     .pipe(
-      map((data) => {
-        const response: RequestResponse = {
-          result: data.result,
-          errors: data.errors
-        }
-       return response;
-     }),
       catchError((err) => {
         console.error(err);
         throw err;
       })
     );
+  }
+
+  editTranslationLabelList( translationId: number, addedLabelsIds?: number[], removedLabelsIds?: number[] ): Observable<EditTranslationLabelResponse> {
+    return this.http.post<EditTranslationLabelResponse>(
+      this.TRANSLATION_API + '/edit-labels/' + translationId,
+      {
+        addIds: addedLabelsIds,
+        deleteIds: removedLabelsIds
+      }, 
+      { headers: HEADERS } )
+      .pipe(
+        catchError((err) => {
+          console.error(err);
+          throw err;
+        })
+      );
   }
 
   editTranslation( translation: Translation, resetStatistics?: boolean ): Observable<RequestResponse> {
@@ -117,11 +123,17 @@ export class TranslationService {
     return this.http.post<{results: LabelProperties[]}>( 
       this.TRANSLATION_API + '/label-list',
        {
-        languageFrom: this.mainService.currentLanguages.languageFrom.id,
-        languageTo: this.mainService.currentLanguages.languageTo.id
+        filters: {
+          languageFromId: this.mainService.currentLanguages.languageFrom.id,
+          languageToId: this.mainService.currentLanguages.languageTo.id
+        }
        },
        { headers: HEADERS }).pipe(
-        map( data => data.results
+        map( data =>  {
+          this.labels = data.results;
+
+          return data.results;
+        }
         ),
         catchError((err) => {
           console.error(err);
@@ -158,8 +170,8 @@ export class TranslationService {
       },
       {headers: HEADERS} )
     .pipe(
-      map( data => data.results 
-      ),
+
+      map( data => data.results ),
       catchError((err) => {
         console.error(err);
         throw err;

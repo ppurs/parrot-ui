@@ -2,9 +2,9 @@
     <div class="filters-container">
         <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
-                <mat-select disableOptionCentering [placeholder]="'quiz-filter-form.label' | translate" panelClass="bottom-position-filter" formControlName="labels" multiple>                 
-                    <mat-option *ngFor="let label of Labels" [value]="label.properties.labelId">
-                        {{label.properties.labelName}}
+                <mat-select disableOptionCentering [placeholder]="'quiz-filter-form.label' | translate" panelClass="bottom-position-first-filter" formControlName="labels" multiple>                 
+                    <mat-option *ngFor="let label of Labels" [value]="label.labelId">
+                        {{label.labelName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field> 

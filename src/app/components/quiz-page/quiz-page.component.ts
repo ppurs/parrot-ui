@@ -10,6 +10,7 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
   styleUrls: ['./quiz-page.component.scss']
 })
 export class QuizPageComponent implements OnInit {
+  isLoadingList: boolean;
   isLoadingPage: boolean;
   noTiles: number = 5;
 
@@ -17,18 +18,20 @@ export class QuizPageComponent implements OnInit {
                private facade: FacadeService,
                private quizService: QuizService,
                private translationService: TranslationService ) {
+    this.isLoadingList = true;
     this.isLoadingPage = true;
   }
 
   ngOnInit(): void {
     this.loadWordTypes();
+    this.loadLabelsList();
 
     this.quizService.resetQuiz();
     this.quizService.setNoTilesOnPage( this.noTiles );
     this.loadQuizTiles();
   }
 
-  applyFilter(event: QuizFilter ): void {
+  applyFilter( event: QuizFilter ): void {
     this.quizService.setFilters( event );
     this.quizService.resetQuiz();
     this.loadQuizTiles();
@@ -40,18 +43,26 @@ export class QuizPageComponent implements OnInit {
   }
 
   private loadQuizTiles(): void {
+    this.isLoadingList = true;
+
     this.facade.loadQuizTiles().subscribe(
       res => {
         this.noTiles = res.length < this.noTiles ? res.length : this.noTiles;
         this.quizService.setNoTilesOnPage( this.noTiles );
 
+        this.isLoadingList = false;
         this.isLoadingPage = false;
+        
       }
     )
   }
 
   private loadWordTypes(): void {
     this.translationService.getWordTypes().subscribe();
+  }
+
+  private loadLabelsList(): void {
+    this.facade.loadLabelSelectList().subscribe();
   }
 
 }

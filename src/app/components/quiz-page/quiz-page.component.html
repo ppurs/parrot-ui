@@ -1,8 +1,9 @@
-<div *ngIf="!isLoadingPage; else spinner" class="page">
+<div *ngIf="!isLoadingPage  else spinner" class="page">
   <app-filter-tile>
     <app-quiz-filter-form #filterForm (filterApplied)="applyFilter($event)"></app-quiz-filter-form>
   </app-filter-tile>
 
+    <div *ngIf="!isLoadingList; else spinner">
       <div class="row">
         <div class="col-2"></div>  
         <div class="col-8">
@@ -13,7 +14,8 @@
           </mat-accordion>
         </div>   
         <div class="col-2"></div>
-        </div>
+      </div>
+    </div>
   </div>
   
   <ng-template #spinner>

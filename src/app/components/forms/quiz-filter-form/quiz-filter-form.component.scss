@@ -17,6 +17,16 @@
    margin: 0 !important;
 }
 
+::ng-deep .bottom-position-first-filter {
+    margin-top: 1.8em;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-left: 17px;
+    min-width: calc(20em - 4px) !important;
+}
+
 ::ng-deep .bottom-position-filter {
     margin-top: 1.8em;
     border-top-left-radius: 0px !important;
