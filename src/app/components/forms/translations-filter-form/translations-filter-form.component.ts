@@ -40,6 +40,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
   private wordFromHints: string[];
   private wordToHints: string[];
   private wordTypesSubscrition?: Subscription;
+  private labelsChanged: boolean;
 
   constructor( private facade: FacadeService,
                private fb: FormBuilder ) {
@@ -49,6 +50,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
 
     this.wordFromHints = [];
     this.wordToHints = [];
+    this.labelsChanged = false;
    }
 
    get fromLang() {
@@ -71,32 +73,30 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
     this.getTypes();
     this.getLabels();
 
-    this.wordTypesSubscrition = this.types?.valueChanges.subscribe( val => {
-      this.onWordTypesChange( val );
-    });
+    this.wordTypesSubscrition = this.types?.valueChanges.subscribe( val => this.onWordTypesChange(val));
 
-    // this.labelsSubscription = this.labels?.valueChanges.pipe(pairwise()).subscribe( ([prev, next]) => {
-    //   this.onLabelsChange( prev, next );
-    // });
+     this.labelsSubscription = this.labels?.valueChanges.pipe(startWith([],[]),pairwise()).subscribe( ([prev, next]) =>
+        this.onLabelsChange( prev, next )
+    );
 
     this.filteredWordFromHints = this.fromLang?.valueChanges.pipe(
       startWith(''),
       map( val => {
-        return val ? this.filterHints( val, this.wordFromHints ) : this.wordFromHints.slice();
+        return val && !this.labelsChanged ? this.filterHints( val, this.wordFromHints ) : this.wordFromHints.slice();
       })
     ) ?? of([]);
 
     this.filteredWordToHints = this.toLang?.valueChanges.pipe(
       startWith(''),
       map( val => {
-        return val ? this.filterHints( val, this.wordToHints ) : this.wordToHints.slice();
+        return val && !this.labelsChanged ? this.filterHints( val, this.wordToHints ) : this.wordToHints.slice();
       })
     ) ?? of([]);
   }
 
   ngOnDestroy(): void {
     this.wordTypesSubscrition?.unsubscribe();
-    //this.labelsSubscription?.unsubscribe();
+    this.labelsSubscription?.unsubscribe();
   }
 
   onSubmit(): void {
@@ -112,6 +112,11 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
     this.filterApplied.emit(payload);
   }
 
+  private clearHints(): void {
+    this.wordFromHints = [];
+    this.wordToHints = [];
+  }
+
   private filterHints(word: string, list: string[]): string[] {
     const filterValue = word.toLowerCase();
 
@@ -125,6 +130,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
   private getFilterHints( payload: TranslationFilterHints ): void {  
     this.facade.getTranslationsLangFromHints(payload).subscribe( res => {
       this.wordFromHints = res;
+  
     });
  
     this.facade.getTranslationsLangToHints(payload).subscribe( res => {
@@ -137,32 +143,46 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
   }
 
   private onWordTypesChange( val: number[] | null ): void {
-    if ( ( this.labels?.value && this.labels?.value.length > 0 ) && ( val?.length && val.length > 0 ) ) {
+    if ( ( !this.labels?.value || ( this.labels?.value && this.labels?.value.length == 0 ) ) 
+          && ( val?.length && val.length > 0 ) ) {
       const payload: TranslationFilterHints = {
         filters: {
           wordTypeIds: val
         }
       }
 
+      this.labelsChanged = false;
       this.getFilterHints(payload);
     } 
     else {
-      this.wordFromHints = [];
-      this.wordToHints = [];
+      this.clearHints();
     }
   }
 
-  private onLabelsChange( prev: number[] | null, next: number[] | null ): void {
+  private onLabelsChange( prev: number[] | null | undefined, next: number[] | null | undefined ): void {
+
+    if( next && next.length > 0 ) {
+      this.labelsChanged = true;
+      this.clearHints();
+    } 
+    else {
+      if ( this.types?.value  ) {
+        this.labelsChanged = false;
+        this.onWordTypesChange( this.types?.value );
+      }
+    }
+
     if( !prev || !next ) {
       return;
     }
 
-    if( prev.length == 1 && prev[0] == NO_LABEL_OPTION.labelId! ) {
+    /*if( prev.length == 1 && prev[0] == NO_LABEL_OPTION.labelId! ) {
       this.labels?.setValue( [ next[1] ] );
+      this.clearHints();
     }
     else if( next.length > 1 && next[ 0 ] == NO_LABEL_OPTION.labelId! ) {
       this.labels?.setValue([ NO_LABEL_OPTION.labelId! ]);
-    }
+    }*/
   }
 
 }
