@@ -1,23 +1,22 @@
 import { TileStateStatus } from "src/app/models/tile-state-status";
 import { FacadeService } from "src/app/services/facade/facade.service";
-import { TranslationTile } from "../translation-tile/translation-tile";
-import { InactiveState } from "./inactive.state";
+import { ListTile } from "../../../models/list-tile";
 import { TileState } from "./tile.state";
 
 export class DeletedState implements TileState {
-    tile!: TranslationTile;
+    tile!: ListTile;
     hiddenActionBar: boolean;
     inputsEnabled: boolean = false;
     hiddenButton: boolean = true;
     status: TileStateStatus;
 
-    constructor( tile: TranslationTile, private facade: FacadeService ) {
+    constructor( tile: ListTile, private facade: FacadeService ) {
         this.tile = tile;
         this.hiddenActionBar = true;
         this.status = TileStateStatus.LOADING;
     }
 
-    setTile( tile: TranslationTile ) {
+    setTile( tile: ListTile ) {
         this.tile = tile;
     }
 
@@ -33,7 +32,7 @@ export class DeletedState implements TileState {
     }
 
     onBtnClick(): void {
-        this.facade.deleteTranslation( this.tile.getCurrentTranslation() ).subscribe( res => {
+        this.facade.deleteTranslation( this.tile.getCurrentFormValue() ).subscribe( res => {
             if ( res.result ) {
                 this.changeStatus( TileStateStatus.SUCCESSFUL );
                 if ( this.tile.removeFromList ) {

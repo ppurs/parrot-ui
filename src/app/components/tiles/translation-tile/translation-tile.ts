@@ -6,21 +6,37 @@ import { TileStateStatus } from "../../../models/tile-state-status";
 import { SubmittedState } from "../states/submitted.state";
 import { TileState } from "../states/tile.state";
 import { Translation } from "src/app/models/translation";
+import { ListTile } from "../../../models/list-tile";
+import { LabelProperties } from "src/app/models/label-properties";
+import { LabelsChange } from "src/app/models/labels-change";
 
-export class TranslationTile {
+export class TranslationTile implements ListTile {
+    content: Translation;
     isExpanded: boolean = false;
-    Types!: WordType[];
+    Labels: LabelProperties[];
+    Types: WordType[];
     state!: TileState;
 
     translationForm: FormGroup = this.fb.group({
         term: ['', Validators.required ],
         translation: ['', Validators.required ],
         type: [ <number><unknown>undefined, Validators.required ],        
-        description: ['']
+        description: [''],
+        labels: [<number[]><unknown>undefined]
       });
 
     constructor( protected facade: FacadeService,
                 protected fb: FormBuilder ) {
+        this.Labels = [];
+        this.Types = [];
+        this.content = {
+            wordFrom: '',
+            wordTo: '',
+            wordTypeId: -1,
+            description: '',
+            labels: [],
+            directLabelIds: undefined
+        };
     }
 
     get term(): AbstractControl<any, any> | null {
@@ -39,6 +55,10 @@ export class TranslationTile {
         return this.translationForm.get('description');
     }
 
+    get labels(): AbstractControl<any, any> | null {
+        return this.translationForm.get('labels')
+    }
+
     get resetStatistics(): AbstractControl<any, any> | null {
         return null;
     }
@@ -53,16 +73,25 @@ export class TranslationTile {
         this.translation?.setValue( content.wordTo );
         this.type?.setValue( content.wordTypeId );
         this.description?.setValue( content.description ?? '' );
+
+        const directLabelIds = this.content.labels
+                            ?.filter(obj => !obj.inherited )
+                            .flatMap( obj => obj.labelId ? [ obj.labelId ] : [] );
+
+        this.labels?.setValue( directLabelIds ?? undefined );
       }
 
-    getCurrentTranslation(): Translation {
-        return {
-            wordFrom: this.term?.value?.trim() ?? '',
-            wordTo: this.translationForm.get('translation')?.value?.trim() ?? '',
-            wordTypeId: this.translationForm.get('type')?.value ?? -1,
-            description: this.translationForm.get('description')?.value?.trim() ?? ''
-        };
+    getCurrentFormValue(): Translation {
+        this.content.wordFrom = this.term?.value?.trim() ?? '';
+        this.content.wordTo = this.translation?.value?.trim() ?? '';
+        this.content.wordTypeId = this.type?.value ?? -1;
+        this.content.description = this.description?.value?.trim() ?? '';
+        this.content.directLabelIds = this.labels?.value ?? undefined;
+      
+        return this.content;
     }
+
+    getLabelsChange?(): LabelsChange | null;
 
     getTileStateStatus(): TileStateStatus {
         return this.state.status;
@@ -90,9 +119,15 @@ export class TranslationTile {
 
     removeFromList?(): void;
 
+    setLabelsDetails( labels: LabelProperties[] ): void {}
+
     tryChangeStateToInactive?(): boolean;
     
     tryChangeStateToSubmitted?(): boolean;
+
+    updateContentAfterSubmitSuccess( content: LabelProperties[] ): void {
+        this.content.labels = content;
+      }
 
     protected checkInputsEnabled(): void {
         if ( this.state.inputsEnabled ) {
@@ -101,6 +136,10 @@ export class TranslationTile {
         else {
             this.translationForm.disable();
         }
+    }
+
+    protected getLabels(): void {
+        this.Labels = this.facade.getLabelSelectList()
     }
     
     protected getTermTypes(): void {

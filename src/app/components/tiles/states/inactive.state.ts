@@ -1,17 +1,18 @@
+import { ListTile } from "../../../models/list-tile";
 import { TranslationTile } from "../translation-tile/translation-tile";
 import { TileState } from "./tile.state";
 
 export class InactiveState implements TileState {
-    tile!: TranslationTile;
+    tile!: ListTile;
     hiddenActionBar: boolean = false;
     inputsEnabled: boolean = false;
     hiddenButton: boolean = true;
 
-    constructor( tile: TranslationTile ) {
+    constructor( tile: ListTile ) {
         this.tile = tile;
     }
 
-    setTile( tile: TranslationTile ) {
+    setTile( tile: ListTile ) {
         this.tile = tile;
     }
 

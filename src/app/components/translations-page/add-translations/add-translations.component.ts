@@ -32,7 +32,7 @@ export class AddTranslationsComponent implements OnInit {
       this.addSubscription.unsubscribe();
     }
 
-    this.addSubscription = tile.instance.createNewTile.subscribe( () => this.addTile() );
+    this.addSubscription = tile.instance.createNewTile.subscribe( (val: {labels: number[]}) => this.addTile( val.labels ) );
   }
 
   private subscribeCopyBtn(tile: ComponentRef<any>) {
@@ -44,7 +44,7 @@ export class AddTranslationsComponent implements OnInit {
     );
   }
 
-  addTile(): void {
+  addTile( defaultLabels?: number[] ): void {
     const componentClass = NewTranslationTileComponent;
     const options = { index: 0 };
     const newTile = this.addedTilesContainer.createComponent(componentClass, options );
@@ -52,6 +52,8 @@ export class AddTranslationsComponent implements OnInit {
     if ( this.addedTilesContainer.length === 1 ) {
       newTile.instance.setFirst();
     }
+
+    newTile.instance.setDefaultLabels( defaultLabels );
     
     this.subscribeAddBtn(newTile);
     this.subscribeCopyBtn(newTile);
@@ -79,6 +81,4 @@ export class AddTranslationsComponent implements OnInit {
   }
 
 }
-
-//TODO: mozna dodac focus na nowo dodany komponent, najlepiej na term input(?)
 

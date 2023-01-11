@@ -12,6 +12,16 @@
     min-width: 20em !important;
 }
 
+::ng-deep .bottom-position-multiple {
+    margin-top: 1.8em;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-left: 31px;
+    min-width: 20em !important;
+}
+
 // ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
 //     stroke: #2c3968;
 // }
@@ -58,5 +68,14 @@
 .center-block {
     width: min-content;
     margin: auto;
+}
+
+.label {
+    opacity: 0.5;
+    font-size: smaller;
+}
+
+.labels-content {
+    width: 20em;
 }
 

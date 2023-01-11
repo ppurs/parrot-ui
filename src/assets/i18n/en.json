@@ -112,6 +112,7 @@
         "translation": "Translation",
         "type": "Type",
         "description": "Description",
+        "label": "Label",
         "required-error": "This field is required.",
         "reset-stats": "Reset statistics",
         "button": {

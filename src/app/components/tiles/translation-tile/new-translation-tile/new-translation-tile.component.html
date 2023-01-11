@@ -56,9 +56,51 @@
                     </div>
                 </div>
             </div>
+            <div class="row" *ngIf="isActive() || (isSubmitted() && getTileStateStatus()!='successful'); else labelsList">
+                <div class="col">
+                    <div class="center-block">
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'translation-tile.label' | translate }}</mat-label>    
+                            <mat-select disableOptionCentering panelClass="bottom-position-multiple" formControlName="labels" multiple>                 
+                                <mat-option *ngFor="let label of Labels" [value]="label.labelId">
+                                    {{label.labelName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field> 
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
             <div class="center-content">
                 <button mat-raised-button *ngIf="!isBtnHidden()" color="primary" type="submit" class="submit-button">{{ 'translation-tile.button.add' | translate }}</button> 
             </div>
         </form>
     </mat-expansion-panel>
 </div>
+
+<ng-template #labelsList >
+    <div *ngIf="content.labels && content.labels.length > 0 " class="row">
+        <div class="col">
+            <div class="center-block">
+                <div class="label">
+                    <span>{{ 'translation-tile.label' | translate }}</span>
+                </div>
+                <div *ngIf="content.labels!.length <= 5; else scrollList" class="labels-content">
+                    <div *ngFor="let label of content.labels" >
+                        <div class="">
+                            <!-- <mat-icon>label</mat-icon> -->
+                            <div [style.opacity]="label.inherited ? 0.5 : 0.75">
+                                {{label.labelName}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</ng-template>
+
+<ng-template #scrollList>
+
+</ng-template>

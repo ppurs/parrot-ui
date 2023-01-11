@@ -12,7 +12,7 @@ import { QuizService } from '../quiz/quiz.service';
 import { TranslationFilterHints } from 'src/app/models/translation-filter-hints';
 import { LabelProperties } from 'src/app/models/label-properties';
 import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
-//import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
+import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +35,9 @@ export class FacadeService {
     return this.translationService.editTranslation(payload, resetStatisctics);
   }
 
-  /*editTranslationLabelList( translationId: number, addedIds?: number[], removedIds?: number[] ): Observable<EditTranslationLabelResponse> {
+  editTranslationLabelList( translationId: number, addedIds?: number[], removedIds?: number[] ): Observable<EditTranslationLabelResponse> {
     return this.translationService.editTranslationLabelList( translationId, addedIds, removedIds );
-  }*/
+  }
 
   changeCurrentLanguages(payload: CurrentLanguages): Observable<RequestResponse> {
     return this.mainService.changeCurrentLanguages(payload);

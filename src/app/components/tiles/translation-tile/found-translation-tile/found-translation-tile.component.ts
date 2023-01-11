@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { LabelsChange } from 'src/app/models/labels-change';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { Translation } from 'src/app/models/translation';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { EditStrategy } from '../../states/active-state-strategy/edit.strategy';
+import { EditTranslationStrategy } from '../../states/tile-submission-strategy/edit-translation.strategy';
 import { ActiveState } from '../../states/active.state';
 import { DeletedState } from '../../states/deleted.state';
 import { InactiveState } from '../../states/inactive.state';
@@ -26,7 +27,7 @@ const FOUND_OPTIONS: TileActionBarOptions[] = [
   styleUrls: ['./found-translation-tile.component.scss']
 })
 export class FoundTranslationTileComponent extends TranslationTile implements OnInit {
-  @Input() content!: Translation;
+  @Input() override content!: Translation;
   @Output() removeEvent = new EventEmitter<Translation>();
   @Output() duplicateFormValues = new EventEmitter<Translation>();
 
@@ -57,6 +58,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
 
     this.changeState(this.initialState);
     this.getTermTypes();   
+    this.getLabels();
     this.fillTileForm( this.content );  
   }
 
@@ -76,13 +78,20 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
     event.stopPropagation();
   }
 
-  override getCurrentTranslation(): Translation {
-      this.content.wordFrom = this.term?.value ?? '';
-      this.content.wordTo = this.translation?.value ?? '';
-      this.content.wordTypeId = this.type?.value ?? -1;
-      this.content.description = this.description?.value ?? '';
+  override getLabelsChange(): LabelsChange | null {
+    const oldLabelIds: number[] = this.content.labels?.flatMap( label => label.labelId && !label.inherited ?  [label.labelId ] : []) ?? [];
+    const newLabelIds: number[] = this.labels?.value ?? []; 
 
-      return this.content;
+    var result: LabelsChange | null = {
+      addIds: newLabelIds.filter( (id: number) => id && !oldLabelIds.includes(id) ),
+      deleteIds: oldLabelIds.filter( id  => id != undefined ? !newLabelIds.includes(id) : false )
+    };
+
+    if( result.addIds?.length == 0 && result.deleteIds?.length == 0 ) {
+      result = null;
+    }
+
+    return result;
   }
 
   onActionSelect(event: string): void {
@@ -109,11 +118,10 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
   }
 
   override tryChangeStateToInactive(): boolean {
-    console.log( this.resetStatistics?.value );
-
     if ( !this.checkFormValuesChange() ) {
       this.showDeleteMessage = false;
       this.changeState( this.initialState );
+
       return true;
     }
     else {
@@ -135,15 +143,20 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
   }
 
   private checkFormValuesChange(): boolean {
+    return this.checkTranslationDetailsValueChange() || this.getLabelsChange() != null;
+  }
+
+  private checkTranslationDetailsValueChange(): boolean {
     if( this.term?.value != this.content.wordFrom ||
-        this.translation?.value != this.content.wordTo || 
-        this.type?.value != this.content.wordTypeId ||
-        this.description?.value != ( this.content.description ?? '' ) ||
-        this.resetStatistics?.value ) {
-      return true;
-    }
-    
-    return false; 
+      this.translation?.value != this.content.wordTo || 
+      this.type?.value != this.content.wordTypeId ||
+      this.description?.value != ( this.content.description ?? '' ) ||
+      this.resetStatistics?.value ) {
+
+    return true;
+  }
+  
+  return false; 
   }
 
   private onDelete() {
@@ -153,13 +166,13 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
   private onEdit() {
     this.isExpanded = true;
     const activeState = new ActiveState(this);
-    activeState.setStrategy(new EditStrategy(this.facade) );
+    activeState.setStrategy(new EditTranslationStrategy(this.facade, this) );
 
     this.changeState( activeState );
   }
 
   private onCopyContent(): void {
-    this.duplicateFormValues.emit( this.getCurrentTranslation() );
+    this.duplicateFormValues.emit( this.getCurrentFormValue() );
   } 
 
 }

@@ -1,22 +1,20 @@
-import { TranslationTile } from "../translation-tile/translation-tile";
-import { ActiveStateStrategy } from "./active-state-strategy/active-state.strategy";
+import { TileSubmissionStrategy } from "./tile-submission-strategy/tile-submission-strategy";
 import { TileStateStatus } from "../../../models/tile-state-status";
-import { SubmittedState } from "./submitted.state";
 import { TileState } from "./tile.state";
-import { FacadeService } from "src/app/services/facade/facade.service";
+import { ListTile } from "src/app/models/list-tile";
 
 export class ActiveState implements TileState {
-    tile!: TranslationTile;
+    tile!: ListTile;
     hiddenActionBar: boolean = true;
     inputsEnabled: boolean = true;
     hiddenButton: boolean = false;
-    strategy!: ActiveStateStrategy;
+    strategy!: TileSubmissionStrategy<ListTile>;
 
-    constructor( tile: TranslationTile ) {
+    constructor( tile: ListTile ) {
         this.tile = tile;
     }
 
-    setTile( tile: TranslationTile ) {
+    setTile( tile: ListTile ) {
         this.tile = tile;
     }
 
@@ -28,8 +26,7 @@ export class ActiveState implements TileState {
         this.strategy.onBtnClick();
     }
 
-    setStrategy(strategy: ActiveStateStrategy): void {
+    setStrategy(strategy: TileSubmissionStrategy<ListTile>): void {
         this.strategy = strategy;
-        this.strategy.setTile( this.tile );
     }
 }
