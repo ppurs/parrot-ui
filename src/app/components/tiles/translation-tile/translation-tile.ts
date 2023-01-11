@@ -74,10 +74,10 @@ export class TranslationTile implements ListTile {
         this.type?.setValue( content.wordTypeId );
         this.description?.setValue( content.description ?? '' );
 
-        const directLabelIds = this.content.labels
-                            ?.filter(obj => !obj.inherited )
+        const directLabelIds = content.labels
+                            ?.filter(obj => obj.inherited != undefined && !obj.inherited )
                             .flatMap( obj => obj.labelId ? [ obj.labelId ] : [] );
-
+        
         this.labels?.setValue( directLabelIds ?? undefined );
       }
 
