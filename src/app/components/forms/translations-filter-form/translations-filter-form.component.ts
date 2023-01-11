@@ -44,7 +44,8 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
   constructor( private facade: FacadeService,
                private fb: FormBuilder ) {
     this.Types = [];
-    this.Labels = [NO_LABEL_OPTION];
+    //this.Labels = [NO_LABEL_OPTION];
+    this.Labels = [];
 
     this.wordFromHints = [];
     this.wordToHints = [];
@@ -74,9 +75,9 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
       this.onWordTypesChange( val );
     });
 
-    this.labelsSubscription = this.labels?.valueChanges.pipe(pairwise()).subscribe( ([prev, next]) => {
-      this.onLabelsChange( prev, next );
-    });
+    // this.labelsSubscription = this.labels?.valueChanges.pipe(pairwise()).subscribe( ([prev, next]) => {
+    //   this.onLabelsChange( prev, next );
+    // });
 
     this.filteredWordFromHints = this.fromLang?.valueChanges.pipe(
       startWith(''),
@@ -95,7 +96,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
 
   ngOnDestroy(): void {
     this.wordTypesSubscrition?.unsubscribe();
-    this.labelsSubscription?.unsubscribe();
+    //this.labelsSubscription?.unsubscribe();
   }
 
   onSubmit(): void {
