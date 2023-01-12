@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { QuizTile, QuizTileContent } from 'src/app/models/quiz-tile';
-import { QuizService } from 'src/app/services/quiz/quiz.service';
+import { FacadeService } from 'src/app/services/facade/facade.service';
 import { AnswerStatus } from './answer-status';
 
 @Component({
@@ -25,7 +25,7 @@ export class QuizTileComponent implements OnInit {
   private subscription!: Subscription;
   
   constructor( private cdref: ChangeDetectorRef,
-               private quizService: QuizService ) {
+               private facade: FacadeService ) {
     this.answerStatus = AnswerStatus.NONE;
     this.answerBtnsDisabled = false;
     this.isLoading = false;
@@ -42,7 +42,7 @@ export class QuizTileComponent implements OnInit {
       }
     })
 
-    this.subscription = this.quizService.isFetchingMoreTiles$.subscribe( val => {
+    this.subscription = this.facade.getFetchMoreQuizTilesStatus().subscribe( val => {
       if ( this.isLoading ) {
 
         if ( !val ) {
@@ -68,7 +68,7 @@ export class QuizTileComponent implements OnInit {
     if( this.userAnswer.value == this.tileData!.content.wordTo ) {
       this.answerStatus = AnswerStatus.CORRECT;
 
-      this.quizService.notifySuccess( this.tileData!.content.translationId ).subscribe();
+      this.facade.notifySuccess( this.tileData!.content.translationId ).subscribe();
     }
     else {
       const otherAnswer = this.tileData!.otherAnswers
@@ -77,7 +77,7 @@ export class QuizTileComponent implements OnInit {
       this.answerStatus =  otherAnswer ? AnswerStatus.PARTLY_CORRECT : AnswerStatus.INCORRECT;
       this.enableAnswerActions();
  
-      this.quizService.notifyFailure( this.tileData!.content.translationId ).subscribe();
+      this.facade.notifyFailure( this.tileData!.content.translationId ).subscribe();
     }
 
     this.cdref.detectChanges();
@@ -90,7 +90,7 @@ export class QuizTileComponent implements OnInit {
   onGiveAnswerClick(): void {
     this.disableAnswerActions();
     this.userAnswer.setValue(this.tileData!.content.wordTo);
-    this.quizService.notifyRevealed( this.tileData!.content.translationId ).subscribe();
+    this.facade.notifyRevealed( this.tileData!.content.translationId ).subscribe();
   }
 
   onNewWordClick(event: Event): void {
@@ -123,11 +123,11 @@ export class QuizTileComponent implements OnInit {
     this.newWordBtnVisible = false;
 
     if( this.tileData ) {
-      this.quizService.removeQuizTile(this.tileData);
+      this.facade.removeQuizTileContentFromMemory(this.tileData);
       this.tileData = null;
     }
 
-    const newData = this.quizService.getQuizTile();
+    const newData = this.facade.getQuizTile();
 
     if( newData ){
       this.tileData = newData;

@@ -76,7 +76,7 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
   }
 
   private getTypes(): void {
-    this.Types = this.facade.getTermTypes();
+    this.Types = this.facade.getWordTypes();
   }
 
   private onLabelsChange( prev: LabelProperties[] | null, next: LabelProperties[] | null ): void {

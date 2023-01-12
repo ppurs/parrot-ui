@@ -16,6 +16,9 @@ import { EditTranslationLabelResponse } from 'src/app/models/requests/translatio
 import { Option } from 'src/app/models/option';
 import { LabelService } from '../label/label.service';
 import { Label } from 'src/app/models/label';
+import { QuizFilter } from 'src/app/models/quiz-filter';
+import { LabelsFilter } from 'src/app/models/labels-filter';
+import { NotifyResponse } from 'src/app/models/requests/notify-response';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +38,10 @@ export class FacadeService {
     return this.translationService.addTranslation(payload);
   }
 
+  changeCurrentLanguages(payload: CurrentLanguages): Observable<RequestResponse> {
+    return this.mainService.changeCurrentLanguages(payload);
+  }
+
   deleteTranslation(payload: Translation): Observable<RequestResponse> {
     return this.translationService.deleteTranslation(payload);
   }
@@ -49,10 +56,10 @@ export class FacadeService {
 
   editTranslationLabelList( translationId: number, addedIds?: number[], removedIds?: number[] ): Observable<EditTranslationLabelResponse> {
     return this.translationService.editTranslationLabelList( translationId, addedIds, removedIds );
-  }
+  }  
 
-  changeCurrentLanguages(payload: CurrentLanguages): Observable<RequestResponse> {
-    return this.mainService.changeCurrentLanguages(payload);
+  getFetchMoreQuizTilesStatus(): Observable<boolean> {
+    return this.quizService.isFetchingMoreTiles$;
   }
 
   getLabelsToTranslationFilter(): Observable<LabelProperties[]> {
@@ -71,15 +78,23 @@ export class FacadeService {
     return this.labelService.hierarchyOptions;
   }
 
+  getLabelsList(filter?: LabelsFilter, limit?: number, offset?: number ): Observable<Label[]> {
+    return this.labelService.getLabelsList( filter, limit, offset );
+  }
+
   getLabelSelectList(): LabelProperties[] {
     return this.translationService.labels;
+  }
+
+  getQuizTile(): QuizTile | null {
+    return this.quizService.getQuizTile();
   }
 
   getSelectionStrategyOptions(): Observable<Option[]> {
     return this.quizService.getSelectionStrategyOptions();
   }
 
-  getTermTypes(): WordType[] {
+  getWordTypes(): WordType[] {
     return this.translationService.wordTypes; 
   }
 
@@ -95,16 +110,48 @@ export class FacadeService {
     return this.translationService.getTranslationFilterHints( payload );
   }
 
-  loadQuizTiles(): Observable<QuizTile[]> {
-    return this.quizService.getQuizTranslations();
+  loadLabelHierarchyOptions(): Observable<Option[]> {
+    return this.labelService.getLabelHierarchyOptions();
   }
 
   loadLabelSelectList(): Observable<LabelProperties[]> {
     return this.translationService.getLabelsToFilter();
   }
 
-  loadLabelHierarchyOptions(): Observable<Option[]> {
-    return this.labelService.getLabelHierarchyOptions();
+  loadQuizTiles(): Observable<QuizTile[]> {
+    return this.quizService.getQuizTranslations();
+  }
+
+  loadWordTypes(): Observable<WordType[]> {
+    return this.translationService.getWordTypes();
+  }
+
+  notifyFailure( translationId: number ): Observable<NotifyResponse> {
+    return this.quizService.notifyFailure( translationId );
+  }
+
+  notifyRevealed( translationId: number ): Observable<NotifyResponse> {
+    return this.quizService.notifySuccess( translationId );
+  }
+
+  notifySuccess( translationId: number ): Observable<NotifyResponse> {
+    return this.quizService.notifySuccess( translationId );
+  }
+
+  removeQuizTileContentFromMemory(tile: QuizTile): void {
+    this.quizService.removeQuizTile(tile);
+  }
+
+  resetQuiz(): void {
+    this.quizService.resetQuiz();
+  }
+
+  setNoQuizTilesOnPage( numberOfTiles: number ): void {
+    this.quizService.setNoTilesOnPage( numberOfTiles );
+  }
+
+  setQuizFilters(filters: QuizFilter): void {
+    this.quizService.setFilters( filters );
   }
 
   setSelectionStrategyOption( strategy: Option ): Observable<RequestResponse> {

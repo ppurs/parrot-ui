@@ -39,7 +39,7 @@ export class NewTranslationTileComponent extends TranslationTile implements OnIn
     initialState.setStrategy( new AddTranslationStrategy(this.facade, this) );
 
     this.changeState(initialState);
-    this.getTermTypes();
+    this.getWordTypes();
     this.getLabels();
   }
 

@@ -142,8 +142,8 @@ export class TranslationTile implements ListTile {
         this.Labels = this.facade.getLabelSelectList()
     }
     
-    protected getTermTypes(): void {
-        this.Types = this.facade.getTermTypes();
+    protected getWordTypes(): void {
+        this.Types = this.facade.getWordTypes();
     }
     
     protected validationCheck(): boolean {

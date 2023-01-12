@@ -58,7 +58,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
     this.initialState = new InactiveState(this);
 
     this.changeState(this.initialState);
-    this.getTermTypes();   
+    this.getWordTypes();   
     this.getLabels();
     this.fillTileForm( this.content );  
   }

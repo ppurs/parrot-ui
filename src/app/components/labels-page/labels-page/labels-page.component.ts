@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Label } from 'src/app/models/label';
 import { LabelsFilter } from 'src/app/models/labels-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { LabelService } from 'src/app/services/label/label.service';
 import { AddLabelsComponent } from '../add-labels/add-labels.component';
 
 const DEFAULT_LIMIT: number = 50;
@@ -26,8 +25,7 @@ export class LabelsPageComponent implements OnInit {
   private offset: number;
 
   constructor(  private cdref: ChangeDetectorRef,
-                private facade: FacadeService,
-                private labelService: LabelService ) {
+                private facade: FacadeService ) {
     this.isFetchingMoreLabels = false;
     this.isLoadingPage = true;
     this.isLoadingList = true;
@@ -77,7 +75,7 @@ export class LabelsPageComponent implements OnInit {
   loadMoreLabels(): void {
     this.isFetchingMoreLabels = true;
 
-    this.labelService.getLabelsList( this.filter, undefined, this.offset ).subscribe(
+    this.facade.getLabelsList( this.filter, undefined, this.offset ).subscribe(
       res => {
         this.labelList?.concat( res );
         this.offset += this.limit;
@@ -90,7 +88,7 @@ export class LabelsPageComponent implements OnInit {
   private getLabelList(): void {
     this.isLoadingList = true;
 
-    this.labelService.getLabelsList( this.filter ).subscribe(
+    this.facade.getLabelsList( this.filter ).subscribe(
       res => {
         this.labelList.push(...res);
         this.offset += this.limit;

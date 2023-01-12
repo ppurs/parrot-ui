@@ -124,7 +124,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
   }
 
   private getTypes(): void {
-    this.Types = this.facade.getTermTypes();
+    this.Types = this.facade.getWordTypes();
   }
 
   private getFilterHints( payload: TranslationFilterHints ): void {  
