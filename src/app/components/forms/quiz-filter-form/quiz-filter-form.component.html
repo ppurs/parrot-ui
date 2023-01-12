@@ -9,7 +9,7 @@
                         </span>
                     </mat-select-trigger>
                     <mat-option *ngFor="let label of Labels" [value]="label">
-                        <span><mat-icon id="option-icon" [style.color]="'#'.concat(label.colorCode)">label</mat-icon></span>
+                        <span><mat-icon id="option-icon" [style.color]="label.colorCode">label</mat-icon></span>
                          {{label.labelName}}
                     </mat-option>
                 </mat-select>

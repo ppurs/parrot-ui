@@ -68,7 +68,7 @@
                                     </span>
                                 </mat-select-trigger>
                                 <mat-option *ngFor="let label of Labels" [value]="label.labelId">
-                                    <span><mat-icon id="option-icon" [style.color]="'#'.concat(label.colorCode)">label</mat-icon></span>
+                                    <span><mat-icon id="option-icon" [style.color]="label.colorCode">label</mat-icon></span>
                                     {{label.labelName}}
                                 </mat-option>
                             </mat-select>
@@ -94,7 +94,7 @@
                 <div *ngIf="content.labels!.length <= 5; else scrollList" class="labels-content">
                     <div *ngFor="let label of content.labels" >
                         <div class="flex-box">
-                            <span><mat-icon id="option-icon" [style.color]="'#'.concat(label.colorCode)">label</mat-icon></span>
+                            <span><mat-icon id="option-icon" [style.color]="label.colorCode">label</mat-icon></span>
                             <div [style.opacity]="label.inherited ? 0.5 : 0.75">
                                 {{label.labelName}}
                             </div>

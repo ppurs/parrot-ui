@@ -28,7 +28,7 @@ export class LabelService {
       this.LABEL_API + '/add/' + this.mainService.currentLanguages.languageTo.id,
       {
         labelName: label.labelName,
-        colorCode: label.colorCode.replace('#', ''),
+        colorCode: label.colorCode,
         parentLabelId: label.directParentLabelId
       },
       {headers: HEADERS} 
@@ -68,7 +68,7 @@ export class LabelService {
       this.LABEL_API + '/edit/' + label.labelId,
       {
         labelName: label.labelName,
-        colorCode: label.colorCode.replace('#',''),
+        colorCode: label.colorCode,
         parentLabelId: label.directParentLabelId
       },
       {headers: HEADERS}

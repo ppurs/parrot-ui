@@ -54,7 +54,7 @@ export class LabelTile implements ListTile {
 
     fillTileForm( content: Label ): void {
         this.name?.setValue( content.labelName );
-        this.colorCode?.setValue( content.colorCode.includes('#') ? content.colorCode : '#'.concat(content.colorCode) );
+        this.colorCode?.setValue( content.colorCode );
 
         let parentLabel = undefined;
         if( content.parentLabels ) {

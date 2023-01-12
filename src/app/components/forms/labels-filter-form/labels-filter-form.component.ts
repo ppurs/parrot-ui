@@ -90,7 +90,8 @@ export class LabelsFilterFormComponent implements FilterForm, OnInit {
 
     const defaultOptions = this.HierarchyOptions
                             .filter(option => option.default == true )
-                            .map( option => option.id ) ?? [];
+                            ?.map( option => option.id ) ?? [];
+                            
     this.hierarchyOptions?.setValue(defaultOptions);
   }
 
