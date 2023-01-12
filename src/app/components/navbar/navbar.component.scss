@@ -1,5 +1,4 @@
 ::ng-deep .mat-menu-panel {
-    margin-top: 14px;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 1px !important;
@@ -9,10 +8,12 @@
 
 ::ng-deep .details-panel {
     width: 10em;
+    margin-top: 14px;
 }
 
 ::ng-deep .language-panel {
     min-width: 6em;
+    margin-top: 14px;
 }
 
 .mat-toolbar {

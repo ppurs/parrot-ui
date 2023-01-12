@@ -18,7 +18,7 @@
   
             <div *ngIf="getListLength() >= 50">
               <div *ngIf="!isFetchingMoreLabels; else smallSpinner" class="load-more">
-                <button mat-button color="primary" id='load-more-btn' (click)="loadMoreLabels()">{{ 'translations-page.load-more' | translate }}</button>
+                <button mat-button color="primary" id='load-more-btn' (click)="loadMoreLabels()">{{ 'labels-page.load-more' | translate }}</button>
               </div>
             </div>
           
