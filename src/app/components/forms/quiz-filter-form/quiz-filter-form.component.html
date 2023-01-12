@@ -3,8 +3,14 @@
         <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering [placeholder]="'quiz-filter-form.label' | translate" panelClass="bottom-position-first-filter" formControlName="labels" multiple>                 
-                    <mat-option *ngFor="let label of Labels" [value]="label.labelId">
-                        {{label.labelName}}
+                    <mat-select-trigger>
+                        <span *ngFor="let label of labels?.value; let i = index">
+                            {{label.labelName}}<span *ngIf="i != labels!.value!.length - 1">, </span>
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let label of Labels" [value]="label">
+                        <span><mat-icon id="option-icon" [style.color]="'#'.concat(label.colorCode)">label</mat-icon></span>
+                         {{label.labelName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field> 

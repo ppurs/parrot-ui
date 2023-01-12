@@ -27,7 +27,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
     fromLang: [''],
     toLang: [''],
     types: [<number[]><unknown>undefined],
-    labels: [<number[]><unknown>undefined]
+    labels: [<LabelProperties[]><unknown>undefined]
   });
 
   filteredWordFromHints!: Observable<string[]>;
@@ -100,13 +100,13 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
   }
 
   onSubmit(): void {
-    const labelIds = this.labels?.value?.includes( NO_LABEL_OPTION.labelId! ) ? [] : this.labels?.value;
+    //const labelIds = this.labels?.value?.includes( NO_LABEL_OPTION.labelId! ) ? [] : this.labels?.value;
 
     const payload: TranslationsFilter = {
       wordFromPrefix: this.fromLang?.value ?? undefined,
       wordToPrefix: this.toLang?.value ?? undefined,
       wordTypeIds: this.types?.value ?? undefined,
-      labelIds: labelIds ?? undefined,
+      labelIds: this.labels?.value?.flatMap( label => label.labelId ? [label.labelId] : []) ?? undefined,
     }
 
     this.filterApplied.emit(payload);
@@ -159,7 +159,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
     }
   }
 
-  private onLabelsChange( prev: number[] | null | undefined, next: number[] | null | undefined ): void {
+  private onLabelsChange( prev: LabelProperties[] | null | undefined, next: LabelProperties[] | null | undefined ): void {
 
     if( next && next.length > 0 ) {
       this.labelsChanged = true;

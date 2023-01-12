@@ -37,6 +37,10 @@
     min-width: calc(20em - 4px) !important;
 }
 
+#option-icon {
+    margin-right: 0;
+}
+
 .apply-button {
     background-color: white;
     float: right;
@@ -53,4 +57,8 @@
 
 .filter-input-box {
     margin-right: 2em;
+}
+
+.select-trigger {
+    align-items: center;
 }

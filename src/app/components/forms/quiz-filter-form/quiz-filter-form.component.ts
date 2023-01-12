@@ -23,7 +23,7 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
   filterApplied = new EventEmitter<QuizFilter>();
 
   filterForm = this.fb.group({
-    labels: [<number[]><unknown>undefined],
+    labels: [<LabelProperties[]><unknown>undefined],
     wordTypes: [<number[]><unknown>undefined]
   });
   
@@ -39,8 +39,8 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
     this.Labels = [];
   }
 
-  get types() {
-    return this.filterForm.get('types');
+  get wordTypes() {
+    return this.filterForm.get('wordTypes');
    }
 
    get labels() {
@@ -61,11 +61,11 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
   }
 
   onSubmit(): void {
-    const labelIds = this.labels?.value?.includes( NO_LABEL_OPTION.labelId! ) ? [] : this.labels?.value;
+    //const labelIds = this.labels?.value?.includes( NO_LABEL_OPTION.labelId! ) ? [] : this.labels?.value;
     
     const payload: QuizFilter = {
-      labelIds: this.filterForm.get('labels')?.value ?? undefined,
-      wordTypes: labelIds ?? undefined
+      labelIds: this.labels?.value?.flatMap(label => label.labelId ? [label.labelId] : [] ) ?? undefined,
+      wordTypes: this.wordTypes?.value ?? undefined
     }
 
     this.filterApplied.emit(payload);
@@ -79,16 +79,16 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
     this.Types = this.facade.getTermTypes();
   }
 
-  private onLabelsChange( prev: number[] | null, next: number[] | null ): void {
+  private onLabelsChange( prev: LabelProperties[] | null, next: LabelProperties[] | null ): void {
     if( !prev || !next ) {
       return;
     }
 
-    if( prev.length == 1 && prev[0] == NO_LABEL_OPTION.labelId! ) {
+    if( prev.length == 1 && prev[0].labelId == NO_LABEL_OPTION.labelId! ) {
       this.labels?.setValue( [ next[1] ] );
     }
-    else if( next.length > 1 && next[ 0 ] == NO_LABEL_OPTION.labelId! ) {
-      this.labels?.setValue([ NO_LABEL_OPTION.labelId! ]);
+    else if( next.length > 1 && next[ 0 ].labelId == NO_LABEL_OPTION.labelId! ) {
+      this.labels?.setValue([ NO_LABEL_OPTION ]);
     }
   }
 
