@@ -12,6 +12,7 @@ import { InactiveState } from '../../states/inactive.state';
 import { SubmittedState } from '../../states/submitted.state';
 import { TileState } from '../../states/tile.state';
 import { TranslationTile } from '../translation-tile';
+import { LabelProperties } from 'src/app/models/label-properties';
 
 
 const FOUND_OPTIONS: TileActionBarOptions[] = [
@@ -76,6 +77,10 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
     this.fillTileForm( this.content );
     this.changeState(this.initialState);
     event.stopPropagation();
+  }
+
+  findSelectedLabels(): LabelProperties[] | undefined {
+    return this.Labels.filter(value => this.labels?.value?.includes(value.labelId));
   }
 
   override getLabelsChange(): LabelsChange | null {

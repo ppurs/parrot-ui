@@ -62,7 +62,13 @@
                         <mat-form-field class="input">
                             <mat-label>{{ 'translation-tile.label' | translate }}</mat-label>    
                             <mat-select disableOptionCentering panelClass="bottom-position-multiple" formControlName="labels" multiple>                 
+                                <mat-select-trigger>
+                                    <span *ngFor="let label of findSelectedLabels(); let i = index">
+                                        {{label.labelName}}<span *ngIf="i != labels!.value!.length - 1">, </span>
+                                    </span>
+                                </mat-select-trigger>
                                 <mat-option *ngFor="let label of Labels" [value]="label.labelId">
+                                    <span><mat-icon id="option-icon" [style.color]="'#'.concat(label.colorCode)">label</mat-icon></span>
                                     {{label.labelName}}
                                 </mat-option>
                             </mat-select>
@@ -87,8 +93,8 @@
                 </div>
                 <div *ngIf="content.labels!.length <= 5; else scrollList" class="labels-content">
                     <div *ngFor="let label of content.labels" >
-                        <div class="">
-                            <!-- <mat-icon>label</mat-icon> -->
+                        <div class="flex-box">
+                            <span><mat-icon id="option-icon" [style.color]="'#'.concat(label.colorCode)">label</mat-icon></span>
                             <div [style.opacity]="label.inherited ? 0.5 : 0.75">
                                 {{label.labelName}}
                             </div>
