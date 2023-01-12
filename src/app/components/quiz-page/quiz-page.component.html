@@ -9,7 +9,7 @@
         <div class="col-8">
           <mat-accordion multi="false">
             <div *ngFor="let tile of getNumberList( noTiles )">
-                <app-quiz-tile></app-quiz-tile>
+                <app-quiz-tile [strategyOption]="selectedStrategy"></app-quiz-tile>
             </div>
           </mat-accordion>
         </div>   

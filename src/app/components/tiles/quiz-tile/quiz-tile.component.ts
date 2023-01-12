@@ -1,9 +1,13 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { QuizTile, QuizTileContent } from 'src/app/models/quiz-tile';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { AnswerStatus } from './answer-status';
+import { SelectionStrategyOptions } from './selection-strategy-options';
+import { DefaultStrategy } from './strategy/default.strategy';
+import { LastTimeAppearedStrategy } from './strategy/last_time_appeared.strategy';
+import { SelectionStrategy } from './strategy/selection.strategy';
 
 @Component({
   selector: 'app-quiz-tile',
@@ -11,18 +15,20 @@ import { AnswerStatus } from './answer-status';
   styleUrls: ['./quiz-tile.component.scss']
 })
 export class QuizTileComponent implements OnInit {
+  @Input() strategyOption: SelectionStrategyOptions;
+
   answerStatus: AnswerStatus;
   answerBtnsDisabled: boolean;
   currentContent!: QuizTileContent;
   isLoading: boolean;
   showNoMoreWordsMsg: boolean;
-
   userAnswer = new FormControl<string>('');
 
   private answerSubscription!: Subscription;
   private tileData!: QuizTile | null;
   private newWordBtnVisible: boolean;
   private subscription!: Subscription;
+  private strategy: SelectionStrategy;
   
   constructor( private cdref: ChangeDetectorRef,
                private facade: FacadeService ) {
@@ -31,10 +37,15 @@ export class QuizTileComponent implements OnInit {
     this.isLoading = false;
     this.newWordBtnVisible = false;
     this.showNoMoreWordsMsg = false;
+    this.strategyOption = SelectionStrategyOptions.DEFAULT;
+    this.strategy = new DefaultStrategy();
   }
 
   ngOnInit(): void {
     this.setNewContent();
+
+    if( this.strategyOption != SelectionStrategyOptions.DEFAULT )
+    this.strategy = new LastTimeAppearedStrategy();
 
     this.answerSubscription = this.userAnswer.valueChanges.subscribe( () => {
       if( this.answerStatus.key != 'none') {
@@ -80,6 +91,7 @@ export class QuizTileComponent implements OnInit {
       this.facade.notifyFailure( this.tileData!.content.translationId ).subscribe();
     }
 
+    this.newWordBtnVisible = this.strategy.getNewWordBtnVisibility( this.answerStatus );
     this.cdref.detectChanges();
   }
 
@@ -89,6 +101,7 @@ export class QuizTileComponent implements OnInit {
 
   onGiveAnswerClick(): void {
     this.disableAnswerActions();
+    this.newWordBtnVisible = true;
     this.userAnswer.setValue(this.tileData!.content.wordTo);
     this.facade.notifyRevealed( this.tileData!.content.translationId ).subscribe();
   }
@@ -110,7 +123,6 @@ export class QuizTileComponent implements OnInit {
   private disableAnswerActions(): void {
     this.answerBtnsDisabled = true;
     this.userAnswer.disable({emitEvent: false});
-    this.newWordBtnVisible = true;
   }
 
   private enableAnswerActions(): void {

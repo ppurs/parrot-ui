@@ -8,6 +8,8 @@ import { NotifyResponse } from 'src/app/models/requests/notify-response';
 import { MainService } from '../main/main.service';
 import { Option } from 'src/app/models/option';
 import { RequestResponse } from 'src/app/models/requests/request-response';
+import { SelectionStrategy } from 'src/app/components/tiles/quiz-tile/strategy/selection.strategy';
+import { DefaultStrategy } from 'src/app/components/tiles/quiz-tile/strategy/default.strategy';
 
 const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -93,7 +95,7 @@ export class QuizService {
   }
 
   getSelectionStrategyOptions(): Observable<Option[]> {
-    return this.http.get<{options: Option[]}>( this.QUIZ_API + 'options/get-selection-strategies', {headers: HEADERS} )
+    return this.http.get<{options: Option[]}>( this.QUIZ_API + '/options/get-selection-strategies', {headers: HEADERS} )
     .pipe(
       map(
         data => data.options

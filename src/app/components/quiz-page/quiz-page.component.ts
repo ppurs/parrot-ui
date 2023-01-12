@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { QuizFilter } from 'src/app/models/quiz-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { Option } from 'src/app/models/option';
+import { SelectionStrategyOptions } from '../tiles/quiz-tile/selection-strategy-options';
 
 const DEFAULT_NO_TILES_ON_PAGE: number = 5;
 
@@ -15,6 +16,7 @@ export class QuizPageComponent implements OnInit {
   isLoadingPage: boolean;
   noTiles: number = DEFAULT_NO_TILES_ON_PAGE;
   selectionStrategyOptions: Option[];
+  selectedStrategy!: SelectionStrategyOptions;
 
   constructor( private cdref: ChangeDetectorRef,
                private facade: FacadeService ) {
@@ -47,6 +49,7 @@ export class QuizPageComponent implements OnInit {
   onStrategySelect(strategy: Option, event: Event): void {
     event.stopPropagation();
     
+    this.selectedStrategy = strategy.id;
     this.selectionStrategyOptions.forEach( option => 
       option.default = ( strategy.id == option.id ) ? true : false )
 
@@ -57,22 +60,11 @@ export class QuizPageComponent implements OnInit {
   }
 
   private getSelectionStrategyOptions(): void {
-    /*this.facade.getSelectionStrategyOptions().subscribe( res => {
+    this.facade.getSelectionStrategyOptions().subscribe( res => {
       this.selectionStrategyOptions = res; 
-    });*/
 
-    this.selectionStrategyOptions = [
-      {
-        id: 1,
-        label: "Parrot Optimizer",
-        default: true,
-      },
-      {
-        id: 2,
-        label: "Last time appeared",
-        default: false,
-      }
-    ]
+      this.selectedStrategy = this.selectionStrategyOptions.find( obj => obj.default )?.id ?? 1;
+    });
   }
 
   private loadQuizTiles(): void {
