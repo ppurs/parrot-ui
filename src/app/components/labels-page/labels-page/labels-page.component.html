@@ -1,0 +1,44 @@
+<div *ngIf="!isLoadingPage; else spinner" class="page">
+    <app-filter-tile>
+        <app-labels-filter-form #filterForm (filterApplied)="applyFilter($event)"></app-labels-filter-form>
+    </app-filter-tile>
+  
+    <div *ngIf="!isLoadingList; else spinner">
+      
+        <div class="row">
+          <div class="col-2"></div>  
+          <div class="col-8">
+            <mat-accordion multi="false">
+              <app-add-labels #addedTiles></app-add-labels>
+  
+              <div *ngFor="let word of labelList">
+                <app-found-label-tile (removeEvent)="deleteTile($event)" (duplicateFormValues)="fillAdditionTile($event)" [content]="word"></app-found-label-tile>
+              </div>
+            </mat-accordion>
+  
+            <div *ngIf="getListLength() >= 50">
+              <div *ngIf="!isFetchingMoreLabels; else smallSpinner" class="load-more">
+                <button mat-button color="primary" id='load-more-btn' (click)="loadMoreLabels()">{{ 'translations-page.load-more' | translate }}</button>
+              </div>
+            </div>
+          
+          </div>
+          <div class="col-2">
+            <button mat-raised-button color="primary" (click)="clearAdditionHistory()">Clear addition history</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  
+  
+  <ng-template #spinner>
+    <div class='spinner'>
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+  
+  <ng-template #smallSpinner>
+    <div class='spinner' id="small-spinner">
+      <mat-spinner [diameter]="20"></mat-spinner>
+    </div>
+  </ng-template>

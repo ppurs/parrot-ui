@@ -16,6 +16,28 @@
         "submit-button": "Apply"
     },
 
+    "labels-filter-form": {
+        "name": "Name",
+        "parent-name": "Parent name",
+        "hierarchy-options": "Place in hierarchy"
+    },
+
+    "label-tile": {
+        "name": "Name",
+        "parent": "Parent",
+        "color": "Color",
+        "default-header": {
+            "add": "Add new label",
+            "edit": "Edit label"
+        },
+        "required-error": "This field is required.",
+        "button": {
+            "add": "ADD",
+            "cancel": "CANCEL",
+            "edit": "SAVE"
+        }
+    },
+
     "login-form": {
         "title": "Login",
         "button": "LOG IN",

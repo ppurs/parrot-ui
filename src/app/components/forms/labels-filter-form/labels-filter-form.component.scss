@@ -1,0 +1,52 @@
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+    height: 2.5em;
+  }
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+    transform: translateY(+25%) !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+   margin: 0 !important;
+}
+
+::ng-deep .bottom-position-filter {
+    margin-top: 1.8em;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-left: 31px;
+    min-width: calc(20em - 4px) !important;
+}
+
+::ng-deep .auto-position {
+    width: calc(100% - 4px) !important;
+    margin-left: 2px;
+    margin-top: 0.75em !important;
+}
+
+.apply-button {
+    background-color: white;
+    float: right;
+    height: 2.5em;
+}
+
+.filter-input {
+    width: 20em;
+}
+
+.filters-container {
+    display: flex;
+}
+
+.filter-input-box {
+    margin-right: 2em;
+}

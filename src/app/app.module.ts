@@ -1,11 +1,16 @@
+import { AddLabelsComponent } from './components/labels-page/add-labels/add-labels.component';
 import { AddTranslationsComponent } from './components/translations-page/add-translations/add-translations.component';
 import { AppComponent } from './app.component';
 import { DeleteConfirmationComponent } from './components/tiles/delete-confirmation/delete-confirmation.component';
 import { FilterTileComponent } from './components/tiles/filter-tile/filter-tile.component';
+import { FoundLabelTileComponent } from './components/tiles/label-tile/found-label-tile/found-label-tile.component';
 import { FoundTranslationTileComponent } from './components/tiles/translation-tile/found-translation-tile/found-translation-tile.component';
+import { LabelsFilterFormComponent } from './components/forms/labels-filter-form/labels-filter-form.component';
+import { LabelsPageComponent } from './components/labels-page/labels-page/labels-page.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { NewLabelTileComponent } from './components/tiles/label-tile/new-label-tile/new-label-tile.component';
 import { NewTranslationTileComponent } from './components/tiles/translation-tile/new-translation-tile/new-translation-tile.component';
 import { QuizFilterFormComponent } from './components/forms/quiz-filter-form/quiz-filter-form.component';
 import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
@@ -14,11 +19,6 @@ import { StatusInfoComponent } from './components/tiles/status-info/status-info.
 import { TileActionsBarComponent } from './components/tiles/tile-actions-bar/tile-actions-bar.component';
 import { TranslationsFilterFormComponent } from './components/forms/translations-filter-form/translations-filter-form.component';
 import { TranslationsPageComponent } from './components/translations-page/translations-page//translations-page.component';
-// import { LabelsPageComponent } from './components/labels-page/labels-page/labels-page.component';
-// import { AddLabelsComponent } from './components/labels-page/add-labels/add-labels.component';
-// import { NewLabelTileComponent } from './components/tiles/label-tile/new-label-tile/new-label-tile.component';
-// import { FoundLabelTileComponent } from './components/tiles/label-tile/found-label-tile/found-label-tile.component';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
@@ -42,20 +42,25 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
+import { NgxColorsModule } from 'ngx-colors';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-//import { LabelsFilterFormComponent } from './components/forms/labels-filter-form/labels-filter-form.component';
 
 @NgModule({
   declarations: [
+    AddLabelsComponent,
     AddTranslationsComponent,
     AppComponent,
     DeleteConfirmationComponent,
     FilterTileComponent,
+    FoundLabelTileComponent,
     FoundTranslationTileComponent,
+    LabelsFilterFormComponent,
+    LabelsPageComponent,
     MainLayoutComponent,
     MainPageComponent,
     NavbarComponent,
+    NewLabelTileComponent,
     NewTranslationTileComponent,
     QuizFilterFormComponent,
     QuizPageComponent,
@@ -63,12 +68,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     StatusInfoComponent,
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
-    TranslationsPageComponent,
-    // LabelsPageComponent,
-    // AddLabelsComponent,
-    // NewLabelTileComponent,
-    // FoundLabelTileComponent,
-    // LabelsFilterFormComponent
+    TranslationsPageComponent
   ],
   imports: [
     AuthModule,
@@ -92,6 +92,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatTabsModule,
     MatToolbarModule,
     NgbModule,
+    NgxColorsModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {

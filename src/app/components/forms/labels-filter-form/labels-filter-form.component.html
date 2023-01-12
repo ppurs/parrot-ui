@@ -1,0 +1,41 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+    <div class="filters-container">
+        <div class="filter-input-box">
+            <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
+                <input  type="text" 
+                        [placeholder]="'labels-filter-form.name' | translate" 
+                        matInput 
+                        formControlName="namePrefix"
+                        [matAutocomplete]="autoName">
+                <mat-autocomplete #autoName="matAutocomplete" class="auto-position" classList="auto-position">
+                    <mat-option *ngFor="let hint of filteredNameLabels | async" [value]="hint.labelName">
+                        {{hint.labelName}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field> 
+        </div>
+        <div class="filter-input-box">
+            <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
+                <input  type="text" 
+                        [placeholder]="'labels-filter-form.parent-name' | translate" 
+                        matInput 
+                        formControlName="parentNamePrefix"
+                        [matAutocomplete]="autoParentName">
+                <mat-autocomplete #autoParentName="matAutocomplete" class="auto-position" classList="auto-position">
+                    <mat-option *ngFor="let hint of filteredParentNameLabels | async" [value]="hint.labelName">
+                        {{hint.labelName}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field> 
+        </div>
+        <div class="filter-input-box">
+            <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
+                <mat-select disableOptionCentering [placeholder]="'labels-filter-form.hierarchy-options' | translate" panelClass="bottom-position-filter" formControlName="hierarchyOptions" multiple>                 
+                    <mat-option *ngFor="let option of HierarchyOptions" [value]="option.id">
+                        {{option.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> 
+        </div>
+    </div>
+</form>

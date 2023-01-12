@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TranslationsPageComponent } from './components/translations-page/translations-page/translations-page.component';
 import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
 import { AppGuard } from './auth/helpers/app-guard/app-guard.service';
+import { LabelsPageComponent } from './components/labels-page/labels-page/labels-page.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'quiz',
         component: QuizPageComponent,
+      },
+      {
+        path: 'labels',
+        component: LabelsPageComponent
       },
       { path: '**', redirectTo: '' }
     ]

@@ -13,15 +13,23 @@ import { TranslationFilterHints } from 'src/app/models/translation-filter-hints'
 import { LabelProperties } from 'src/app/models/label-properties';
 import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
 import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
+import { LabelHierarchyOption } from 'src/app/models/label-hierarchy-options';
+import { LabelService } from '../label/label.service';
+import { Label } from 'src/app/models/label';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacadeService {
 
-  constructor(private mainService: MainService,
+  constructor(private labelService: LabelService, 
+              private mainService: MainService,
               private quizService: QuizService,
               private translationService: TranslationService) {}
+
+  addNewLabel(payload: Label): Observable<RequestResponse> {
+    return this.labelService.addLabel(payload);
+  }
 
   addNewTranslation(payload: Translation): Observable<AddTranslationResponse> {
     return this.translationService.addTranslation(payload);
@@ -29,6 +37,10 @@ export class FacadeService {
 
   deleteTranslation(payload: Translation): Observable<RequestResponse> {
     return this.translationService.deleteTranslation(payload);
+  }
+
+  editLabel(payload: Label): Observable<RequestResponse> {
+    return this.labelService.editLabel(payload);
   }
 
   editTranslation( payload: Translation, resetStatisctics?: boolean ): Observable<RequestResponse> {
@@ -53,6 +65,10 @@ export class FacadeService {
 
   getNavbarNavigation(): string[] {
     return ['quiz', 'translations', 'labels' ];
+  }
+
+  getLabelParentHierarchyOptions(): LabelHierarchyOption[] {
+    return this.labelService.hierarchyOptions;
   }
 
   getLabelSelectList(): LabelProperties[] {
@@ -81,6 +97,10 @@ export class FacadeService {
 
   loadLabelSelectList(): Observable<LabelProperties[]> {
     return this.translationService.getLabelsToFilter();
+  }
+
+  loadLabelHierarchyOptions(): Observable<LabelHierarchyOption[]> {
+    return this.labelService.getLabelHierarchyOptions();
   }
   
 }

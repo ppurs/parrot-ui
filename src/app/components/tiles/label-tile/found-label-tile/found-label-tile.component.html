@@ -1,0 +1,64 @@
+<div class="margintile">
+    <mat-expansion-panel [expanded]="isExpanded" hideToggle>
+            <mat-expansion-panel-header *ngIf="!showDeleteMessage" collapsedHeight="2.5em">
+                <mat-panel-title>
+                     <span> {{ name?.value }}</span>
+                </mat-panel-title>
+
+                <app-tile-actions-bar *ngIf="!isActionBarHidden()" [options]="tileOptions" (selectedAction)="onActionSelect($event)"></app-tile-actions-bar>
+                <div class="status-info">
+                    <app-status-info *ngIf="getTileStateStatus()" [status]="getTileStateStatus()"></app-status-info>
+                </div>
+                <button *ngIf="isActive()" mat-button color="primary" (click)="discardChanges($event)">{{ 'label-tile.button.cancel' | translate }}</button>            
+            </mat-expansion-panel-header>
+
+            <mat-expansion-panel-header *ngIf="showDeleteMessage" collapsedHeight="2.5em">
+                <app-delete-confirmation [msgParam]="{value: name?.value ?? ''}" (confirmation)="deleteConfirmed($event)" class="confirmation"></app-delete-confirmation>
+                <div class="status-info">
+                    <app-status-info *ngIf="getTileStateStatus()" [status]="getTileStateStatus()"></app-status-info>
+                </div>
+            </mat-expansion-panel-header>
+
+        <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col">
+                    <div class="center-block">
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'label-tile.name' | translate }}</mat-label>
+                            <input type="text" matInput formControlName="name">
+                            <mat-error *ngIf="labelForm.get('name')?.hasError('required')">
+                                {{ 'label-tile.required-error' | translate }}
+                            </mat-error> 
+                        </mat-form-field> 
+
+                        <mat-form-field class="input">
+                            <mat-label>{{ 'label-tile.parent' | translate }}</mat-label>    
+                            <mat-select disableOptionCentering panelClass="bottom-position" formControlName="parent">   
+                                <mat-option *ngFor="let label of Labels" [value]="label.labelId">
+                                    {{label.labelName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field> 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="center-block">
+                        <div id="color-input" class="input">
+                            <label class="label">{{ 'label-tile.color' | translate }}</label>
+                            <div ngx-colors-trigger
+                                 class="color-info"
+                                 [style.background]="colorCode?.value"
+                                 [hideTextInput]="true"
+                                 formControlName="colorCode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="center-content">
+                <button mat-raised-button *ngIf="!isBtnHidden()" color="primary" type="submit" class="submit-button">{{ 'label-tile.button.edit' | translate }}</button> 
+            </div>
+        </form>
+    </mat-expansion-panel>
+</div>

@@ -1,8 +1,7 @@
 import { LabelProperties } from "./label-properties";
 
-export interface Label {
-    properties: LabelProperties, 
-	usageCount: number,
-	parentLabels: LabelProperties[]
+export interface Label extends LabelProperties {
+	parentLabels?: LabelProperties[],
+	directParentLabelId?: number,
 }
 
