@@ -38,6 +38,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -45,6 +46,7 @@ import { NgModule } from '@angular/core';
 import { NgxColorsModule } from 'ngx-colors';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SnackBarContentComponent } from './components/labels-page/snack-bar-content/snack-bar-content.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     StatusInfoComponent,
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
-    TranslationsPageComponent
+    TranslationsPageComponent,
+    SnackBarContentComponent
   ],
   imports: [
     AuthModule,
@@ -88,6 +91,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatInputModule,
     MatMenuModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTabsModule,
     MatToolbarModule,

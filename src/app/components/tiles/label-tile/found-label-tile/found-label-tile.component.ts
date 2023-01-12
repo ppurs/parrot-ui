@@ -30,6 +30,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   @Input() override content!: Label;
   @Output() removeEvent = new EventEmitter<Label>();
   @Output() duplicateFormValues = new EventEmitter<Label>();
+  @Output() override showWarnMsg = new EventEmitter();
 
   tileOptions: TileActionBarOptions[];
   formSubscription?: Subscription;
@@ -135,6 +136,8 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   
   return false; 
   }
+
+  
 
   private onDelete() {
     //this.showDeleteMessage = true;

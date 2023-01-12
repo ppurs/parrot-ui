@@ -27,6 +27,7 @@ export class EditLabelStrategy implements TileSubmissionStrategy<LabelTile> {
 
             if ( res.result ) {
                 this.tile.state.changeStatus( TileStateStatus.SUCCESSFUL );
+                this.tile.showWarnMessage();
             }
             else { 
                 this.tile.state.changeStatus( TileStateStatus.UNSUCCESSFUL );

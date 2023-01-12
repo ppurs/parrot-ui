@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Label } from 'src/app/models/label';
 import { LabelsFilter } from 'src/app/models/labels-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { AddLabelsComponent } from '../add-labels/add-labels.component';
+import { SnackBarContentComponent } from '../snack-bar-content/snack-bar-content.component';
 
 const DEFAULT_LIMIT: number = 50;
 
@@ -13,6 +15,7 @@ const DEFAULT_LIMIT: number = 50;
 })
 export class LabelsPageComponent implements OnInit {
   @ViewChild('addedTiles') addedTiles!: AddLabelsComponent;
+  @ViewChild('snackBarRef')
 
   isFetchingMoreLabels: boolean;
   isLoadingPage: boolean;
@@ -25,7 +28,8 @@ export class LabelsPageComponent implements OnInit {
   private offset: number;
 
   constructor(  private cdref: ChangeDetectorRef,
-                private facade: FacadeService ) {
+                private facade: FacadeService,
+                private snackBar: MatSnackBar ) {
     this.isFetchingMoreLabels = false;
     this.isLoadingPage = true;
     this.isLoadingList = true;
@@ -41,9 +45,7 @@ export class LabelsPageComponent implements OnInit {
 
   applyFilter(event: LabelsFilter): void {
     this.filter = event;
-    this.labelList = [];
-    this.getLabelList();
-    this.cdref.detectChanges();
+    this.reloadList();
   }
 
   clearAdditionHistory(): void {
@@ -83,6 +85,25 @@ export class LabelsPageComponent implements OnInit {
         this.isFetchingMoreLabels = false;
       }
     );
+  }
+
+  openSnackBar(): void {
+    const snackRef = this.snackBar.openFromComponent(SnackBarContentComponent, {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 5000,
+    });
+
+    snackRef.instance.refreshList.subscribe( () =>  {
+      snackRef.instance.onClose();
+      this.reloadList()
+     } );
+  }
+
+  reloadList(): void {
+    this.labelList = [];
+    this.getLabelList();
+    this.cdref.detectChanges();
   }
 
   private getLabelList(): void {

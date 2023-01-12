@@ -68,7 +68,7 @@ export class LabelService {
       this.LABEL_API + '/edit/' + label.labelId,
       {
         labelName: label.labelName,
-        colorCode: label.colorCode,
+        colorCode: label.colorCode.replace('#',''),
         parentLabelId: label.directParentLabelId
       },
       {headers: HEADERS}

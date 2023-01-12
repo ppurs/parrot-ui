@@ -7,6 +7,7 @@ import { TileState } from "../states/tile.state";
 import { ListTile } from "src/app/models/list-tile";
 import { Label } from "src/app/models/label";
 import { LabelProperties } from "src/app/models/label-properties";
+import { EventEmitter } from "@angular/core";
 
 const DEFAULT_COLOR: string = '#33691E';
 
@@ -15,6 +16,7 @@ export class LabelTile implements ListTile {
     Labels: LabelProperties[];
     isExpanded: boolean = false;
     state!: TileState;
+    showWarnMsg = new EventEmitter();
 
     labelForm: FormGroup = this.fb.group({
        name:['', [Validators.required]],
@@ -95,6 +97,11 @@ export class LabelTile implements ListTile {
     }
 
     removeFromList?(): void;
+    
+    showWarnMessage(): void {
+        this.showWarnMsg.emit();
+    }
+    
 
     tryChangeStateToInactive?(): boolean;
     

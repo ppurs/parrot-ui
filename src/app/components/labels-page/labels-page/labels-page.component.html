@@ -12,7 +12,7 @@
               <app-add-labels #addedTiles></app-add-labels>
   
               <div *ngFor="let word of labelList">
-                <app-found-label-tile (removeEvent)="deleteTile($event)" (duplicateFormValues)="fillAdditionTile($event)" [content]="word"></app-found-label-tile>
+                <app-found-label-tile (removeEvent)="deleteTile($event)" (duplicateFormValues)="fillAdditionTile($event)" (showWarnMsg)="openSnackBar()" [content]="word"></app-found-label-tile>
               </div>
             </mat-accordion>
   
