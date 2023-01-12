@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { map, Observable, of, startWith } from 'rxjs';
 import { FilterForm } from 'src/app/models/filter-form';
-import { LabelHierarchyOption } from 'src/app/models/label-hierarchy-options';
+import { Option } from 'src/app/models/option';
 import { LabelProperties } from 'src/app/models/label-properties';
 import { LabelsFilter } from 'src/app/models/labels-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
@@ -16,7 +16,7 @@ export class LabelsFilterFormComponent implements FilterForm, OnInit {
   @Output()
   filterApplied = new EventEmitter<LabelsFilter>();
   
-  HierarchyOptions: LabelHierarchyOption[];
+  HierarchyOptions: Option[];
   filteredNameLabels!: Observable<LabelProperties[]>;
   filteredParentNameLabels!: Observable<LabelProperties[]>;
 

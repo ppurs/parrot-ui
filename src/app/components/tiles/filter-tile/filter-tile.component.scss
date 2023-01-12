@@ -13,6 +13,10 @@
     border-bottom-right-radius: 0px !important;
 }
 
+.mat-expansion-panel-header-title { 
+    align-items: center;
+}
+
 .mat-expansion-panel-header {
     padding: 1em;
     font-weight: 100 !important;
@@ -34,4 +38,8 @@
 
 .flex-box {
     display: flex;
+}
+
+.settings-button {
+    color: white;
 }

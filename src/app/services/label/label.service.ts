@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { Label } from 'src/app/models/label';
-import { LabelHierarchyOption } from 'src/app/models/label-hierarchy-options';
+import { Option } from 'src/app/models/option';
 import { LabelProperties } from 'src/app/models/label-properties';
 import { LabelsFilter } from 'src/app/models/labels-filter';
 import { AddLabelResponse } from 'src/app/models/requests/label/add-label.response';
@@ -17,7 +17,7 @@ const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 export class LabelService {
   private readonly LABEL_API = '/api/labels';
 
-  hierarchyOptions!: LabelHierarchyOption[];
+  hierarchyOptions!: Option[];
 
   constructor( private http: HttpClient,
                private mainService: MainService ) { }
@@ -80,8 +80,8 @@ export class LabelService {
       );
   }
 
-  getLabelHierarchyOptions(): Observable<LabelHierarchyOption[]> {
-    return this.http.get<{options: LabelHierarchyOption[]}>(
+  getLabelHierarchyOptions(): Observable<Option[]> {
+    return this.http.get<{options: Option[]}>(
       this.LABEL_API + '/filters/place-in-hierarchy',
       { headers: HEADERS }
     ).pipe(

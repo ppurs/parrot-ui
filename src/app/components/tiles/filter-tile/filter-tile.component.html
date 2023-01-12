@@ -3,11 +3,13 @@
     <mat-expansion-panel #tile (expandedChange)="changeArrowIcon()" class="filter-panel" hideToggle>
         <mat-expansion-panel-header collapsedHeight="2.5em" expandedHeight="3em">
             <mat-panel-title>
-                <!--ARROW ICON-->
                 <mat-icon *ngIf="!isExpanded">arrow_drop_down</mat-icon>
                 <mat-icon *ngIf="isExpanded">arrow_drop_up</mat-icon>
                 {{ 'filter-tile.header' | translate }}
             </mat-panel-title>
+            <button *ngIf="settings" mat-button class="settings-button" [matMenuTriggerFor]="settings" (click)="onSettings($event)">
+                <mat-icon>arrow_drop_down</mat-icon>{{'filter-tile.settings' | translate }}
+            </button>
         </mat-expansion-panel-header>
 
         <ng-template matExpansionPanelContent>

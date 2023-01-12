@@ -13,7 +13,7 @@ import { TranslationFilterHints } from 'src/app/models/translation-filter-hints'
 import { LabelProperties } from 'src/app/models/label-properties';
 import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
 import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
-import { LabelHierarchyOption } from 'src/app/models/label-hierarchy-options';
+import { Option } from 'src/app/models/option';
 import { LabelService } from '../label/label.service';
 import { Label } from 'src/app/models/label';
 
@@ -67,12 +67,16 @@ export class FacadeService {
     return ['quiz', 'translations', 'labels' ];
   }
 
-  getLabelParentHierarchyOptions(): LabelHierarchyOption[] {
+  getLabelParentHierarchyOptions(): Option[] {
     return this.labelService.hierarchyOptions;
   }
 
   getLabelSelectList(): LabelProperties[] {
     return this.translationService.labels;
+  }
+
+  getSelectionStrategyOptions(): Observable<Option[]> {
+    return this.quizService.getSelectionStrategyOptions();
   }
 
   getTermTypes(): WordType[] {
@@ -99,8 +103,12 @@ export class FacadeService {
     return this.translationService.getLabelsToFilter();
   }
 
-  loadLabelHierarchyOptions(): Observable<LabelHierarchyOption[]> {
+  loadLabelHierarchyOptions(): Observable<Option[]> {
     return this.labelService.getLabelHierarchyOptions();
+  }
+
+  setSelectionStrategyOption( strategy: Option ): Observable<RequestResponse> {
+    return this.quizService.setSelectionStrategyOption( strategy );
   }
   
 }

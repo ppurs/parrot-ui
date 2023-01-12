@@ -6,6 +6,8 @@ import { QuizPayload } from 'src/app/models/requests/quiz-payload';
 import { QuizTile, QuizTileContent } from 'src/app/models/quiz-tile';
 import { NotifyResponse } from 'src/app/models/requests/notify-response';
 import { MainService } from '../main/main.service';
+import { Option } from 'src/app/models/option';
+import { RequestResponse } from 'src/app/models/requests/request-response';
 
 const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -90,6 +92,19 @@ export class QuizService {
       );
   }
 
+  getSelectionStrategyOptions(): Observable<Option[]> {
+    return this.http.get<{options: Option[]}>( this.QUIZ_API + 'options/get-selection-strategies', {headers: HEADERS} )
+    .pipe(
+      map(
+        data => data.options
+      ),
+      catchError((err) => {
+        console.error(err);
+        throw err;
+      })
+    );
+  }
+
   notifySuccess( translationId: number ): Observable<NotifyResponse> {
     return this.http.get<NotifyResponse>( this.QUIZ_API + '/guessed/' + translationId, {headers: HEADERS} )
       .pipe(
@@ -146,6 +161,16 @@ export class QuizService {
 
   setNoTilesOnPage( number: number ) {
     this.noTilesOnPage = number;
+  }
+
+  setSelectionStrategyOption( strategy: Option ): Observable<RequestResponse> {
+    return this.http.get<RequestResponse>( this.QUIZ_API + '/options/set-selection-strategies/' + strategy.id, {headers: HEADERS} )
+    .pipe(
+      catchError((err) => {
+        console.error(err);
+        throw err;
+      })
+    );
   }
 
   private checkNumberOfAvailableTiles() {

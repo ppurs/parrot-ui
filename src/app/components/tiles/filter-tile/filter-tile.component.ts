@@ -1,4 +1,5 @@
-import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, ViewChild } from '@angular/core';
+import { MatMenu } from '@angular/material/menu';
 import { FilterForm } from 'src/app/models/filter-form';
 
 @Component({
@@ -7,6 +8,8 @@ import { FilterForm } from 'src/app/models/filter-form';
   styleUrls: ['./filter-tile.component.scss']
 })
 export class FilterTileComponent implements OnInit {
+  @Input() settings?: MatMenu;
+
   @ViewChild('tile') tile!: any;
 
   @ContentChild('filterForm')
@@ -23,6 +26,10 @@ export class FilterTileComponent implements OnInit {
 
   changeArrowIcon(): void {
     this.isExpanded = !this.isExpanded;
+  }
+
+  onSettings(event: Event): void {
+    event.stopPropagation()
   }
 
   onSubmit(): void {

@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { QuizFilter } from 'src/app/models/quiz-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
+import { Option } from 'src/app/models/option';
 
 @Component({
   selector: 'app-quiz-page',
@@ -13,6 +14,7 @@ export class QuizPageComponent implements OnInit {
   isLoadingList: boolean;
   isLoadingPage: boolean;
   noTiles: number = 5;
+  selectionStrategyOptions: Option[];
 
   constructor( private cdref: ChangeDetectorRef,
                private facade: FacadeService,
@@ -20,9 +22,11 @@ export class QuizPageComponent implements OnInit {
                private translationService: TranslationService ) {
     this.isLoadingList = true;
     this.isLoadingPage = true;
+    this.selectionStrategyOptions = [];
   }
 
   ngOnInit(): void {
+    this.getSelectionStrategyOptions();
     this.loadWordTypes();
     this.loadLabelsList();
 
@@ -40,6 +44,37 @@ export class QuizPageComponent implements OnInit {
 
   getNumberList( num: number ): number[] {
     return Array(num).fill(0);
+  }
+
+  onStrategySelect(strategy: Option, event: Event): void {
+    event.stopPropagation();
+    
+    this.selectionStrategyOptions.forEach( option => 
+      option.default = ( strategy.id == option.id ) ? true : false )
+
+    this.facade.setSelectionStrategyOption(strategy).subscribe();
+    this.quizService.resetQuiz();
+    this.loadQuizTiles();
+    this.cdref.detectChanges();
+  }
+
+  private getSelectionStrategyOptions(): void {
+    /*this.facade.getSelectionStrategyOptions().subscribe( res => {
+      this.selectionStrategyOptions = res; 
+    });*/
+
+    this.selectionStrategyOptions = [
+      {
+        id: 1,
+        label: "Parrot Optimizer",
+        default: true,
+      },
+      {
+        id: 2,
+        label: "Last time appeared",
+        default: false,
+      }
+    ]
   }
 
   private loadQuizTiles(): void {

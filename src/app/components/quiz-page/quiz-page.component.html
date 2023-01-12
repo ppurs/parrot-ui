@@ -1,5 +1,5 @@
 <div *ngIf="!isLoadingPage  else spinner" class="page">
-  <app-filter-tile>
+  <app-filter-tile [settings]="settings">
     <app-quiz-filter-form #filterForm (filterApplied)="applyFilter($event)"></app-quiz-filter-form>
   </app-filter-tile>
 
@@ -23,3 +23,19 @@
       <mat-spinner></mat-spinner>
     </div>
   </ng-template>
+
+  <mat-menu #settings="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="selectionStrategy">
+      <mat-icon id="option-icon" >arrow_left</mat-icon>
+      {{ 'quiz-page.options.selectionStrategy' | translate }}
+    </button>
+  </mat-menu>
+
+  <mat-menu #selectionStrategy="matMenu">
+    <div *ngFor="let strategy of selectionStrategyOptions"> 
+      <button mat-menu-item (click)="onStrategySelect(strategy, $event)">
+        <span [style.color]="strategy.default ? '#33691E' : ''">{{strategy.label}}</span>
+      </button>
+    </div>
+    
+  </mat-menu>

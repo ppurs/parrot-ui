@@ -7,10 +7,6 @@
     padding-right: 5em;
 }
 
-button {
-    margin-top: 0.5em;
-}
-
 .page { 
     height: calc( 100% - 5em );
 }
@@ -21,3 +17,12 @@ button {
     align-items: center;
     height: 100%;
 }
+
+#option-icon {
+    margin-right: 0;
+}
+
+
+::ng-deep .mat-menu-submenu-icon {
+    display: none;
+ }
