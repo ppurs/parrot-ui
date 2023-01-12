@@ -7,6 +7,7 @@ import { AddLabelStrategy } from '../../states/tile-submission-strategy/add-labe
 import { ActiveState } from '../../states/active.state';
 import { SubmittedState } from '../../states/submitted.state';
 import { LabelTile } from '../label-tile';
+import { LabelProperties } from 'src/app/models/label-properties';
 
 const NEW_OPTIONS: TileActionBarOptions[] = [
   TileActionBarOptions.COPY_CONTENT
@@ -45,6 +46,10 @@ export class NewLabelTileComponent extends LabelTile implements OnInit {
       this.isExpanded = true;
       this.cdref.detectChanges();
     }
+  }
+
+  findSelectedLabel(): LabelProperties | undefined {
+    return this.Labels.find(label => label.labelId == this.parent?.value );
   }
 
   onActionSelect(event: string): void {

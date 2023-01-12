@@ -34,7 +34,13 @@
                         <mat-form-field class="input">
                             <mat-label>{{ 'label-tile.parent' | translate }}</mat-label>    
                             <mat-select disableOptionCentering panelClass="bottom-position" formControlName="parent">   
+                                <mat-select-trigger>
+                                    <span>
+                                        {{findSelectedLabel()?.labelName ?? ''}}
+                                    </span>
+                                </mat-select-trigger>
                                 <mat-option *ngFor="let label of Labels" [value]="label.labelId">
+                                    <span><mat-icon id="option-icon" [style.color]="'#'.concat(label.colorCode)">label</mat-icon></span>
                                     {{label.labelName}}
                                 </mat-option>
                             </mat-select>

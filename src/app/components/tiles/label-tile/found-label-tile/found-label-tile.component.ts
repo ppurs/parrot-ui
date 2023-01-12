@@ -11,6 +11,7 @@ import { InactiveState } from '../../states/inactive.state';
 import { SubmittedState } from '../../states/submitted.state';
 import { TileState } from '../../states/tile.state';
 import { LabelTile } from '../label-tile';
+import { LabelProperties } from 'src/app/models/label-properties';
 
 
 const FOUND_OPTIONS: TileActionBarOptions[] = [
@@ -68,6 +69,10 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
     this.fillTileForm( this.content );
     this.changeState(this.initialState);
     event.stopPropagation();
+  }
+
+  findSelectedLabel(): LabelProperties | undefined {
+    return this.Labels.find(label => label.labelId == this.parent?.value );
   }
 
   onActionSelect(event: string): void {
