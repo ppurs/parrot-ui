@@ -43,6 +43,10 @@ export class FacadeService {
     return this.mainService.changeCurrentLanguages(payload);
   }
 
+  deleteLabel( payload: Label, option: number ): Observable<RequestResponse> {
+    return this.labelService.deleteLabel(payload, option);
+  }
+
   deleteTranslation(payload: Translation): Observable<RequestResponse> {
     return this.translationService.deleteTranslation(payload);
   }

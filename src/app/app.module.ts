@@ -47,6 +47,7 @@ import { NgxColorsModule } from 'ngx-colors';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SnackBarContentComponent } from './components/labels-page/snack-bar-content/snack-bar-content.component';
+import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { SnackBarContentComponent } from './components/labels-page/snack-bar-con
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
     TranslationsPageComponent,
-    SnackBarContentComponent
+    SnackBarContentComponent,
+    DeleteLabelConfirmationComponent
   ],
   imports: [
     AuthModule,

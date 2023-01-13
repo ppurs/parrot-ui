@@ -1,6 +1,6 @@
-<div class="margintile">
+<div class="margintile" *ngIf="!showDeleteMessage">
     <mat-expansion-panel [expanded]="isExpanded" hideToggle>
-            <mat-expansion-panel-header *ngIf="!showDeleteMessage" collapsedHeight="2.5em">
+            <mat-expansion-panel-header collapsedHeight="2.5em">
                 <mat-panel-title>
                      <span> {{ name?.value }}</span>
                 </mat-panel-title>
@@ -10,13 +10,6 @@
                     <app-status-info *ngIf="getTileStateStatus()" [status]="getTileStateStatus()"></app-status-info>
                 </div>
                 <button *ngIf="isActive()" mat-button color="primary" (click)="discardChanges($event)">{{ 'label-tile.button.cancel' | translate }}</button>            
-            </mat-expansion-panel-header>
-
-            <mat-expansion-panel-header *ngIf="showDeleteMessage" collapsedHeight="2.5em">
-                <app-delete-confirmation [msgParam]="{value: name?.value ?? ''}" (confirmation)="deleteConfirmed($event)" class="confirmation"></app-delete-confirmation>
-                <div class="status-info">
-                    <app-status-info *ngIf="getTileStateStatus()" [status]="getTileStateStatus()"></app-status-info>
-                </div>
             </mat-expansion-panel-header>
 
         <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
@@ -67,6 +60,10 @@
             </div>
         </form>
     </mat-expansion-panel>
+</div>
+
+<div class="margintile" *ngIf="showDeleteMessage">
+    <app-delete-label-confirmation [msgParam]="{value: name?.value ?? ''}"  [tileStatus]="getTileStateStatus()" (confirmation)="deleteConfirmed($event)"></app-delete-label-confirmation>
 </div>
 
 <ng-template #labelsList >

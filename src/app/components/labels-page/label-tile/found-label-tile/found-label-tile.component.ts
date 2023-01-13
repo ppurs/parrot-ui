@@ -15,7 +15,7 @@ import { TileStateStatus } from 'src/app/models/tile-state-status';
 
 
 const FOUND_OPTIONS: TileActionBarOptions[] = [
-  //TileActionBarOptions.DELETE,
+  TileActionBarOptions.DELETE,
   TileActionBarOptions.EDIT,
   TileActionBarOptions.COPY_CONTENT
 ]
@@ -56,10 +56,25 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
     this.getLabels();
   }
 
-  deleteConfirmed(event: boolean): void {
-    if ( event ) {
+  deleteConfirmed(event: {confirm: boolean, option?: number}): void {
+    if ( event.confirm && event.option ) {
       this.changeState( new DeletedState() );
-      //TODO DELETE
+      
+      this.facade.deleteLabel( this.getCurrentFormValue(), event.option ).subscribe( res => {
+        if ( res.result ) {
+            this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+            this.showWarnMessage();
+            if ( this.removeFromList ) {
+                this.removeFromList();
+                
+            }
+        }
+        else {
+            this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+                this.tryChangeStateToInactive();
+            //error message
+        }
+    });
     }
     else {
       this.showDeleteMessage = false;
@@ -73,7 +88,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   }
 
   findSelectedLabel(): LabelProperties | undefined {
-    return this.Labels.find(label => label.labelId == this.parent?.value );
+    return this.Labels?.find(label => label.labelId == this.parent?.value );
   }
 
   onActionSelect(event: string): void {
@@ -163,7 +178,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   
 
   private onDelete() {
-    //this.showDeleteMessage = true;
+    this.showDeleteMessage = true;
   }
 
   private onEdit() {

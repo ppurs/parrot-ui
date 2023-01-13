@@ -89,7 +89,7 @@ export class LabelsFilterFormComponent implements FilterForm, OnInit {
     this.HierarchyOptions = this.facade.getLabelParentHierarchyOptions();
 
     const defaultOptions = this.HierarchyOptions
-                            .filter(option => option.default == true )
+                            ?.filter(option => option.default == true )
                             ?.map( option => option.id ) ?? [];
                             
     this.hierarchyOptions?.setValue(defaultOptions);

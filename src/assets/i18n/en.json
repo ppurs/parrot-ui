@@ -11,6 +11,15 @@
         "cancel": "NO"
     },
 
+    "delete-label-confirmation": {
+        "msg": "Are you sure to delete translation: {{value}}?",
+        "confirm": {
+            "detach-children": "Yes, and detach all direct child labels from the hierarchy.",
+            "attach-children-to-parent": "Yes, attach all direct child labels to the parent label."
+        },
+        "cancel": "No"
+    },
+
     "filter-tile": {
         "header": "Filters",
         "settings": "Settings",

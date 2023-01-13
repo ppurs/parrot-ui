@@ -48,7 +48,7 @@ export class NewLabelTileComponent extends LabelTile implements OnInit {
   }
 
   findSelectedLabel(): LabelProperties | undefined {
-    return this.Labels.find(label => label.labelId == this.parent?.value );
+    return this.Labels?.find(label => label.labelId == this.parent?.value );
   }
 
   onActionSelect(event: string): void {

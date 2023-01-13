@@ -1,0 +1,25 @@
+    <mat-expansion-panel [expanded]="isExpanded" hideToggle>
+        <mat-expansion-panel-header collapsedHeight="2.5em">
+            <mat-panel-title>
+                    <span>{{ 'delete-confirmation.msg' | translate:msgParam }}</span>
+            </mat-panel-title>
+                <div class="status-info">
+                    <app-status-info *ngIf="tileStatus" [status]="tileStatus"></app-status-info>
+                </div>
+        </mat-expansion-panel-header>
+            
+                <div class="actions">
+                    <div class="buttons">
+                        <div class="confirm-buttons">
+                            <button mat-button color="primary" (click)="confirm($event, 1)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.confirm.detach-children' | translate }}</button>
+                            <button mat-button color="primary" (click)="confirm($event, 2)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.confirm.attach-children-to-parent' | translate }}</button>
+                        </div>
+                        
+                        <button mat-button class="cancel-button" (click)="cancel($event)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.cancel' | translate }}</button>
+                    </div>
+                </div>
+            
+            
+        
+    </mat-expansion-panel>
+
