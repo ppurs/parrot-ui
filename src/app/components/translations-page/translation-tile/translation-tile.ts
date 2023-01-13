@@ -112,11 +112,7 @@ export class TranslationTile implements ListTile {
     isBtnHidden(): boolean {
         return this.state.hiddenButton;
     }
-
-    onSubmit(): void {
-        this.state.onBtnClick()
-    }
-
+    
     removeFromList?(): void;
 
     setLabelsDetails( labels: LabelProperties[] ): void {}

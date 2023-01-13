@@ -5,7 +5,6 @@ import { LabelsChange } from 'src/app/models/labels-change';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { Translation } from 'src/app/models/translation';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { EditTranslationStrategy } from 'src/app/components/shared/states/tile-submission-strategy/edit-translation.strategy';
 import { ActiveState } from 'src/app/components/shared/states/active.state';
 import { DeletedState } from 'src/app/components/shared/states/deleted.state';
 import { InactiveState } from 'src/app/components/shared/states/inactive.state';
@@ -13,6 +12,7 @@ import { SubmittedState } from 'src/app/components/shared/states/submitted.state
 import { TileState } from 'src/app/components/shared/states/tile.state';
 import { TranslationTile } from '../translation-tile';
 import { LabelProperties } from 'src/app/models/label-properties';
+import { TileStateStatus } from 'src/app/models/tile-state-status';
 
 
 const FOUND_OPTIONS: TileActionBarOptions[] = [
@@ -55,7 +55,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
   }
 
   ngOnInit(): void {
-    this.initialState = new InactiveState(this);
+    this.initialState = new InactiveState();
 
     this.changeState(this.initialState);
     this.getWordTypes();   
@@ -65,8 +65,21 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
 
   deleteConfirmed(event: boolean): void {
     if ( event ) {
-      this.changeState( new DeletedState( this, this.facade ) );
-      this.state.onBtnClick();  
+      this.changeState( new DeletedState() );
+
+      this.facade.deleteTranslation( this.getCurrentFormValue() ).subscribe( res => {
+        if ( res.result ) {
+            this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+            if ( this.removeFromList ) {
+                this.removeFromList();
+            }
+        }
+        else {
+            this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+                this.tryChangeStateToInactive();
+            //error message
+        }
+    });
     }
     else {
       this.showDeleteMessage = false;
@@ -116,6 +129,47 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
         break;
       }
     }
+  }
+
+  onSubmit(): void {
+    if ( this.tryChangeStateToInactive() ) {
+      return;
+    }
+
+    const resetStats: boolean = this.resetStatistics?.value;
+    
+    if (!this.tryChangeStateToSubmitted() ) {
+        return;
+    }
+
+    const currentValue = this.getCurrentFormValue();
+    const labelsChange: LabelsChange | null = this.getLabelsChange();
+
+    this.facade.editTranslation( currentValue, resetStats ).subscribe( res => {
+
+          if ( !res.result ) {
+              this.state.changeStatus( TileStateStatus.UNSUCCESSFUL );
+              //error message
+          } else if ( res.result && !labelsChange ) {
+              this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+          }
+
+      });  
+      
+      if( labelsChange && currentValue.translationId ) {
+          this.facade.editTranslationLabelList( currentValue.translationId, labelsChange.addIds, labelsChange.deleteIds ).subscribe(
+              res => {
+                  if( res.result  && this.state.status != TileStateStatus.UNSUCCESSFUL ) {
+                          
+                      this.updateContentAfterSubmitSuccess( res.labels );
+                      this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+                  }
+                  else {
+                      this.state.changeStatus( TileStateStatus.UNSUCCESSFUL );
+                  }
+              }
+          );
+      }
   }
 
   override removeFromList(): void {
@@ -170,9 +224,8 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
 
   private onEdit() {
     this.isExpanded = true;
-    const activeState = new ActiveState(this);
-    activeState.setStrategy(new EditTranslationStrategy(this.facade, this) );
-
+    const activeState = new ActiveState();
+   
     this.changeState( activeState );
   }
 

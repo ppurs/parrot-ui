@@ -3,7 +3,6 @@ import { TileState } from "./tile.state";
 import { ListTile } from "../../../models/list-tile";
 
 export class SubmittedState implements TileState {
-    tile!: ListTile;
     hiddenActionBar: boolean;
     inputsEnabled: boolean = false;
     hiddenButton: boolean = true;
@@ -12,10 +11,6 @@ export class SubmittedState implements TileState {
     constructor() {
         this.hiddenActionBar = true;
         this.status = TileStateStatus.LOADING;
-    }
-
-    setTile( tile: ListTile ) {
-        this.tile = tile;
     }
 
     changeStatus( status: TileStateStatus ): void {
@@ -29,11 +24,4 @@ export class SubmittedState implements TileState {
         this.status = status;
     }
 
-    onBtnClick(): void {
-        console.log('Cannot submit data on \'submitted\' state.');
-    };
-
-    setStrategy(strategy: any): void {
-        console.log('Cannot set strategy on \'submitted\' state.');
-    }
 }

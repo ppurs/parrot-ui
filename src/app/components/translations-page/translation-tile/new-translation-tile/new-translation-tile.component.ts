@@ -4,10 +4,10 @@ import { LabelProperties } from 'src/app/models/label-properties';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { Translation } from 'src/app/models/translation';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { AddTranslationStrategy } from 'src/app/components/shared/states/tile-submission-strategy/add-translation.strategy';
 import { ActiveState } from 'src/app/components/shared/states/active.state';
 import { SubmittedState } from 'src/app/components/shared/states/submitted.state';
 import { TranslationTile } from '../translation-tile';
+import { TileStateStatus } from 'src/app/models/tile-state-status';
 
 const NEW_OPTIONS: TileActionBarOptions[] = [
   TileActionBarOptions.COPY_CONTENT
@@ -35,8 +35,7 @@ export class NewTranslationTileComponent extends TranslationTile implements OnIn
   }
 
   ngOnInit(): void {
-    const initialState = new ActiveState(this);
-    initialState.setStrategy( new AddTranslationStrategy(this.facade, this) );
+    const initialState = new ActiveState();
 
     this.changeState(initialState);
     this.getWordTypes();
@@ -63,6 +62,29 @@ export class NewTranslationTileComponent extends TranslationTile implements OnIn
     }
   }
 
+  onSubmit(): void {
+    if ( !this.tryChangeStateToSubmitted() ) {
+      return;
+  }
+
+  const formContent = this.getCurrentFormValue();
+
+  this.facade.addNewTranslation( formContent ).subscribe( res => {
+      if ( res.result ) {
+          if( formContent.directLabelIds && formContent.directLabelIds.length > 0 ) {
+              this.setLabels( res.insertedId, formContent.directLabelIds );
+          }
+          else {
+              this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+          }
+      }
+      else { 
+          this.state.changeStatus( TileStateStatus.UNSUCCESSFUL );
+          //error message
+      }
+  });     
+  }
+
   setDefaultLabels( labelIds?: number[]): void {
     this.labels?.setValue( labelIds );
   }
@@ -86,4 +108,20 @@ export class NewTranslationTileComponent extends TranslationTile implements OnIn
   private onCopyContent(): void {
     this.duplicateFormValues.emit( this.getCurrentFormValue() );
   } 
+
+  private setLabels( translationId: number, labelIds: number[]): void {
+    this.facade.editTranslationLabelList( translationId, labelIds, undefined ).subscribe( res => {
+        if ( res.result ) {
+            if ( this.updateContentAfterSubmitSuccess ) {
+                this.updateContentAfterSubmitSuccess( res.labels );
+            }
+            
+            this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+        }
+        else { 
+            this.state.changeStatus( TileStateStatus.UNSUCCESSFUL );
+            //error message
+        }
+    })
+  }
 }

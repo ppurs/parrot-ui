@@ -92,10 +92,6 @@ export class LabelTile implements ListTile {
         return this.state.hiddenButton;
     }
 
-    onSubmit(): void {
-        this.state.onBtnClick()
-    }
-
     removeFromList?(): void;
     
     showWarnMessage(): void {

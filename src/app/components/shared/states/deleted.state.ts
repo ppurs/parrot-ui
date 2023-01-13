@@ -4,20 +4,14 @@ import { ListTile } from "../../../models/list-tile";
 import { TileState } from "./tile.state";
 
 export class DeletedState implements TileState {
-    tile!: ListTile;
     hiddenActionBar: boolean;
     inputsEnabled: boolean = false;
     hiddenButton: boolean = true;
     status: TileStateStatus;
 
-    constructor( tile: ListTile, private facade: FacadeService ) {
-        this.tile = tile;
+    constructor() {
         this.hiddenActionBar = true;
         this.status = TileStateStatus.LOADING;
-    }
-
-    setTile( tile: ListTile ) {
-        this.tile = tile;
     }
 
     changeStatus( status: TileStateStatus ): void {
@@ -29,27 +23,5 @@ export class DeletedState implements TileState {
         }
         
         this.status = status;
-    }
-
-    onBtnClick(): void {
-        this.facade.deleteTranslation( this.tile.getCurrentFormValue() ).subscribe( res => {
-            if ( res.result ) {
-                this.changeStatus( TileStateStatus.SUCCESSFUL );
-                if ( this.tile.removeFromList ) {
-                    this.tile.removeFromList();
-                }
-            }
-            else {
-                this.changeStatus( TileStateStatus.SUCCESSFUL );
-                if ( this.tile.tryChangeStateToInactive ) {
-                    this.tile.tryChangeStateToInactive();
-                }
-                //error message
-            }
-        });
-    };
-
-    setStrategy(strategy: any): void {
-        console.log('Cannot set strategy on \'delete\' state.');
     }
 }

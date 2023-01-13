@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { Label } from 'src/app/models/label';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { EditLabelStrategy } from 'src/app/components/shared/states/tile-submission-strategy/edit-label.strategy';
 import { ActiveState } from 'src/app/components/shared/states/active.state';
 import { DeletedState } from 'src/app/components/shared/states/deleted.state';
 import { InactiveState } from 'src/app/components/shared/states/inactive.state';
@@ -12,6 +11,7 @@ import { SubmittedState } from 'src/app/components/shared/states/submitted.state
 import { TileState } from 'src/app/components/shared/states/tile.state';
 import { LabelTile } from '../label-tile';
 import { LabelProperties } from 'src/app/models/label-properties';
+import { TileStateStatus } from 'src/app/models/tile-state-status';
 
 
 const FOUND_OPTIONS: TileActionBarOptions[] = [
@@ -49,7 +49,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initialState = new InactiveState(this);
+    this.initialState = new InactiveState();
 
     this.changeState(this.initialState);
     this.fillTileForm( this.content );  
@@ -58,8 +58,8 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
 
   deleteConfirmed(event: boolean): void {
     if ( event ) {
-      this.changeState( new DeletedState( this, this.facade ) );
-      this.state.onBtnClick();  
+      this.changeState( new DeletedState() );
+      //TODO DELETE
     }
     else {
       this.showDeleteMessage = false;
@@ -93,6 +93,28 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
         break;
       }
     }
+  }
+
+  onSubmit(): void {
+    if ( this.tryChangeStateToInactive() ) {
+      return;
+  }
+  
+  if ( !this.tryChangeStateToSubmitted() ) {
+      return;
+  }
+
+ this.facade.editLabel( this.getCurrentFormValue() ).subscribe( res => {
+
+      if ( res.result ) {
+          this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+          this.showWarnMessage();
+      }
+      else { 
+          this.state.changeStatus( TileStateStatus.UNSUCCESSFUL );
+          //error message
+      }
+  });      
   }
 
   override removeFromList(): void {
@@ -145,9 +167,8 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
 
   private onEdit() {
     this.isExpanded = true;
-    const activeState = new ActiveState(this);
-    activeState.setStrategy(new EditLabelStrategy(this.facade, this) );
-
+    const activeState = new ActiveState();
+  
     this.changeState( activeState );
   }
 
