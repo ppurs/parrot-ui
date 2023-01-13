@@ -66,6 +66,12 @@
     margin-bottom: 0.5em;
 }
 
+.parent-label {
+    opacity: 0.75;
+    font-size: small;
+    margin-bottom: 0.5em;
+}
+
 #color-input {
     transform: translateY(-0.75em);
 }
@@ -80,3 +86,13 @@
 #option-icon {
     margin-right: 0;
 }
+
+
+.parents-content {
+    width: 20em;
+}
+
+.flex-box {
+    display: flex;
+}
+

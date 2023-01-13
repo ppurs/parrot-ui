@@ -103,6 +103,10 @@ export class LabelTile implements ListTile {
     
     tryChangeStateToSubmitted?(): boolean;
 
+    updateContentAfterSubmitSuccess( content: LabelProperties[] ): void {
+        this.content.parentLabels = content;
+      }
+
     protected checkInputsEnabled(): void {
         if ( this.state.inputsEnabled ) {
             this.labelForm.enable();

@@ -23,7 +23,7 @@ export class LabelService {
                private mainService: MainService ) { }
 
 
-  addLabel( label: Label ): Observable<RequestResponse> {
+  addLabel( label: Label ): Observable<AddLabelResponse> {
     return this.http.post<AddLabelResponse>( 
       this.LABEL_API + '/add/' + this.mainService.currentLanguages.languageTo.id,
       {
@@ -33,12 +33,6 @@ export class LabelService {
       },
       {headers: HEADERS} 
       ).pipe(
-        map( data => {
-          return {
-            result: data.result,
-            errors: data.errors 
-          };
-        }),
         catchError((err) => {
           console.error(err);
           throw err;
@@ -63,8 +57,8 @@ export class LabelService {
       );
   }
 
-  editLabel( label: Label ): Observable<RequestResponse> {
-    return this.http.post<RequestResponse>( 
+  editLabel( label: Label ): Observable<AddLabelResponse> {
+    return this.http.post<AddLabelResponse>( 
       this.LABEL_API + '/edit/' + label.labelId,
       {
         labelName: label.labelName,

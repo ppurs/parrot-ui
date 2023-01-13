@@ -105,7 +105,8 @@
                 <div class="label">
                     <span>{{ 'translation-tile.label' | translate }}</span>
                 </div>
-                <div *ngIf="content.labels!.length <= 5; else scrollList" class="labels-content">
+                <!-- <div *ngIf="content.labels!.length <= 5; else scrollList" class="labels-content"> -->
+                <div class="labels-content"> 
                     <div *ngFor="let label of content.labels" >
                         <div class="flex-box">
                             <span><mat-icon id="option-icon" [style.color]="label.colorCode">label</mat-icon></span>
@@ -121,6 +122,3 @@
     </div>
 </ng-template>
 
-<ng-template #scrollList>
-
-</ng-template>

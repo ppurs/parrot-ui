@@ -31,7 +31,7 @@
                             </mat-error> 
                         </mat-form-field> 
 
-                        <mat-form-field class="input">
+                        <mat-form-field class="input" *ngIf="isActive() || (isSubmitted() && getTileStateStatus()!='successful'); else labelsList">
                             <mat-label>{{ 'label-tile.parent' | translate }}</mat-label>    
                             <mat-select disableOptionCentering panelClass="bottom-position" formControlName="parent">   
                                 <mat-select-trigger>
@@ -68,3 +68,20 @@
         </form>
     </mat-expansion-panel>
 </div>
+
+<ng-template #labelsList >
+    <div class="parent-label" *ngIf="content.parentLabels && content.parentLabels.length > 0">
+        <span>{{ 'label-tile.parent' | translate }}</span>
+    </div>
+    <!-- <div *ngIf="content.labels!.length <= 5; else scrollList" class="labels-content"> -->
+    <div class="parents-content"> 
+        <div *ngFor="let label of content.parentLabels">
+            <div class="flex-box">
+                <span><mat-icon id="option-icon" [style.color]="label.colorCode">label</mat-icon></span>
+                <div [style.opacity]="label.inherited ? 0.5 : 0.75">
+                    {{label.labelName}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

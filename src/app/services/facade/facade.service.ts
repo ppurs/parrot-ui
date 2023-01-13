@@ -19,6 +19,7 @@ import { Label } from 'src/app/models/label';
 import { QuizFilter } from 'src/app/models/quiz-filter';
 import { LabelsFilter } from 'src/app/models/labels-filter';
 import { NotifyResponse } from 'src/app/models/requests/notify-response';
+import { AddLabelResponse } from 'src/app/models/requests/label/add-label.response';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class FacadeService {
               private quizService: QuizService,
               private translationService: TranslationService) {}
 
-  addNewLabel(payload: Label): Observable<RequestResponse> {
+  addNewLabel(payload: Label): Observable<AddLabelResponse> {
     return this.labelService.addLabel(payload);
   }
 
@@ -46,7 +47,7 @@ export class FacadeService {
     return this.translationService.deleteTranslation(payload);
   }
 
-  editLabel(payload: Label): Observable<RequestResponse> {
+  editLabel(payload: Label): Observable<AddLabelResponse> {
     return this.labelService.editLabel(payload);
   }
 

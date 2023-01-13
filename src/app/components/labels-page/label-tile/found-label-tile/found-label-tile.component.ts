@@ -108,6 +108,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
 
       if ( res.result ) {
           this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+          this.updateContentAfterSubmitSuccess( res.labels );
           this.showWarnMessage();
       }
       else { 

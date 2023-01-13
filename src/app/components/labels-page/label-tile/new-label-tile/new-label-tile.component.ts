@@ -68,6 +68,7 @@ export class NewLabelTileComponent extends LabelTile implements OnInit {
   this.facade.addNewLabel( this.getCurrentFormValue() ).subscribe( res => {
       if ( res.result ) {
           this.state.changeStatus( TileStateStatus.SUCCESSFUL );
+          this.updateContentAfterSubmitSuccess( res.labels );
       }
       else { 
           this.state.changeStatus( TileStateStatus.UNSUCCESSFUL );
