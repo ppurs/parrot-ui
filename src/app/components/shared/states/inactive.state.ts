@@ -1,5 +1,4 @@
 import { ListTile } from "../../../models/list-tile";
-import { TranslationTile } from "../translation-tile/translation-tile";
 import { TileState } from "./tile.state";
 
 export class InactiveState implements TileState {

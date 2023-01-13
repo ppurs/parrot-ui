@@ -1,4 +1,3 @@
-import { TranslationTile } from "../translation-tile/translation-tile";
 import { TileStateStatus } from "../../../models/tile-state-status";
 import { TileState } from "./tile.state";
 import { ListTile } from "../../../models/list-tile";

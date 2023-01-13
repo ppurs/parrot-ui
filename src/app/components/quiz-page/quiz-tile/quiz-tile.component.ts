@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { QuizTile, QuizTileContent } from 'src/app/models/quiz-tile';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { AnswerStatus } from './answer-status';
-import { SelectionStrategyOptions } from './selection-strategy-options';
+import { SelectionStrategyOptions } from '../../../models/selection-strategy-options';
 import { DefaultStrategy } from './strategy/default.strategy';
 import { LastTimeAppearedStrategy } from './strategy/last_time_appeared.strategy';
 import { SelectionStrategy } from './strategy/selection.strategy';

@@ -5,12 +5,12 @@ import { LabelsChange } from 'src/app/models/labels-change';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { Translation } from 'src/app/models/translation';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { EditTranslationStrategy } from '../../states/tile-submission-strategy/edit-translation.strategy';
-import { ActiveState } from '../../states/active.state';
-import { DeletedState } from '../../states/deleted.state';
-import { InactiveState } from '../../states/inactive.state';
-import { SubmittedState } from '../../states/submitted.state';
-import { TileState } from '../../states/tile.state';
+import { EditTranslationStrategy } from 'src/app/components/shared/states/tile-submission-strategy/edit-translation.strategy';
+import { ActiveState } from 'src/app/components/shared/states/active.state';
+import { DeletedState } from 'src/app/components/shared/states/deleted.state';
+import { InactiveState } from 'src/app/components/shared/states/inactive.state';
+import { SubmittedState } from 'src/app/components/shared/states/submitted.state';
+import { TileState } from 'src/app/components/shared/states/tile.state';
 import { TranslationTile } from '../translation-tile';
 import { LabelProperties } from 'src/app/models/label-properties';
 

@@ -2,7 +2,7 @@ import { TileStateStatus } from "../../../../models/tile-state-status";
 import { TileSubmissionStrategy } from "./tile-submission-strategy";
 import { FacadeService } from "src/app/services/facade/facade.service";
 import { LabelsChange } from "src/app/models/labels-change";
-import { TranslationTile } from "../../translation-tile/translation-tile";
+import { TranslationTile } from "src/app/components/translations-page/translation-tile/translation-tile";
 
 export class EditTranslationStrategy implements TileSubmissionStrategy<TranslationTile> {
     tile!: TranslationTile;

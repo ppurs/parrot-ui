@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { QuizFilter } from 'src/app/models/quiz-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { Option } from 'src/app/models/option';
-import { SelectionStrategyOptions } from '../tiles/quiz-tile/selection-strategy-options';
+import { SelectionStrategyOptions } from 'src/app/models/selection-strategy-options';
 
 const DEFAULT_NO_TILES_ON_PAGE: number = 5;
 

@@ -1,10 +1,10 @@
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { WordType } from "src/app/models/word-type";
 import { FacadeService } from "src/app/services/facade/facade.service";
-import { ActiveState } from "../states/active.state";
+import { ActiveState } from "../../shared/states/active.state";
 import { TileStateStatus } from "../../../models/tile-state-status";
-import { SubmittedState } from "../states/submitted.state";
-import { TileState } from "../states/tile.state";
+import { SubmittedState } from "../../shared/states/submitted.state";
+import { TileState } from "../../shared/states/tile.state";
 import { Translation } from "src/app/models/translation";
 import { ListTile } from "../../../models/list-tile";
 import { LabelProperties } from "src/app/models/label-properties";

@@ -1,9 +1,9 @@
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FacadeService } from "src/app/services/facade/facade.service";
-import { ActiveState } from "../states/active.state";
+import { ActiveState } from "../../shared/states/active.state";
 import { TileStateStatus } from "../../../models/tile-state-status";
-import { SubmittedState } from "../states/submitted.state";
-import { TileState } from "../states/tile.state";
+import { SubmittedState } from "../../shared/states/submitted.state";
+import { TileState } from "../../shared/states/tile.state";
 import { ListTile } from "src/app/models/list-tile";
 import { Label } from "src/app/models/label";
 import { LabelProperties } from "src/app/models/label-properties";

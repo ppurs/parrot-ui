@@ -4,9 +4,9 @@ import { LabelProperties } from 'src/app/models/label-properties';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { Translation } from 'src/app/models/translation';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { AddTranslationStrategy } from '../../states/tile-submission-strategy/add-translation.strategy';
-import { ActiveState } from '../../states/active.state';
-import { SubmittedState } from '../../states/submitted.state';
+import { AddTranslationStrategy } from 'src/app/components/shared/states/tile-submission-strategy/add-translation.strategy';
+import { ActiveState } from 'src/app/components/shared/states/active.state';
+import { SubmittedState } from 'src/app/components/shared/states/submitted.state';
 import { TranslationTile } from '../translation-tile';
 
 const NEW_OPTIONS: TileActionBarOptions[] = [

@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Translation } from 'src/app/models/translation';
-import { NewTranslationTileComponent } from '../../tiles/translation-tile/new-translation-tile/new-translation-tile.component';
+import { NewTranslationTileComponent } from '../translation-tile/new-translation-tile/new-translation-tile.component';
 
 @Component({
   selector: 'app-add-translations',

@@ -3,9 +3,9 @@ import { FormBuilder} from '@angular/forms';
 import { Label } from 'src/app/models/label';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { AddLabelStrategy } from '../../states/tile-submission-strategy/add-label.strategy';
-import { ActiveState } from '../../states/active.state';
-import { SubmittedState } from '../../states/submitted.state';
+import { AddLabelStrategy } from 'src/app/components/shared/states/tile-submission-strategy/add-label.strategy';
+import { ActiveState } from 'src/app/components/shared/states/active.state';
+import { SubmittedState } from 'src/app/components/shared/states/submitted.state';
 import { LabelTile } from '../label-tile';
 import { LabelProperties } from 'src/app/models/label-properties';
 

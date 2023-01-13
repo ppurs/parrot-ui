@@ -8,8 +8,6 @@ import { NotifyResponse } from 'src/app/models/requests/notify-response';
 import { MainService } from '../main/main.service';
 import { Option } from 'src/app/models/option';
 import { RequestResponse } from 'src/app/models/requests/request-response';
-import { SelectionStrategy } from 'src/app/components/tiles/quiz-tile/strategy/selection.strategy';
-import { DefaultStrategy } from 'src/app/components/tiles/quiz-tile/strategy/default.strategy';
 
 const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -45,7 +43,6 @@ export class QuizService {
     return this.quizTiles[ this.lastTileIndex ];
   }
 
-  //TODO: add filters
   getQuizTranslations(): Observable<QuizTile[]> {    
     const tilesCount: number = this.quizTiles.length == 0 ? this.noTilesOnPage * 2 : this.noTilesOnPage;
 
@@ -57,7 +54,7 @@ export class QuizService {
       languageToId: this.mainService.currentLanguages.languageTo.id,
       excludeTranslationIds: notUsedTranslationIds,
       count: tilesCount,
-      wordTypes: this.filter?.wordTypes,
+      wordTypeIds: this.filter?.wordTypeIds,
       labelIds: this.filter?.labelIds
     }
 

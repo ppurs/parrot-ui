@@ -65,7 +65,7 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
     
     const payload: QuizFilter = {
       labelIds: this.labels?.value?.flatMap(label => label.labelId ? [label.labelId] : [] ) ?? undefined,
-      wordTypes: this.wordTypes?.value ?? undefined
+      wordTypeIds: this.wordTypes?.value ?? undefined
     }
 
     this.filterApplied.emit(payload);

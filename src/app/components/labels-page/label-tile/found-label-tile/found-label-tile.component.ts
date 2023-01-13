@@ -4,12 +4,12 @@ import { Subscription } from 'rxjs';
 import { Label } from 'src/app/models/label';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { EditLabelStrategy } from '../../states/tile-submission-strategy/edit-label.strategy';
-import { ActiveState } from '../../states/active.state';
-import { DeletedState } from '../../states/deleted.state';
-import { InactiveState } from '../../states/inactive.state';
-import { SubmittedState } from '../../states/submitted.state';
-import { TileState } from '../../states/tile.state';
+import { EditLabelStrategy } from 'src/app/components/shared/states/tile-submission-strategy/edit-label.strategy';
+import { ActiveState } from 'src/app/components/shared/states/active.state';
+import { DeletedState } from 'src/app/components/shared/states/deleted.state';
+import { InactiveState } from 'src/app/components/shared/states/inactive.state';
+import { SubmittedState } from 'src/app/components/shared/states/submitted.state';
+import { TileState } from 'src/app/components/shared/states/tile.state';
 import { LabelTile } from '../label-tile';
 import { LabelProperties } from 'src/app/models/label-properties';
 

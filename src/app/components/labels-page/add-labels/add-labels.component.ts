@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Label } from 'src/app/models/label';
-import { NewLabelTileComponent } from '../../tiles/label-tile/new-label-tile/new-label-tile.component';
-
+import { NewLabelTileComponent } from '../label-tile/new-label-tile/new-label-tile.component';
 @Component({
   selector: 'app-add-labels',
   templateUrl: './add-labels.component.html',

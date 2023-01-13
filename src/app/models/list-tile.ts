@@ -1,4 +1,4 @@
-import { TileState } from "../components/tiles/states/tile.state";
+import { TileState } from "../components/shared/states/tile.state";
 
 export interface ListTile {
     state: TileState;

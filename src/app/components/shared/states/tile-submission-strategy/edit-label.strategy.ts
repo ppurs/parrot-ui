@@ -1,7 +1,7 @@
 import { TileStateStatus } from "../../../../models/tile-state-status";
 import { TileSubmissionStrategy } from "./tile-submission-strategy";
 import { FacadeService } from "src/app/services/facade/facade.service";
-import { LabelTile } from "../../label-tile/label-tile";
+import { LabelTile } from "src/app/components/labels-page/label-tile/label-tile";
 
 export class EditLabelStrategy implements TileSubmissionStrategy<LabelTile> {
     tile: LabelTile;
