@@ -75,7 +75,9 @@
                         </mat-form-field> 
                     </div>
                 </div>
-                <div class="col"></div>
+                <div class="col">
+                    <div id="empty-col"></div>
+                </div>
             </div>
             <div class="center-content">
                 <button mat-raised-button *ngIf="!isBtnHidden()" color="primary" type="submit" class="submit-button">{{ 'translation-tile.button.add' | translate }}</button> 
@@ -104,6 +106,8 @@
                 </div>
             </div>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <div id="empty-col"></div>
+        </div>
     </div>
 </ng-template>
