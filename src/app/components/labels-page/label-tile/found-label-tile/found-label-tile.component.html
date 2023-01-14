@@ -2,7 +2,8 @@
     <mat-expansion-panel [expanded]="isExpanded" hideToggle>
             <mat-expansion-panel-header collapsedHeight="2.5em">
                 <mat-panel-title>
-                     <span> {{ name?.value }}</span>
+                    <mat-icon id="option-icon" [style.color]="colorCode?.value">label</mat-icon>
+                    <span> {{ name?.value }}</span> 
                 </mat-panel-title>
 
                 <app-tile-actions-bar *ngIf="!isActionBarHidden()" [options]="tileOptions" (selectedAction)="onActionSelect($event)"></app-tile-actions-bar>
@@ -32,6 +33,7 @@
                                         {{findSelectedLabel()?.labelName ?? ''}}
                                     </span>
                                 </mat-select-trigger>
+                                <mat-option id="no-label" [value]="null">No label</mat-option>
                                 <mat-option *ngFor="let label of Labels" [value]="label.labelId">
                                     <span><mat-icon id="option-icon" [style.color]="label.colorCode">label</mat-icon></span>
                                     {{label.labelName}}

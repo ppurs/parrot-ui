@@ -67,7 +67,7 @@ export class LabelTile implements ListTile {
     getCurrentFormValue(): Label {
         this.content.labelName = this.name?.value?.trim() ?? '';
         this.content.colorCode = this.colorCode?.value;
-        this.content.directParentLabelId = this.parent?.value ?? undefined;
+        this.content.directParentLabelId = this.parent?.value ?? null;
       
         return this.content;
     }

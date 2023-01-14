@@ -4,7 +4,8 @@
             <mat-panel-title>
                 <span *ngIf="isActive(); else termName"> {{ 'label-tile.default-header.add' | translate }}</span>
                 <ng-template #termName>
-                     <span> {{ name?.value }}</span> 
+                    <mat-icon id="option-icon" [style.color]="colorCode?.value">label</mat-icon>
+                    <span> {{ name?.value }}</span> 
                 </ng-template>
             </mat-panel-title>
             <app-tile-actions-bar *ngIf="!isActionBarHidden()" [options]="tileOptions" (selectedAction)="onActionSelect($event)"></app-tile-actions-bar>
@@ -33,6 +34,7 @@
                                         {{findSelectedLabel()?.labelName ?? ''}}
                                     </span>
                                 </mat-select-trigger>
+                                <mat-option id="no-label" [value]="undefined">No label</mat-option>
                                 <mat-option *ngFor="let label of Labels" [value]="label.labelId">
                                     <span><mat-icon id="option-icon" [style.color]="label.colorCode">label</mat-icon></span>
                                     {{label.labelName}}
