@@ -136,7 +136,7 @@ export class FacadeService {
   }
 
   notifyRevealed( translationId: number ): Observable<NotifyResponse> {
-    return this.quizService.notifySuccess( translationId );
+    return this.quizService.notifyRevealed( translationId );
   }
 
   notifySuccess( translationId: number ): Observable<NotifyResponse> {
