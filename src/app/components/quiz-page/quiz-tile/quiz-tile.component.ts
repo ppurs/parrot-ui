@@ -85,10 +85,18 @@ export class QuizTileComponent implements OnInit {
       const otherAnswer = this.tileData!.otherAnswers
         .find( answer => answer.wordTo == this.userAnswer.value );
 
-      this.answerStatus =  otherAnswer ? AnswerStatus.PARTLY_CORRECT : AnswerStatus.INCORRECT;
-      this.enableAnswerActions();
+      if ( otherAnswer && otherAnswer.wordType == this.tileData!.content.wordType 
+            && otherAnswer.description == this.tileData!.content.description ) {
+        this.answerStatus = AnswerStatus.CORRECT;
+        
+        this.facade.notifySuccess( this.tileData!.content.translationId ).subscribe();
+      }
+      else {
+        this.answerStatus =  otherAnswer ? AnswerStatus.PARTLY_CORRECT : AnswerStatus.INCORRECT;
+        this.enableAnswerActions();
  
-      this.facade.notifyFailure( this.tileData!.content.translationId ).subscribe();
+        this.facade.notifyFailure( this.tileData!.content.translationId ).subscribe();
+      }
     }
 
     this.newWordBtnVisible = this.strategy.getNewWordBtnVisibility( this.answerStatus );
