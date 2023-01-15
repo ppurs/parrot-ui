@@ -72,7 +72,7 @@ export class QuizPageComponent implements OnInit {
 
     this.facade.loadQuizTiles().subscribe(
       res => {
-        this.noTiles = res.length < this.noTiles ? res.length : this.noTiles;
+        this.noTiles = res.length < DEFAULT_NO_TILES_ON_PAGE ? res.length : DEFAULT_NO_TILES_ON_PAGE;
         this.facade.setNoQuizTilesOnPage( this.noTiles );
 
         this.isLoadingList = false;
