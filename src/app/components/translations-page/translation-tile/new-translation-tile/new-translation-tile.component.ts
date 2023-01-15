@@ -50,7 +50,7 @@ export class NewTranslationTileComponent extends TranslationTile implements OnIn
   }
 
   findSelectedLabels(): LabelProperties[] | undefined {
-    return this.Labels.filter(value => this.labels?.value?.includes(value.labelId));;
+    return this.Labels?.filter(value => this.labels?.value?.includes(value.labelId));;
   }
 
   onActionSelect(event: string): void {

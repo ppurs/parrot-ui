@@ -93,7 +93,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
   }
 
   findSelectedLabels(): LabelProperties[] | undefined {
-    return this.Labels.filter(value => this.labels?.value?.includes(value.labelId));
+    return this.Labels?.filter(value => this.labels?.value?.includes(value.labelId));
   }
 
   override getLabelsChange(): LabelsChange | null {
