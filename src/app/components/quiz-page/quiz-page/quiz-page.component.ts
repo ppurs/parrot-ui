@@ -38,6 +38,7 @@ export class QuizPageComponent implements OnInit {
   applyFilter( event: QuizFilter ): void {
     this.facade.setQuizFilters( event );
     this.facade.resetQuiz();
+    this.facade.setNoQuizTilesOnPage( DEFAULT_NO_TILES_ON_PAGE );
     this.loadQuizTiles();
     this.cdref.detectChanges();
   }
@@ -77,7 +78,7 @@ export class QuizPageComponent implements OnInit {
 
         this.isLoadingList = false;
         this.isLoadingPage = false;
-        
+        this.cdref.detectChanges();
       }
     )
   }
