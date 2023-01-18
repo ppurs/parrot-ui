@@ -137,7 +137,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
     this.removeEvent.emit(this.content);
   }
 
-  override tryChangeStateToInactive(): boolean {
+  tryChangeStateToInactive(): boolean {
 
     if ( !this.checkFormValuesChange() ) {
       this.showDeleteMessage = false;
@@ -149,7 +149,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
     }
   }
 
-  override tryChangeStateToSubmitted(): boolean {   
+  tryChangeStateToSubmitted(): boolean {   
      if ( this.validationCheck() ) {    
        this.changeState( new SubmittedState() );
        this.isExpanded = false;

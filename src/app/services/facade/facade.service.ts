@@ -20,6 +20,7 @@ import { QuizFilter } from 'src/app/models/quiz-filter';
 import { LabelsFilter } from 'src/app/models/labels-filter';
 import { NotifyResponse } from 'src/app/models/requests/notify-response';
 import { AddLabelResponse } from 'src/app/models/requests/label/add-label.response';
+import { TranslationsFilter } from 'src/app/models/translations-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +114,10 @@ export class FacadeService {
     payload.filters!.languageId = this.mainService.currentLanguages.languageTo.id;
 
     return this.translationService.getTranslationFilterHints( payload );
+  }
+
+  getTranslationsList(filters?: TranslationsFilter, limit?: number, offset?: number): Observable<Translation[]> {
+    return this.translationService.getTranslationsList();
   }
 
   loadLabelHierarchyOptions(): Observable<Option[]> {

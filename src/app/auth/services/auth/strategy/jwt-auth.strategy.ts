@@ -50,7 +50,7 @@ export class JwtAuthStrategy implements AuthStrategy {
       return of(undefined);
       }
 
-    getStoredUser(): User | undefined {
+    private getStoredUser(): User | undefined {
       if ( localStorage.getItem(this.USER) ) {
         const user: User = { username: <string>localStorage.getItem(this.USER) };
         return user;

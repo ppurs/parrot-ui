@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { TranslationsFilter } from 'src/app/models/translations-filter';
 import { Translation } from 'src/app/models/translation';
-import { TranslationService } from 'src/app/services/translation/translation.service';
 import { AddTranslationsComponent } from '../add-translations/add-translations.component';
+import { FacadeService } from 'src/app/services/facade/facade.service';
 
 const DEFAULT_LIMIT: number = 50;
 
@@ -26,7 +26,7 @@ export class TranslationsPageComponent implements OnInit {
   private offset: number;
 
   constructor(  private cdref: ChangeDetectorRef,
-                private translationService: TranslationService ) {
+                private facade: FacadeService ) {
     this.hasMore = false;
     this.isFetchingMoreWords = false;
     this.isLoadingPage = true;
@@ -73,7 +73,7 @@ export class TranslationsPageComponent implements OnInit {
   loadMoreWords(): void {
     this.isFetchingMoreWords = true;
 
-    this.translationService.getTranslationsList( this.filter, undefined, this.offset ).subscribe(
+    this.facade.getTranslationsList( this.filter, undefined, this.offset ).subscribe(
       res => {
         this.hasMore = res.length < this.limit ? false : true;
 
@@ -86,19 +86,17 @@ export class TranslationsPageComponent implements OnInit {
   }
 
   private loadLabelSelectList(): void {
-    this.translationService.getLabelsToFilter().subscribe( res => {
-    });
+    this.facade.loadLabelSelectList().subscribe();
   }
 
   private loadWordTypes(): void {
-    this.translationService.getWordTypes().subscribe( res => {
-    });
+    this.facade.loadWordTypes().subscribe();
   }
 
   private getWordList(): void {
     this.isLoadingList = true;
 
-    this.translationService.getTranslationsList( this.filter ).subscribe(
+    this.facade.getTranslationsList( this.filter ).subscribe(
       res => {
         this.wordList.push(...res);
 

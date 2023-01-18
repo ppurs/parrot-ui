@@ -72,7 +72,7 @@ export class LabelTile implements ListTile {
         return this.content;
     }
 
-    getTileStateStatus(): TileStateStatus {
+    getTileStateStatus(): TileStateStatus | undefined {
         return this.state.status;
     }
 
@@ -97,11 +97,6 @@ export class LabelTile implements ListTile {
     showWarnMessage(): void {
         this.showWarnMsg.emit();
     }
-    
-
-    tryChangeStateToInactive?(): boolean;
-    
-    tryChangeStateToSubmitted?(): boolean;
 
     updateContentAfterSubmitSuccess( content: LabelProperties[] ): void {
         this.content.parentLabels = content;

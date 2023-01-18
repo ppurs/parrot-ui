@@ -10,7 +10,6 @@ import { MainService } from '../main/main.service';
 import { LabelProperties } from 'src/app/models/label-properties';
 import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
 import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 

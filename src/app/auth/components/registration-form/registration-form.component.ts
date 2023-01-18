@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { POSTRegister } from 'src/app/auth/models/post-register';
-import { AccountService } from 'src/app/auth/services/account/account.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { passwordMatchValidator } from './validators/password-match-validator';
 import { UniqueUsernameValidator } from './validators/unique-user-validator';
 
@@ -20,7 +20,7 @@ export class RegistrationFormComponent implements OnInit {
                       Validators.required,
                       Validators.pattern("[a-zA-Z0-9_]*"),
                     ],
-                    asyncValidators: [UniqueUsernameValidator.createValidator(this.account)],
+                    asyncValidators: [UniqueUsernameValidator.createValidator(this.auth)],
                     updateOn: 'blur'
                 }
               ],
@@ -47,8 +47,8 @@ export class RegistrationFormComponent implements OnInit {
     ]
   });
 
-  constructor(private fb: FormBuilder,
-              private account: AccountService,
+  constructor(private auth: AuthService,
+              private fb: FormBuilder,
               private router: Router ) {}
 
   ngOnInit(): void {}
@@ -93,7 +93,7 @@ export class RegistrationFormComponent implements OnInit {
       email: <string>this.email?.value
     }
 
-    this.account.register( data ).subscribe( res => {
+    this.auth.register( data ).subscribe( res => {
       if ( res.result ) {
         this.onSuccess();
       }
