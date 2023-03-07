@@ -1,4 +1,5 @@
 import { AuthInterceptor } from './auth-interceptor';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { authStrategyProvider } from './services/auth/strategy/auth.strategy';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
+    AuthLayoutComponent,
     LoginFormComponent,
     RegistrationFormComponent
   ],

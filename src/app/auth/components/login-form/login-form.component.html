@@ -1,8 +1,8 @@
-<div class="login-card">
-    <mat-card class="login-card-content">
+<auth-layout>
+    <div>
         <div class="login-title">
             <div class="center-content">
-                <mat-card-title>{{ 'login-form.title' | translate }}</mat-card-title> 
+                {{ 'login-form.title' | translate }}
             </div>
             <div class="center-content">
                 <mat-error *ngIf="!isSuccess">
@@ -12,35 +12,32 @@
         </div>
 
         <div class="center-content">
-            <mat-card-content>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <div>   
-                        <mat-form-field class="input">
-                            <mat-label>{{ 'account.username' | translate }}</mat-label>
-                            <input type="text" matInput formControlName="username">
-                            <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-                                {{ 'login-form.errors.username' | translate }}
-                            </mat-error> 
-                        </mat-form-field> 
-                    </div>
-                    <div>
-                        <mat-form-field class="input">
-                            <mat-label>{{ 'account.password' | translate }}</mat-label>
-                            <input type="password" matInput formControlName="password">
-                            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-                                {{ 'login-form.errors.password' | translate }}
-                            </mat-error> 
-                        </mat-form-field>
-                    </div>     
-                    <button mat-raised-button color="primary" type="submit" class="submit-button">{{ 'login-form.button' | translate }}</button> 
-                </form>
-            </mat-card-content>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div>   
+                    <mat-form-field class="input">
+                        <mat-label>{{ 'account.username' | translate }}</mat-label>
+                        <input type="text" matInput formControlName="username">
+                        <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+                            {{ 'login-form.errors.username' | translate }}
+                        </mat-error> 
+                    </mat-form-field> 
+                </div>
+                <div>
+                    <mat-form-field class="input">
+                        <mat-label>{{ 'account.password' | translate }}</mat-label>
+                        <input type="password" matInput formControlName="password">
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                            {{ 'login-form.errors.password' | translate }}
+                        </mat-error> 
+                    </mat-form-field>
+                </div>     
+                <button mat-raised-button color="primary" type="submit" class="submit-button">{{ 'login-form.button' | translate }}</button> 
+            </form>      
         </div>
-        
+            
         <div class="info">{{ 'login-form.account-question' | translate }}</div>
         <div class="center-content">
             <a routerLink="/register">{{ 'login-form.register-link' | translate }}</a>
         </div>
-        
-    </mat-card>
-</div>
+    </div>     
+</auth-layout>

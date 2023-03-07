@@ -1,0 +1,88 @@
+ .auth-card {
+    box-shadow: 5px 8px 12px rgba(0,0,0,0.4);
+    border-radius: 8px;
+    background-color: white;
+    height: 90%;
+    width: 75%;
+    position: fixed;
+}
+
+.auth-card-content {
+    display: flex;
+    border-radius: inherit;
+    height: 100%;
+    overflow: auto;
+}
+
+.auth-form-content {
+    margin: 2em;
+}
+
+.card-container {
+    background-color:#bfdec4;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    overflow: auto;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container {
+    background-color:  #33691E;
+    box-shadow: inset 1px 1px 150px #162e0d;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    width: 60%;
+    height: fit-content;
+    min-height: 100%;
+}
+
+.img-container {
+    width: 100%;
+    margin: 5%;
+}
+
+.title-container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+#title {
+    max-width: 60%;
+}
+
+img {
+    display: flex;
+    width: 100%;
+}
+
+ /* Designing for scroll-bar */
+ ::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: gainsboro;
+    border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #162e0d33;
+    border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #33691E;
+}
