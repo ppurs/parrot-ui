@@ -7,7 +7,8 @@ a:link, a:active, a:hover, a:visited {
 
 #auth-title {
     width: 100%;
-    margin-bottom: 2em;
+    flex-direction: column;
+    margin-bottom: 1.5em;
     text-align: center;
 
     h1 {
@@ -21,6 +22,10 @@ a:link, a:active, a:hover, a:visited {
     padding: 10%;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+#spinner-container {
+    height: calc(20px);
 }
 
 

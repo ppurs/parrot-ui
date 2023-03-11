@@ -47,9 +47,13 @@ export class RegistrationFormComponent implements OnInit {
     ]
   });
 
+  isRequestPending: boolean;
+
   constructor(private auth: AuthService,
               private fb: FormBuilder,
-              private router: Router ) {}
+              private router: Router ) {
+    this.isRequestPending = false;
+              }
 
   ngOnInit(): void {}
 
@@ -78,6 +82,7 @@ export class RegistrationFormComponent implements OnInit {
       this.registrationForm.markAllAsTouched();
     }
     else {
+      this.isRequestPending = true;
       this.sendRegisterData();
     }
   }
@@ -94,6 +99,8 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     this.auth.register( data ).subscribe( res => {
+      this.isRequestPending = false
+
       if ( res.result ) {
         this.onSuccess();
       }

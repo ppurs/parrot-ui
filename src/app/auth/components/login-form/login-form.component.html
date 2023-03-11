@@ -1,8 +1,10 @@
 <auth-layout>
     <div id="form-container">
         <div class="center-content" id="auth-title">
-                <h1>{{ 'login-form.title' | translate }}</h1>
-            <div class="center-content">
+            <h1>{{ 'login-form.title' | translate }}</h1>
+           
+            <div class="center-content" id="spinner-container">
+                <mat-spinner [diameter]="20" *ngIf="isRequestPending"></mat-spinner>
                 <mat-error *ngIf="!isSuccess">
                     {{ 'login-form.errors.negative-response' | translate }}
                 </mat-error>  
@@ -29,10 +31,10 @@
                         </mat-error> 
                     </mat-form-field>
                 </div>     
-                <button mat-raised-button color="primary" type="submit" class="submit-button">{{ 'login-form.button' | translate }}</button> 
+                <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="isRequestPending">{{ 'login-form.button' | translate }}</button> 
             </form>      
         </div>
-            
+
         <div id="info">{{ 'login-form.account-question' | translate }}</div>
         <div class="center-content">
             <a routerLink="/register">{{ 'login-form.register-link' | translate }}</a>

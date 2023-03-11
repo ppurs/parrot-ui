@@ -15,12 +15,14 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     password:['', Validators.required]
   });
 
+  isRequestPending: boolean;
   isSuccess: boolean;
   private valSubscription: any;
 
   constructor(private auth: AuthService,
               private fb: FormBuilder,
               private router: Router ) {
+    this.isRequestPending = false;
     this.isSuccess = true;
   }
 
@@ -35,9 +37,12 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     else {
       const username = this.loginForm.get('username')?.value;
       const password = this.loginForm.get('password')?.value;
+      this.isRequestPending = true;
 
       this.auth.login( <string>username, <string>password ).subscribe(
         res => {
+          this.isRequestPending = false;
+
           if( res.result ) {
             this.router.navigate([this.auth.INITIAL_PATH])
           }

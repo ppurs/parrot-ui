@@ -2,6 +2,9 @@
     <div id="form-container">
         <div class="center-content" id="auth-title">
             <h1>{{ 'registration-form.title' | translate }}</h1>
+            <div class="center-content" id="spinner-container">
+                <mat-spinner [diameter]="20" *ngIf="isRequestPending"></mat-spinner>
+            </div>
         </div>
 
         <div>
@@ -70,7 +73,7 @@
                     </div>
                     <div class="checkbox-label">{{ 'registration-form.accept-checkbox.accept' | translate }}<a routerLink="/register"> {{ 'registration-form.accept-checkbox.terms' | translate }}</a> {{ 'registration-form.accept-checkbox.and' | translate }} <a routerLink="/register">{{ 'registration-form.accept-checkbox.privacy-policy' | translate }}</a>.<span
                         *ngIf="acceptTerms?.touched && acceptTerms?.hasError('required')" class="error-asterisk">*</span></div> 
-                    <button mat-raised-button color="primary" type="submit" class="submit-button">{{ 'registration-form.button' | translate }}</button> 
+                    <button mat-raised-button color="primary" type="submit" class="submit-button" [disabled]="isRequestPending">{{ 'registration-form.button' | translate }}</button> 
                 </div>
             </form>
         </div>
