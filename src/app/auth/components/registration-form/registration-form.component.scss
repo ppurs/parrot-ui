@@ -7,6 +7,13 @@
     display: none;
 }
 
+
+#info {
+    text-align: center;
+    padding-top: 3em;
+}
+
+
 .checkbox-position {
     width: 16px;
     height: 16px;
@@ -25,11 +32,6 @@
 
 .error-asterisk {
     color: red;
-}
-
-.info {
-    text-align: center;
-    padding-top: 3em;
 }
 
 .mat-checkbox {
