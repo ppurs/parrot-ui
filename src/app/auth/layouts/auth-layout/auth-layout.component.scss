@@ -3,19 +3,23 @@
     border-radius: 8px;
     background-color: white;
     height: 90%;
-    width: 75%;
-    position: fixed;
+    aspect-ratio: 16/9;
+    overflow: hidden;
 }
 
 .auth-card-content {
     display: flex;
     border-radius: inherit;
     height: 100%;
-    overflow: auto;
+    width: 100%;
+    overflow-y: auto;
+    
 }
 
-.auth-form-content {
-    margin: 2em;
+.auth-form-container {
+    display: flex;
+    width: 40%;
+    overflow-y: auto;
 }
 
 .card-container {
@@ -26,6 +30,8 @@
     top:0px;
     left:0px;
     overflow: auto;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
 }
 
 .center-content {

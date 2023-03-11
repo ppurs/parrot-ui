@@ -1,9 +1,7 @@
 <auth-layout>
-    <div>
-        <div class="login-title">
-            <div class="center-content">
-                {{ 'login-form.title' | translate }}
-            </div>
+    <div class="form-container">
+        <div class="center-content auth-title">
+                <h1>{{ 'login-form.title' | translate }}</h1>
             <div class="center-content">
                 <mat-error *ngIf="!isSuccess">
                     {{ 'login-form.errors.negative-response' | translate }}
@@ -11,9 +9,9 @@
             </div>
         </div>
 
-        <div class="center-content">
+        <div>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div>   
+                <div class="input-container">   
                     <mat-form-field class="input">
                         <mat-label>{{ 'account.username' | translate }}</mat-label>
                         <input type="text" matInput formControlName="username">
@@ -22,7 +20,7 @@
                         </mat-error> 
                     </mat-form-field> 
                 </div>
-                <div>
+                <div class="input-container">
                     <mat-form-field class="input">
                         <mat-label>{{ 'account.password' | translate }}</mat-label>
                         <input type="password" matInput formControlName="password">
@@ -39,5 +37,6 @@
         <div class="center-content">
             <a routerLink="/register">{{ 'login-form.register-link' | translate }}</a>
         </div>
-    </div>     
+        
+    </div>
 </auth-layout>

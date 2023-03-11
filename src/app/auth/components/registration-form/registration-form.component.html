@@ -1,12 +1,12 @@
 <auth-layout>
-    <div>
-        <div class="center-content registration-title">
-            {{ 'registration-form.title' | translate }}
+    <div class=" form-container">
+        <div class="center-content auth-title">
+            <h1>{{ 'registration-form.title' | translate }}</h1>
         </div>
 
-        <div class="center-content">
+        <div>
             <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-                <div>
+                <div class="input-container">
                     <mat-form-field class="input" >
                         <mat-label>{{ 'account.username' | translate }}</mat-label>
                         <input type="text" matInput formControlName="username">
@@ -22,7 +22,7 @@
                     </mat-form-field> 
                 </div>
 
-                <div>
+                <div class="input-container">
                     <mat-form-field class="input" >
                         <mat-label>{{ 'account.email' | translate }}</mat-label>
                         <input type="email" matInput formControlName="email">
@@ -34,7 +34,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div>
+
+                <div class="input-container">
                     <mat-form-field class="input" >
                         <mat-label>{{ 'account.password' | translate }}</mat-label>
                         <input type="password" matInput formControlName="password"> 
@@ -49,7 +50,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div> 
-                <div>
+
+                <div class="input-container">
                     <mat-form-field class="input" >
                         <mat-label>{{ 'registration-form.password-repetition' | translate }}</mat-label>
                         <input type="password" matInput formControlName="passwordRepetition">

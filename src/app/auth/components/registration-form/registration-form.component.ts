@@ -11,7 +11,7 @@ import { UniqueUsernameValidator } from './validators/unique-user-validator';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.scss']
+  styleUrls: ['./registration-form.component.scss', '../auth-form.scss']
 })
 export class RegistrationFormComponent implements OnInit {
   registrationForm = this.fb.group({
