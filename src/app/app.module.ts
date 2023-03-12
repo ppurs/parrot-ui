@@ -2,6 +2,8 @@ import { AddLabelsComponent } from './components/labels-page/add-labels/add-labe
 import { AddTranslationsComponent } from './components/translations-page/add-translations/add-translations.component';
 import { AppComponent } from './app.component';
 import { DeleteConfirmationComponent } from './components/translations-page/translation-tile/delete-confirmation/delete-confirmation.component';
+import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
+import { ErrorToastComponent } from './components/shared/error-toast/error-toast.component';
 import { FilterTileComponent } from './components/shared/filter-tile/filter-tile.component';
 import { FoundLabelTileComponent } from './components/labels-page/label-tile/found-label-tile/found-label-tile.component';
 import { FoundTranslationTileComponent } from './components/translations-page/translation-tile/found-translation-tile/found-translation-tile.component';
@@ -15,6 +17,7 @@ import { NewTranslationTileComponent } from './components/translations-page/tran
 import { QuizFilterFormComponent } from './components/quiz-page/quiz-filter-form/quiz-filter-form.component';
 import { QuizPageComponent } from './components/quiz-page/quiz-page/quiz-page.component';
 import { QuizTileComponent } from './components/quiz-page/quiz-tile/quiz-tile.component';
+import { SnackBarContentComponent } from './components/labels-page/snack-bar-content/snack-bar-content.component';
 import { StatusInfoComponent } from './components/shared/status-info/status-info.component';
 import { TileActionsBarComponent } from './components/shared/tile-actions-bar/tile-actions-bar.component';
 import { TranslationsFilterFormComponent } from './components/translations-page/translations-filter-form/translations-filter-form.component';
@@ -25,7 +28,7 @@ import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -46,8 +49,9 @@ import { NgModule } from '@angular/core';
 import { NgxColorsModule } from 'ngx-colors';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SnackBarContentComponent } from './components/labels-page/snack-bar-content/snack-bar-content.component';
-import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
+
+import { ErrorInterceptor } from './error-interceptor';
+
 
 @NgModule({
   declarations: [
@@ -55,6 +59,8 @@ import { DeleteLabelConfirmationComponent } from './components/labels-page/label
     AddTranslationsComponent,
     AppComponent,
     DeleteConfirmationComponent,
+    DeleteLabelConfirmationComponent,
+    ErrorToastComponent,
     FilterTileComponent,
     FoundLabelTileComponent,
     FoundTranslationTileComponent,
@@ -68,12 +74,11 @@ import { DeleteLabelConfirmationComponent } from './components/labels-page/label
     QuizFilterFormComponent,
     QuizPageComponent,
     QuizTileComponent,
+    SnackBarContentComponent,
     StatusInfoComponent,
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
-    TranslationsPageComponent,
-    SnackBarContentComponent,
-    DeleteLabelConfirmationComponent
+    TranslationsPageComponent
   ],
   imports: [
     AuthModule,
@@ -108,7 +113,13 @@ import { DeleteLabelConfirmationComponent } from './components/labels-page/label
       }
   }),
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

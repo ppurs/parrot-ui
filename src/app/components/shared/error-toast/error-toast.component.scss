@@ -1,0 +1,36 @@
+#close-button {
+    pointer-events: auto;
+    transform: scale(0.8);
+    width: auto;
+    height: auto;
+    line-height: 0;
+    align-self: flex-start;
+    flex-shrink: unset;
+}
+
+#details-button {
+    float: right;
+    color: black;
+}
+
+#error-icon {
+    color: var(--error);
+    margin-right: 0.5em;
+}
+
+#toast-header {
+    font-weight: bold;
+}
+
+.toast-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    color: black;
+}
+
+.toast-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

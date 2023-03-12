@@ -134,6 +134,14 @@
         }
     },
 
+    "toast": {
+        "error": {
+            "details": "Show details",
+            "header": "Error",
+            "message": "An error has been occured"
+        }
+    },
+
     "translations-filter-form": {
         "lang-from": "From language term",
         "lang-to": "To language term",
