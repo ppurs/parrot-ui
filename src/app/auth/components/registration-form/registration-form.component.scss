@@ -7,11 +7,12 @@
     display: none;
 }
 
-.center-content { 
-    display: flex;
-    justify-content: center;
+
+#info {
     text-align: center;
+    padding-top: 3em;
 }
+
 
 .checkbox-position {
     width: 16px;
@@ -20,7 +21,7 @@
 }
 
 .checkbox-label {
-    width: calc(25em - 16px - 0.5em);
+    width: calc(100% - 16px - 0.5em);
     font-size: small;
     text-align: left;
     white-space: normal;
@@ -30,58 +31,9 @@
 }
 
 .error-asterisk {
-    color: red;
-}
-
-.info {
-    text-align: center;
-    padding-top: 3em;
-}
-
-.input {
-    width: 25em;
-}
-
-.mat-card-title {
-    font-weight: 600;
+    color: var(--error);
 }
 
 .mat-checkbox {
     box-shadow: none !important;
-}
-
-.mat-form-field {
-    margin-bottom: 0.5em;
-}
-
-.registration-card {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    width: fit-content;
-}
-
-.registration-card-content {
-    padding-left: 4em;
-    padding-right: 4em;
-    padding-top: 4em;
-    padding-bottom: 3em;
-}
-
-.registration-title {
-    margin-bottom: 4em;
-}
-
-.submit-button {
-    margin-top: 2em;
-    width: 100%;
-}
-
-a:link, a:active, a:hover, a:visited {
-    color: green;
-    background-color: transparent;
-    text-decoration: none;
 }

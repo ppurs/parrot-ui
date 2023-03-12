@@ -93,7 +93,7 @@ export class TranslationTile implements ListTile {
 
     getLabelsChange?(): LabelsChange | null;
 
-    getTileStateStatus(): TileStateStatus {
+    getTileStateStatus(): TileStateStatus | undefined {
         return this.state.status;
     }
 
@@ -116,11 +116,7 @@ export class TranslationTile implements ListTile {
     removeFromList?(): void;
 
     setLabelsDetails( labels: LabelProperties[] ): void {}
-
-    tryChangeStateToInactive?(): boolean;
     
-    tryChangeStateToSubmitted?(): boolean;
-
     updateContentAfterSubmitSuccess( content: LabelProperties[] ): void {
         this.content.labels = content;
       }

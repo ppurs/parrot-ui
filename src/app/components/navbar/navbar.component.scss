@@ -17,6 +17,15 @@
     margin-top: 14px;
 }
 
+img {
+    height: 44px;
+    width: auto;
+}
+
+#logo-title {
+    height: 24px;
+}
+
 .mat-toolbar {
     position: fixed;
     z-index: 2;
@@ -43,18 +52,12 @@
     flex: 1 1 auto;
 }
 
-.colorBack {
-    background-color: green;
-    color: white;
-    height: inherit;
-}
-
 .info-item {
     color: black;
 }
 
 .logout-button {
-    color: green;
+    color: var(--primary-green);
 }
 
 #user-button {

@@ -176,7 +176,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
     this.removeEvent.emit(this.content);
   }
 
-  override tryChangeStateToInactive(): boolean {
+  tryChangeStateToInactive(): boolean {
     if ( !this.checkFormValuesChange() ) {
       this.showDeleteMessage = false;
       this.changeState( this.initialState );
@@ -188,7 +188,7 @@ export class FoundTranslationTileComponent extends TranslationTile implements On
     }
   }
 
-  override tryChangeStateToSubmitted(): boolean {   
+  tryChangeStateToSubmitted(): boolean {   
      if ( this.validationCheck() && this.term?.value != null  ) {    
        this.changeState( new SubmittedState() );
        this.isExpanded = false;

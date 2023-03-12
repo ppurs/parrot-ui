@@ -79,8 +79,6 @@ export class QuizService {
 
           this.quizTiles.push(...tilesContent);  
 
-          //this._hasMoreTiles = data.results.length < this.noTilesOnPage ? false : true;
-
           return tilesContent ?? [];
         }
           ),

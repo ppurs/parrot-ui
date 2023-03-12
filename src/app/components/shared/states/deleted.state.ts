@@ -15,7 +15,7 @@ export class DeletedState implements TileState {
     }
 
     changeStatus( status: TileStateStatus ): void {
-        if( status == TileStateStatus.LOADING ) {
+        if( status != TileStateStatus.UNSUCCESSFUL ) {
             this.hiddenActionBar = true;
         }
         else {

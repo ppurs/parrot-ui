@@ -7,58 +7,14 @@
     display: none
 }
 
-.center-content { 
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
 
-.info {
+#info {
     text-align: center;
     padding-top: 5em;
 }
 
-.input {
-    width: 25em;
-}
 
-.login-card {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    width: fit-content;
-}
 
-.login-card-content {
-    padding-left: 4em;
-    padding-right: 4em;
-    padding-top: 5em;
-    padding-bottom: 3em;
-}
 
-.login-title {
-    margin-bottom: 4em;
-}
 
-.mat-card-title {
-    font-weight: 600;
-}
-
-.mat-form-field {
-    margin-bottom: 0.5em;
-}
-
-.submit-button {
-    margin-top: 1.5em;
-    width: 100%;
-}
-
-a:link, a:active, a:hover, a:visited {
-    color: green;
-    background-color: transparent;
-    text-decoration: none;
-}
 

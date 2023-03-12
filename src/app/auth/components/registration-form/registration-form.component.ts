@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { POSTRegister } from 'src/app/auth/models/post-register';
-import { AccountService } from 'src/app/auth/services/account/account.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { passwordMatchValidator } from './validators/password-match-validator';
 import { UniqueUsernameValidator } from './validators/unique-user-validator';
 
@@ -11,7 +11,7 @@ import { UniqueUsernameValidator } from './validators/unique-user-validator';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.scss']
+  styleUrls: ['./registration-form.component.scss', '../auth-form.scss']
 })
 export class RegistrationFormComponent implements OnInit {
   registrationForm = this.fb.group({
@@ -20,7 +20,7 @@ export class RegistrationFormComponent implements OnInit {
                       Validators.required,
                       Validators.pattern("[a-zA-Z0-9_]*"),
                     ],
-                    asyncValidators: [UniqueUsernameValidator.createValidator(this.account)],
+                    asyncValidators: [UniqueUsernameValidator.createValidator(this.auth)],
                     updateOn: 'blur'
                 }
               ],
@@ -47,9 +47,13 @@ export class RegistrationFormComponent implements OnInit {
     ]
   });
 
-  constructor(private fb: FormBuilder,
-              private account: AccountService,
-              private router: Router ) {}
+  isRequestPending: boolean;
+
+  constructor(private auth: AuthService,
+              private fb: FormBuilder,
+              private router: Router ) {
+    this.isRequestPending = false;
+              }
 
   ngOnInit(): void {}
 
@@ -78,6 +82,7 @@ export class RegistrationFormComponent implements OnInit {
       this.registrationForm.markAllAsTouched();
     }
     else {
+      this.isRequestPending = true;
       this.sendRegisterData();
     }
   }
@@ -93,7 +98,9 @@ export class RegistrationFormComponent implements OnInit {
       email: <string>this.email?.value
     }
 
-    this.account.register( data ).subscribe( res => {
+    this.auth.register( data ).subscribe( res => {
+      this.isRequestPending = false
+
       if ( res.result ) {
         this.onSuccess();
       }

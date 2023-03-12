@@ -85,7 +85,7 @@ export class NewLabelTileComponent extends LabelTile implements OnInit {
     this.first = true;
   }
 
-  override tryChangeStateToSubmitted(): boolean {
+  tryChangeStateToSubmitted(): boolean {
     if ( this.validationCheck() ) {    
       this.changeState( new SubmittedState() );
       this.cdref.detectChanges();

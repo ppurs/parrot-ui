@@ -7,7 +7,7 @@ import { TileStateStatus } from '../../../models/tile-state-status';
   styleUrls: ['./status-info.component.scss']
 })
 export class StatusInfoComponent implements OnInit {
-  @Input() status: TileStateStatus;
+  @Input() status: TileStateStatus | undefined;
 
   constructor() { 
     this.status = TileStateStatus.LOADING;

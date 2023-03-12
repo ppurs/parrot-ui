@@ -8,7 +8,7 @@ import { TileStateStatus } from 'src/app/models/tile-state-status';
 })
 export class DeleteLabelConfirmationComponent implements OnInit {
   @Input() msgParam!: {value: string};
-  @Input() tileStatus!: TileStateStatus;
+  @Input() tileStatus!: TileStateStatus | undefined;
   @Output() confirmation =  new EventEmitter<{confirm: boolean, option?: number}>();
   btnDisabled: boolean;
   isExpanded: boolean;
