@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TileActionBarOptions } from 'src/app/models/tile-action-bar-options';
 
-interface ActionBarButton {
+type ActionBarButton = {
   option?: TileActionBarOptions
   optionName: string,
   iconName: string,

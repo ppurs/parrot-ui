@@ -15,7 +15,6 @@ const DEFAULT_LIMIT: number = 50;
 })
 export class LabelsPageComponent implements OnInit {
   @ViewChild('addedTiles') addedTiles!: AddLabelsComponent;
-  @ViewChild('snackBarRef')
 
   isFetchingMoreLabels: boolean;
   isLoadingPage: boolean;
