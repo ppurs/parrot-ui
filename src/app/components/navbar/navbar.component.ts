@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   private readonly navigations: NavbarNavigation[] = [
     { header: 'Quiz', route: '/quiz' },
     { header: 'Translations', route: '/translations' },
-    //{ header: 'Labels', route: '/labels' },
+    { header: 'Labels', route: '/labels' },
   ]
 
   constructor(private facade: FacadeService,
