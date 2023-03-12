@@ -23,7 +23,7 @@
 }
 
 .card-container {
-    background-color:#bfdec4;
+    background-color:var(--body-background);
     position:fixed;
     width:100%;
     height:100%;
@@ -41,8 +41,8 @@
 }
 
 .logo-container {
-    background-color:  #33691E;
-    box-shadow: inset 1px 1px 150px #162e0d;
+    background-color:  var(--primary-green);
+    box-shadow: inset 1px 1px 150px var(--secondary-green);
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
     width: 60%;
@@ -84,11 +84,11 @@ img {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #162e0d33;
+    background: var(--dark-green);
     border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #33691E;
+    background: var(--primary-green);
 }
