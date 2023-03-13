@@ -1,0 +1,15 @@
+#close-dialog-button {
+    transform: scale(0.9);
+    width: auto;
+    height: auto;
+    line-height: 0;
+    align-self: flex-start;
+    flex-shrink: unset;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+#dialog-title {
+    display: flex;
+    overflow-x: hidden;
+}

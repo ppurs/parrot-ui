@@ -33,6 +33,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -51,6 +52,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ErrorInterceptor } from './error-interceptor';
+import { ErrorDetailsDialogContentComponent } from './components/shared/error-details-dialog-content/error-details-dialog-content.component';
 
 
 @NgModule({
@@ -78,7 +80,8 @@ import { ErrorInterceptor } from './error-interceptor';
     StatusInfoComponent,
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
-    TranslationsPageComponent
+    TranslationsPageComponent,
+    ErrorDetailsDialogContentComponent
   ],
   imports: [
     AuthModule,
@@ -91,6 +94,7 @@ import { ErrorInterceptor } from './error-interceptor';
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,   

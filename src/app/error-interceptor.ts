@@ -18,10 +18,13 @@ export class ErrorInterceptor implements HttpInterceptor {
             horizontalPosition: 'right',
             verticalPosition: 'bottom',
             duration: 5000,
-            panelClass: 'error-toast-panel'
+            panelClass: 'error-toast-panel',
+            data: error
           }
         );
       }
+
+      console.log(error);
       return throwError(() => error);
     }));
     
