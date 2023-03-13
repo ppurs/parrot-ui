@@ -7,8 +7,6 @@ import { POSTRegister } from '../../models/post-register';
 import { User } from '../../models/user';
 import { AuthStrategy, AUTH_STRATEGY } from './strategy/auth.strategy';
 
-const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,8 +31,7 @@ export class AuthService {
       {
         username,
         password,
-      },
-      { headers: HEADERS }
+      }
     ).pipe(
       map( (data) => {
         return this.auth.doLoginUser({ username: username, response: data});
@@ -55,11 +52,11 @@ export class AuthService {
   }
 
   register( payload: POSTRegister ): Observable<RequestResponse> {
-    return this.http.post<RequestResponse>( this.REGISTRATION_API + '/register', payload, {headers: HEADERS} );
+    return this.http.post<RequestResponse>( this.REGISTRATION_API + '/register', payload );
   }
 
   validateUserUnique( username: string ){
     return this.http.post<{result: boolean}>( 
-      this.REGISTRATION_API + '/username-exists', {username: username}, {headers: HEADERS} );
+      this.REGISTRATION_API + '/username-exists', {username: username} );
   }
 }

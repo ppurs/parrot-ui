@@ -53,6 +53,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorDetailsDialogContentComponent } from './components/shared/error-details-dialog-content/error-details-dialog-content.component';
+import { DefaultOptionsInterceptor } from './default-options-interceptor';
 
 
 @NgModule({
@@ -118,6 +119,11 @@ import { ErrorDetailsDialogContentComponent } from './components/shared/error-de
   }),
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DefaultOptionsInterceptor,
+      multi: true
+    },
     {
     provide: HTTP_INTERCEPTORS,
     useClass: ErrorInterceptor,

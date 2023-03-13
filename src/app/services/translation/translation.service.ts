@@ -11,7 +11,6 @@ import { LabelProperties } from 'src/app/models/label-properties';
 import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
 import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
 
-const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
 interface DeleteTranslationResponse {
   result: boolean,
@@ -46,8 +45,7 @@ export class TranslationService {
         wordTo: payload.wordTo,
         description: payload.description,
         wordTypeId: payload.wordTypeId,
-      }, 
-      { headers: HEADERS } );
+      } );
   }
 
   editTranslationLabelList( translationId: number, addedLabelsIds?: number[], removedLabelsIds?: number[] ): Observable<EditTranslationLabelResponse> {
@@ -56,8 +54,7 @@ export class TranslationService {
       {
         addIds: addedLabelsIds,
         deleteIds: removedLabelsIds
-      }, 
-      { headers: HEADERS } );
+      } );
   }
 
   editTranslation( translation: Translation, resetStatistics?: boolean ): Observable<RequestResponse> {
@@ -71,8 +68,7 @@ export class TranslationService {
         description: translation.description,
         wordTypeId: translation.wordTypeId,
         resetStatistics
-      },
-      {headers: HEADERS} )
+      } )
     .pipe(
       map((data) => {
         const response: RequestResponse = {
@@ -85,7 +81,7 @@ export class TranslationService {
   }
 
   deleteTranslation( translation: Translation ): Observable<RequestResponse> {
-    return this.http.get<DeleteTranslationResponse>( this.TRANSLATION_API + '/delete/' + translation.translationId, {headers: HEADERS} )
+    return this.http.get<DeleteTranslationResponse>( this.TRANSLATION_API + '/delete/' + translation.translationId )
     .pipe(
       map( data => {
         const errors = data.errors?.map( err => ({ field: '', message: err }));
@@ -106,8 +102,7 @@ export class TranslationService {
           languageFromId: this.mainService.currentLanguages.languageFrom.id,
           languageToId: this.mainService.currentLanguages.languageTo.id
         }
-       },
-       { headers: HEADERS }).pipe(
+       }).pipe(
         map( data =>  {
           this.labels = data.results;
 
@@ -118,7 +113,7 @@ export class TranslationService {
   }
 
   getTranslationFilterHints(payload: TranslationFilterHints): Observable<string[]> {
-    return this.http.post<TranslationFilterHintsResponse>( this.TRANSLATION_API + '/word-list', payload, {headers: HEADERS} )
+    return this.http.post<TranslationFilterHintsResponse>( this.TRANSLATION_API + '/word-list', payload )
     .pipe(
       map( data => data.results.map( obj => obj.word ) ),
     );
@@ -138,8 +133,7 @@ export class TranslationService {
 	        wordTypeId: filters?.wordTypeIds,
           labelIds: filters?.labelIds
         }
-      },
-      {headers: HEADERS} )
+      } )
     .pipe(
       map( data => data.results )
     );
@@ -147,7 +141,7 @@ export class TranslationService {
 
   getWordTypes(): Observable<WordType[]> {
     const languageTo = this.mainService.currentLanguages.languageTo;
-    return this.http.get<{wordTypes: WordType[]}>( this.TRANSLATION_API + '/word-type-list/' + languageTo.id, {headers: HEADERS} )
+    return this.http.get<{wordTypes: WordType[]}>( this.TRANSLATION_API + '/word-type-list/' + languageTo.id )
     .pipe(
       map((data) => {
         this.wordTypes = data.wordTypes;
