@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { TranslationsFilter } from 'src/app/models/translations-filter';
 import { RequestResponse } from 'src/app/models/requests/request-response';
 import { Translation } from 'src/app/models/translation';
@@ -47,13 +47,7 @@ export class TranslationService {
         description: payload.description,
         wordTypeId: payload.wordTypeId,
       }, 
-      { headers: HEADERS } )
-    .pipe(
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
-    );
+      { headers: HEADERS } );
   }
 
   editTranslationLabelList( translationId: number, addedLabelsIds?: number[], removedLabelsIds?: number[] ): Observable<EditTranslationLabelResponse> {
@@ -63,13 +57,7 @@ export class TranslationService {
         addIds: addedLabelsIds,
         deleteIds: removedLabelsIds
       }, 
-      { headers: HEADERS } )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
-      );
+      { headers: HEADERS } );
   }
 
   editTranslation( translation: Translation, resetStatistics?: boolean ): Observable<RequestResponse> {
@@ -92,11 +80,7 @@ export class TranslationService {
           errors: data.errors
         }
        return response;
-     }),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
+     })
     );
   }
 
@@ -110,10 +94,6 @@ export class TranslationService {
           result: data.result,
           errors: errors
         };
-      }),
-      catchError((err) => {
-        console.error(err);
-        throw err;
       })
     );
   }
@@ -133,11 +113,7 @@ export class TranslationService {
 
           return data.results;
         }
-        ),
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
+        )
       );
   }
 
@@ -145,10 +121,6 @@ export class TranslationService {
     return this.http.post<TranslationFilterHintsResponse>( this.TRANSLATION_API + '/word-list', payload, {headers: HEADERS} )
     .pipe(
       map( data => data.results.map( obj => obj.word ) ),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
     );
   }
 
@@ -169,12 +141,7 @@ export class TranslationService {
       },
       {headers: HEADERS} )
     .pipe(
-
-      map( data => data.results ),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
+      map( data => data.results )
     );
   }
 
@@ -186,11 +153,7 @@ export class TranslationService {
         this.wordTypes = data.wordTypes;
 
        return data.wordTypes;
-     }),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
+     })
     );
   }
 }

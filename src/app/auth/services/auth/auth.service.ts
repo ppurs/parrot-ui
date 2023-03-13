@@ -38,11 +38,7 @@ export class AuthService {
     ).pipe(
       map( (data) => {
         return this.auth.doLoginUser({ username: username, response: data});
-       } ),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
+       } )
     );
   }
 
@@ -59,13 +55,7 @@ export class AuthService {
   }
 
   register( payload: POSTRegister ): Observable<RequestResponse> {
-    return this.http.post<RequestResponse>( this.REGISTRATION_API + '/register', payload, {headers: HEADERS} )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
-      );
+    return this.http.post<RequestResponse>( this.REGISTRATION_API + '/register', payload, {headers: HEADERS} );
   }
 
   validateUserUnique( username: string ){

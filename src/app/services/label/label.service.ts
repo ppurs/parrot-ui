@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Label } from 'src/app/models/label';
 import { Option } from 'src/app/models/option';
 import { LabelProperties } from 'src/app/models/label-properties';
@@ -32,11 +32,6 @@ export class LabelService {
         parentLabelId: label.directParentLabelId
       },
       {headers: HEADERS} 
-      ).pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
       );
   }
 
@@ -48,13 +43,7 @@ export class LabelService {
       {
          params: requestParams, 
          headers: HEADERS 
-      })
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
-      );
+      });
   }
 
   editLabel( label: Label ): Observable<AddLabelResponse> {
@@ -66,11 +55,6 @@ export class LabelService {
         parentLabelId: label.directParentLabelId
       },
       {headers: HEADERS}
-      ).pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
       );
   }
 
@@ -83,12 +67,8 @@ export class LabelService {
         this.hierarchyOptions = data.options;
 
         return data.options 
-      }),
-      catchError((err) => {
-        console.error(err);
-        throw err;
       })
-    );
+      );
   }
   
   getLabelsList( filter?: LabelsFilter, limit?:number, offset?: number ): Observable<Label[]> {
@@ -107,11 +87,7 @@ export class LabelService {
       },
       { headers: HEADERS } )
       .pipe(
-        map( data => data.results ),
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
+        map( data => data.results )
       );
   }
 }

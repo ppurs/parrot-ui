@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CurrentLanguages } from 'src/app/models/current-languages';
 import { Language } from 'src/app/models/language';
 import { NavbarData } from 'src/app/models/navbar-data';
@@ -42,12 +42,7 @@ export class MainService {
         languageToId: payload.languageTo.id
       },
       {headers: HEADERS} 
-      ).pipe(
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
-    );
+      );
   }
 
   getNavbarData(): Observable<NavbarData> {
@@ -72,11 +67,7 @@ export class MainService {
             currentLanguages: currentLanguages,
             languages: languages
           }
-        }),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
+        })
       );
   }
 }

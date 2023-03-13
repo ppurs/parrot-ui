@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { QuizFilter } from 'src/app/models/quiz-filter';
 import { QuizPayload } from 'src/app/models/requests/quiz-payload';
 import { QuizTile, QuizTileContent } from 'src/app/models/quiz-tile';
@@ -80,11 +80,6 @@ export class QuizService {
           this.quizTiles.push(...tilesContent);  
 
           return tilesContent ?? [];
-        }
-          ),
-        catchError((err) => {
-          console.error(err);
-          throw err;
         })
       );
   }
@@ -94,42 +89,20 @@ export class QuizService {
     .pipe(
       map(
         data => data.options
-      ),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
+      )
     );
   }
 
   notifySuccess( translationId: number ): Observable<NotifyResponse> {
-    return this.http.get<NotifyResponse>( this.QUIZ_API + '/guessed/' + translationId, {headers: HEADERS} )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
-      );
+    return this.http.get<NotifyResponse>( this.QUIZ_API + '/guessed/' + translationId, {headers: HEADERS} );
   }
 
   notifyRevealed( translationId: number ): Observable<NotifyResponse> {
-    return this.http.get<NotifyResponse>( this.QUIZ_API + '/revealed/' + translationId, {headers: HEADERS} )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
-      );
+    return this.http.get<NotifyResponse>( this.QUIZ_API + '/revealed/' + translationId, {headers: HEADERS} );
   }
 
   notifyFailure( translationId: number ): Observable<NotifyResponse> {
-    return this.http.get<NotifyResponse>( this.QUIZ_API + '/attempt-failed/' + translationId, {headers: HEADERS} )
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
-      );
+    return this.http.get<NotifyResponse>( this.QUIZ_API + '/attempt-failed/' + translationId, {headers: HEADERS} );
   }
 
   removeQuizTile( tile: QuizTile): void {
@@ -161,13 +134,7 @@ export class QuizService {
   }
 
   setSelectionStrategyOption( strategy: Option ): Observable<RequestResponse> {
-    return this.http.get<RequestResponse>( this.QUIZ_API + '/options/set-selection-strategies/' + strategy.id, {headers: HEADERS} )
-    .pipe(
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
-    );
+    return this.http.get<RequestResponse>( this.QUIZ_API + '/options/set-selection-strategies/' + strategy.id, {headers: HEADERS} );
   }
 
   private checkNumberOfAvailableTiles() {
