@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Observable, of, tap } from "rxjs";
+import { Role } from "src/app/auth/models/role";
 import { User } from "src/app/auth/models/user";
 import { RequestResponse } from "src/app/models/requests/request-response";
 import { AuthStrategy } from "./auth.strategy";
@@ -25,6 +26,15 @@ export class SessionAuthStrategy implements AuthStrategy {
       } else {
         return this.http.get<User>(`someurl/user`)
           .pipe(tap(user => this.loggedUser = user));
+      }
+    }
+
+    getUserRoles(): Observable<Role[]> {
+      if(this.loggedUser) {
+        return of(this.loggedUser?.roles ?? [Role.USER]);
+      }
+      else {
+        return of([Role.USER]);
       }
     }
   }

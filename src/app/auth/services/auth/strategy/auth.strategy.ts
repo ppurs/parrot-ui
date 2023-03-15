@@ -6,11 +6,13 @@ import { User } from "src/app/auth/models/user";
 import { RequestResponse } from "src/app/auth/models/request-response";
 import { environment } from "src/environments/environment";
 import { SessionAuthStrategy } from "./session-auth.strategy";
+import { Role } from "src/app/auth/models/role";
 
 export interface AuthStrategy {
     doLoginUser(data: any): RequestResponse;
     doLogoutUser(): void;
     getCurrentUser(): Observable<User | undefined>;
+    getUserRoles(): Observable<Role[]>;
   }
   
 export const AUTH_STRATEGY = new InjectionToken<AuthStrategy>('AuthStrategy');

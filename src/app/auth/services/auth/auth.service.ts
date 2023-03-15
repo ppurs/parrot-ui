@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { RequestResponse } from 'src/app/models/requests/request-response';
 import { POSTRegister } from '../../models/post-register';
+import { Role } from '../../models/role';
 import { User } from '../../models/user';
 import { AuthStrategy, AUTH_STRATEGY } from './strategy/auth.strategy';
 
@@ -15,6 +16,7 @@ const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 export class AuthService {
   public readonly LOGIN_PATH = '/login';
   public readonly INITIAL_PATH = '';
+  public readonly INITIAL_ADMIN_PATH = '/admin'
 
   private readonly AUTH_API = "/api/login";
   private readonly REGISTRATION_API = '/api/registration';
@@ -25,6 +27,10 @@ export class AuthService {
 
   getCurrentUser$(): Observable<User | undefined> {
     return this.auth.getCurrentUser();
+  }
+
+  getUserRoles$(): Observable<Role[]> {
+    return this.auth.getUserRoles();
   }
 
   login( username: string, password: string ): Observable<RequestResponse> {
@@ -44,6 +50,10 @@ export class AuthService {
         throw err;
       })
     );
+  }
+
+  isAdmin(): boolean {
+    return false;
   }
 
   isLoggedIn$(): Observable<boolean> {
