@@ -31,7 +31,7 @@ export class JwtAuthStrategy implements AuthStrategy {
         const token: AuthToken = { token: response.token, tokenExpirationDateTime: response.tokenExpirationDateTime };
 
         localStorage.setItem(this.USER, data.username);
-        localStorage.setItem(this.ROLES, JSON.stringify(data.roles));
+        localStorage.setItem(this.ROLES, JSON.stringify(data.roles ?? []));
         localStorage.setItem(this.JWT_TOKEN, JSON.stringify(token));
       }
 
@@ -67,7 +67,7 @@ export class JwtAuthStrategy implements AuthStrategy {
     }
 
     private getStoredRoles(): Role[] {
-      return localStorage.getItem(this.ROLES) ? 
+      return localStorage.getItem(this.ROLES) != null ? 
                 JSON.parse(<string>localStorage.getItem(this.ROLES)) : [];
     }
 
