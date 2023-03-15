@@ -14,20 +14,21 @@
 
     <span class="spacer"></span>
 
- 
-    <span class="language-choose">{{ 'navbar.from' | translate }}:</span>
-    <a mat-button class="language-choose" [matMenuTriggerFor]="languageFromChoose">
-        <span>{{currentLangs?.languageFrom?.name}}</span>
-        <mat-icon>arrow_drop_down</mat-icon>
-    </a> 
-  
-    <span class="lang-spacer"></span>
+    <span *forRoles="[USER_ROLE]">
+        <span class="language-choose">{{ 'navbar.from' | translate }}:</span>
+        <a mat-button class="language-choose" [matMenuTriggerFor]="languageFromChoose">
+            <span>{{currentLangs?.languageFrom?.name}}</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+        </a> 
+    
+        <span class="lang-spacer"></span>
 
-    <span class="language-choose">{{ 'navbar.to' | translate }}:</span>
-    <a mat-button class="language-choose" [matMenuTriggerFor]="languageToChoose">
-        <span>{{currentLangs?.languageTo?.name}}</span>
-        <mat-icon>arrow_drop_down</mat-icon>
-    </a> 
+        <span class="language-choose">{{ 'navbar.to' | translate }}:</span>
+        <a mat-button class="language-choose" [matMenuTriggerFor]="languageToChoose">
+            <span>{{currentLangs?.languageTo?.name}}</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+        </a> 
+    </span>
 
     <div>
         <a mat-button [matMenuTriggerFor]="userAccount" id="user-button">
@@ -51,17 +52,8 @@
 
 <mat-menu #userAccount="matMenu" class="details-panel" color="primary" xPosition="before">
     <ng-template matMenuContent>
-        <button mat-menu-item class="info-item" disabled="true">{{accountType}}</button>
+        <button mat-menu-item *ngIf="accountType" class="info-item" disabled="true">{{accountType}}</button>
         <mat-divider></mat-divider>
         <button mat-menu-item class="logout-button" (click)="logout()">{{ 'navbar.logout' | translate }}</button>
     </ng-template>
 </mat-menu>
-
-<!--
-<nav mat-tab-nav-bar class="colorBack">
-    <a mat-tab-link *ngFor="let link of links; index as i"
-       [href]="link"
-       (click)="activeLink = link"
-       [active]="activeLink == link"> {{titles[i]}} </a>
-  </nav> 
--->

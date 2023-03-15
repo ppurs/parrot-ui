@@ -76,10 +76,6 @@ export class FacadeService {
     return this.mainService.getNavbarData();
   }
 
-  getNavbarNavigation(): string[] {
-    return ['quiz', 'translations', 'labels' ];
-  }
-
   getLabelParentHierarchyOptions(): Option[] {
     return this.labelService.hierarchyOptions;
   }
