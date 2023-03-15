@@ -16,7 +16,6 @@ const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 export class AuthService {
   public readonly LOGIN_PATH = '/login';
   public readonly INITIAL_PATH = '';
-  public readonly INITIAL_ADMIN_PATH = '/admin'
 
   private readonly AUTH_API = "/api/login";
   private readonly REGISTRATION_API = '/api/registration';
@@ -50,10 +49,6 @@ export class AuthService {
         throw err;
       })
     );
-  }
-
-  isAdmin(): boolean {
-    return false;
   }
 
   isLoggedIn$(): Observable<boolean> {
