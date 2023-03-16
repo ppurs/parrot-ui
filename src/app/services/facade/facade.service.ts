@@ -21,6 +21,8 @@ import { LabelsFilter } from 'src/app/models/labels-filter';
 import { NotifyResponse } from 'src/app/models/requests/notify-response';
 import { AddLabelResponse } from 'src/app/models/requests/label/add-label.response';
 import { TranslationsFilter } from 'src/app/models/translations-filter';
+import { UserService } from '../user/user.service';
+import { UsersFilterElement } from 'src/app/models/users-filter-element';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,8 @@ export class FacadeService {
   constructor(private labelService: LabelService, 
               private mainService: MainService,
               private quizService: QuizService,
-              private translationService: TranslationService) {}
+              private translationService: TranslationService,
+              private usersService: UserService) {}
 
   addNewLabel(payload: Label): Observable<AddLabelResponse> {
     return this.labelService.addLabel(payload);
@@ -116,6 +119,10 @@ export class FacadeService {
     return this.translationService.getTranslationsList();
   }
 
+  getUsersToFilters(): UsersFilterElement[] {
+    return this.usersService.usersToFilter;
+  }
+
   loadLabelHierarchyOptions(): Observable<Option[]> {
     return this.labelService.getLabelHierarchyOptions();
   }
@@ -126,6 +133,10 @@ export class FacadeService {
 
   loadQuizTiles(): Observable<QuizTile[]> {
     return this.quizService.getQuizTranslations();
+  }
+
+  loadUsersToFilters(): Observable<UsersFilterElement[]> {
+    return this.usersService.getUsersToFilters();
   }
 
   loadWordTypes(): Observable<WordType[]> {

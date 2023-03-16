@@ -1,0 +1,45 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+    <div class="filters-container">
+        <div class="filter-input-box">
+            <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
+                <mat-select disableOptionCentering 
+                            [placeholder]="'users-filter-form.users' | translate" 
+                            panelClass="bottom-position-first-filter" 
+                            formControlName="users" 
+                            multiple>                 
+                    <mat-option *ngFor="let user of Users" [value]="user.userId">
+                        {{user.username}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> 
+        </div>
+        <div id="radio-input-box" class="filter-input-box">
+            <div class="radio-group-container">
+                <div class="radio-container">
+                <input  type="radio" 
+                        id="stateChoice1" 
+                        class="custom-radio" 
+                        formControlName="accountState" 
+                        [value]=1 />
+                <label for="stateChoice1" class="radio-label">{{ 'users-filter-form.accountState.active' | translate }}</label>
+                </div>
+                <div class="radio-container">
+                <input  type="radio" 
+                        id="contactChoice2" 
+                        class="custom-radio"
+                        formControlName="accountState" 
+                        [value]=2 />
+                <label for="stateChoice2" class="radio-label">{{ 'users-filter-form.accountState.disabled' | translate }}</label>
+                </div>
+                <div class="radio-container">
+                <input  type="radio" 
+                        id="contactChoice3" 
+                        class="custom-radio"
+                        formControlName="accountState" 
+                        [value]=null />
+                <label for="stateChoice3" class="radio-label">{{ 'users-filter-form.accountState.all' | translate }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -48,6 +48,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SnackBarContentComponent } from './components/labels-page/snack-bar-content/snack-bar-content.component';
 import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
+import { UsersPageComponent } from './components/users-page/users-page/users-page.component';
+import { UsersFilterFormComponent } from './components/users-page/users-filter-form/users-filter-form.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { DeleteLabelConfirmationComponent } from './components/labels-page/label
     TranslationsFilterFormComponent,
     TranslationsPageComponent,
     SnackBarContentComponent,
-    DeleteLabelConfirmationComponent
+    DeleteLabelConfirmationComponent,
+    UsersPageComponent,
+    UsersFilterFormComponent
   ],
   imports: [
     AuthModule,

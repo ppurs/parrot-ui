@@ -162,8 +162,14 @@
             "cancel": "CANCEL",
             "edit": "SAVE"
         }
-    }
+    },
 
-    
-    
+    "users-filter-form": {
+        "users": "Username",
+        "accountState": {
+            "active": "Active",
+            "all": "All",
+            "disabled": "Disabled"
+        }
+    }
 }
