@@ -2,10 +2,10 @@
     <div class="row list-row user-content">
         <div class="col-3"> {{user.username}} </div>
         <div class="col-4"> {{user.email}} </div>
-        <div class="col-2"> 
+        <div class="col-2 state-col"> 
             <mat-slide-toggle [formControl]="accountState">{{ getAccountStateKey() | translate }}</mat-slide-toggle>
         </div>
-        <div class="col-3"> 
+        <div class="col"> 
             <button [disabled]="!isActive()" mat-flat-button color="primary" id="impersonate-button" (click)="impersonateUser()">{{ 'users-list.impersonate-button' | translate }}</button>
         </div>
     </div>
