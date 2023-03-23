@@ -7,6 +7,7 @@ import { User } from "src/app/auth/models/user";
 import { AuthStrategy } from "./auth.strategy";
 
 interface LoginResponse {
+  roles: Role[],
   token: string,
   tokenExpirationDateTime: string,
   result: boolean,
@@ -25,13 +26,13 @@ export class JwtAuthStrategy implements AuthStrategy {
     private readonly ROLES = 'ROLES';
   
     doLoginUser( data: any ): RequestResponse {
-      data = <{username: string, roles: Role[], roresponse: any}>data;
+      data = <{username: string, response: any}>data;
       const response = <LoginResponse>data.response;
       if( response.result ) {
         const token: AuthToken = { token: response.token, tokenExpirationDateTime: response.tokenExpirationDateTime };
 
         localStorage.setItem(this.USER, data.username);
-        localStorage.setItem(this.ROLES, JSON.stringify(data.roles ?? []));
+        localStorage.setItem(this.ROLES, JSON.stringify(data.response.roles ?? []));
         localStorage.setItem(this.JWT_TOKEN, JSON.stringify(token));
       }
 

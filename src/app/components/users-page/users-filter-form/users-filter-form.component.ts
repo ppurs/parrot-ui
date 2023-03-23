@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AccountState } from 'src/app/models/account-state';
 import { FilterForm } from 'src/app/models/filter-form';
 import { UsersFilter } from 'src/app/models/users-filter';
 import { UsersFilterElement } from 'src/app/models/users-filter-element';
@@ -20,6 +21,7 @@ export class UsersFilterFormComponent implements FilterForm, OnInit {
   });
   
   Users: UsersFilterElement[];
+  States = AccountState;
 
   constructor(private fb: FormBuilder,
               private facade: FacadeService) { 

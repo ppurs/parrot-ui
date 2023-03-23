@@ -8,3 +8,25 @@
     align-items: center;
     height: 100%;
 }
+
+.list-header {
+    //font-weight: bold;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: var(--primary-green);
+    color: white;
+}
+
+.list-row {
+    align-items: center;
+}
+
+.margin-tile { 
+    margin-top: 0.5em;
+    width: 100%;
+}
+
+.page-row {
+    margin-left: 0;
+    margin-right: 0;
+}

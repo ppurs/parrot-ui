@@ -22,7 +22,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsersList( filters?: UsersFilter): Observable<User[]> {
-    return this.http.get<User[]>( this.USERS_API + '/list');
+    return this.http.post< {results: User[]}>( this.USERS_API + '/list', filters )
+      .pipe(
+        map( res => res.results )
+      );
   }
 
   getUsersToFilters(): Observable<UsersFilterElement[]> {
@@ -37,7 +40,7 @@ export class UserService {
   }
 
   disableUser(userId: number): Observable<RequestResponse> {
-    return this.http.get<RequestResponse>( this.USERS_API + '/distable/' + userId );
+    return this.http.get<RequestResponse>( this.USERS_API + '/disable/' + userId );
   }
 
   impersonateUser(userId: number): Observable<ImpersonateResponse> {

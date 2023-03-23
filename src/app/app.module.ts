@@ -15,6 +15,7 @@ import { NewTranslationTileComponent } from './components/translations-page/tran
 import { QuizFilterFormComponent } from './components/quiz-page/quiz-filter-form/quiz-filter-form.component';
 import { QuizPageComponent } from './components/quiz-page/quiz-page/quiz-page.component';
 import { QuizTileComponent } from './components/quiz-page/quiz-tile/quiz-tile.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { StatusInfoComponent } from './components/shared/status-info/status-info.component';
 import { TileActionsBarComponent } from './components/shared/tile-actions-bar/tile-actions-bar.component';
 import { TranslationsFilterFormComponent } from './components/translations-page/translations-filter-form/translations-filter-form.component';
@@ -30,6 +31,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -50,6 +52,8 @@ import { SnackBarContentComponent } from './components/labels-page/snack-bar-con
 import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
 import { UsersPageComponent } from './components/users-page/users-page/users-page.component';
 import { UsersFilterFormComponent } from './components/users-page/users-filter-form/users-filter-form.component';
+import { UserTileComponent } from './components/users-page/user-tile/user-tile.component';
+import { ConfirmationDialogComponent } from './components/users-page/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,9 @@ import { UsersFilterFormComponent } from './components/users-page/users-filter-f
     SnackBarContentComponent,
     DeleteLabelConfirmationComponent,
     UsersPageComponent,
-    UsersFilterFormComponent
+    UsersFilterFormComponent,
+    UserTileComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     AuthModule,
@@ -90,6 +96,7 @@ import { UsersFilterFormComponent } from './components/users-page/users-filter-f
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,   
@@ -97,6 +104,7 @@ import { UsersFilterFormComponent } from './components/users-page/users-filter-f
     MatInputModule,
     MatMenuModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTabsModule,

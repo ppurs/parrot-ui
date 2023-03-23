@@ -23,6 +23,8 @@ import { AddLabelResponse } from 'src/app/models/requests/label/add-label.respon
 import { TranslationsFilter } from 'src/app/models/translations-filter';
 import { UserService } from '../user/user.service';
 import { UsersFilterElement } from 'src/app/models/users-filter-element';
+import { User } from 'src/app/auth/models/user';
+import { UsersFilter } from 'src/app/models/users-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +55,10 @@ export class FacadeService {
 
   deleteTranslation(payload: Translation): Observable<RequestResponse> {
     return this.translationService.deleteTranslation(payload);
+  }
+
+  disableUser( userId: number ): Observable<RequestResponse> {
+    return this.usersService.disableUser(userId);
   }
 
   editLabel(payload: Label): Observable<AddLabelResponse> {
@@ -117,6 +123,10 @@ export class FacadeService {
 
   getTranslationsList(filters?: TranslationsFilter, limit?: number, offset?: number): Observable<Translation[]> {
     return this.translationService.getTranslationsList();
+  }
+
+  getUsersList( filters?: UsersFilter ): Observable<User[]> {
+    return this.usersService.getUsersList( filters );
   }
 
   getUsersToFilters(): UsersFilterElement[] {
