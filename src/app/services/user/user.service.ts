@@ -1,15 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { AuthToken } from 'src/app/auth/models/auth-token';
 import { User } from 'src/app/auth/models/user';
+import { ImpersonateResponse } from 'src/app/models/requests/impersonate-response';
 import { RequestResponse } from 'src/app/models/requests/request-response';
 import { UsersFilter } from 'src/app/models/users-filter';
 import { UsersFilterElement } from 'src/app/models/users-filter-element';
-
-interface ImpersonateResponse extends RequestResponse {
-  token: AuthToken
-}
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +18,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsersList( filters?: UsersFilter): Observable<User[]> {
-    return this.http.post< {results: User[]}>( this.USERS_API + '/list', filters )
+    return this.http.post< {results: User[]}>( this.USERS_API + '/list', { filters: filters } )
       .pipe(
         map( res => res.results )
       );
@@ -41,9 +37,5 @@ export class UserService {
 
   disableUser(userId: number): Observable<RequestResponse> {
     return this.http.get<RequestResponse>( this.USERS_API + '/disable/' + userId );
-  }
-
-  impersonateUser(userId: number): Observable<ImpersonateResponse> {
-    return this.http.get<ImpersonateResponse>( this.USERS_API + 'impersonate/' + userId );
   }
 }
