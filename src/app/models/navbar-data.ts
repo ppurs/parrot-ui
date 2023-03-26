@@ -4,6 +4,6 @@ import { Language } from "./language";
 export interface NavbarData {
     username: string,
     //accountType: string,
-    currentLanguages: CurrentLanguages,
-    languages: Language[]
+    currentLanguages?: CurrentLanguages,
+    languages?: Language[]
   }

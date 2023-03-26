@@ -1,0 +1,18 @@
+<mat-card class="margin-tile user-content">
+    <div class="row list-row user-content">
+        <div class="col-3"> {{user.username}} </div>
+        <div class="col-4"> {{user.email}} </div>
+        <div class="col-2 state-col"> 
+            <mat-slide-toggle [formControl]="accountState">{{ getAccountStateKey() | translate }}</mat-slide-toggle>
+        </div>
+        <div class="col"> 
+            <div class="i-button-container">
+                <button *ngIf="!isImpersonatePending; else spinner" [disabled]="!isActive()" mat-flat-button color="primary" class="impersonate-button" (click)="impersonateUser()">{{ 'users-list.impersonate-button' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</mat-card>
+
+<ng-template #spinner> 
+    <mat-spinner class="impersonate-spinner" [diameter]="20"></mat-spinner>
+</ng-template>

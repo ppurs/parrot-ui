@@ -12,9 +12,9 @@ const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
 interface GETNavbarResponse {
   username: string,
-  languageFromId: number,
-	languageToId: number,
-	languages: {
+  languageFromId?: number,
+	languageToId?: number,
+	languages?: {
     languageId: number,
     languageName: string
   }[]
@@ -56,13 +56,13 @@ export class MainService {
       {headers: HEADERS} 
       ).pipe(
         map( (res) => {
-          const languages: Language[] = res.languages.map(lang => {
+          const languages: Language[] | undefined = res.languages?.map(lang => {
             return { id: lang.languageId, name: lang.languageName }
           });
 
           const currentLanguages: CurrentLanguages = {
-            languageFrom: <Language>languages.find( lang => { return lang.id === res.languageFromId } ),
-            languageTo: <Language>languages.find( lang => { return lang.id === res.languageToId } ),
+            languageFrom: <Language>languages?.find( lang => { return lang.id === res.languageFromId } ),
+            languageTo: <Language>languages?.find( lang => { return lang.id === res.languageToId } ),
           }
 
           this.currentLanguages = currentLanguages;

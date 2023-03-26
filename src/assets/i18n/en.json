@@ -5,6 +5,13 @@
         "email": "Email"
     },
 
+    "confirmation-dialog": {
+        "title": "Please confirm",
+        "question": "Are you sure you want to disable user",
+        "confirm": "Yes",
+        "cancel": "No"
+    },
+
     "delete-confirmation": {
         "msg": "Are you sure to delete translation: {{value}}?",
         "confirm": "YES",
@@ -67,7 +74,8 @@
     "navbar": {
         "from": "From",
         "to": "To",
-        "logout": "Log out"
+        "logout": "Log out",
+        "go-back-to-admin": "Go back to admin account"
     },
 
     "quiz-filter-form": {
@@ -162,8 +170,25 @@
             "cancel": "CANCEL",
             "edit": "SAVE"
         }
-    }
+    },
 
-    
-    
+    "users-filter-form": {
+        "users": "Username",
+        "account-state": {
+            "active": "Active",
+            "all": "All",
+            "disabled": "Disabled"
+        }
+    },
+
+    "users-list": {
+        "username": "Username",
+        "email": "Email",
+        "account-state": {
+            "header": "Account state",
+            "active": "Active",
+            "disabled": "Disabled"
+        },
+        "impersonate-button": "Impersonate"
+    }
 }

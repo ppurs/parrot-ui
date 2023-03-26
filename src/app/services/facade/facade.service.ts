@@ -21,6 +21,10 @@ import { LabelsFilter } from 'src/app/models/labels-filter';
 import { NotifyResponse } from 'src/app/models/requests/notify-response';
 import { AddLabelResponse } from 'src/app/models/requests/label/add-label.response';
 import { TranslationsFilter } from 'src/app/models/translations-filter';
+import { UserService } from '../user/user.service';
+import { UsersFilterElement } from 'src/app/models/users-filter-element';
+import { User } from 'src/app/auth/models/user';
+import { UsersFilter } from 'src/app/models/users-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +34,8 @@ export class FacadeService {
   constructor(private labelService: LabelService, 
               private mainService: MainService,
               private quizService: QuizService,
-              private translationService: TranslationService) {}
+              private translationService: TranslationService,
+              private usersService: UserService) {}
 
   addNewLabel(payload: Label): Observable<AddLabelResponse> {
     return this.labelService.addLabel(payload);
@@ -50,6 +55,10 @@ export class FacadeService {
 
   deleteTranslation(payload: Translation): Observable<RequestResponse> {
     return this.translationService.deleteTranslation(payload);
+  }
+
+  disableUser( userId: number ): Observable<RequestResponse> {
+    return this.usersService.disableUser(userId);
   }
 
   editLabel(payload: Label): Observable<AddLabelResponse> {
@@ -74,10 +83,6 @@ export class FacadeService {
 
   getNavbarData(): Observable<NavbarData> {
     return this.mainService.getNavbarData();
-  }
-
-  getNavbarNavigation(): string[] {
-    return ['quiz', 'translations', 'labels' ];
   }
 
   getLabelParentHierarchyOptions(): Option[] {
@@ -120,6 +125,14 @@ export class FacadeService {
     return this.translationService.getTranslationsList();
   }
 
+  getUsersList( filters?: UsersFilter ): Observable<User[]> {
+    return this.usersService.getUsersList( filters );
+  }
+
+  getUsersToFilters(): UsersFilterElement[] {
+    return this.usersService.usersToFilter;
+  }
+
   loadLabelHierarchyOptions(): Observable<Option[]> {
     return this.labelService.getLabelHierarchyOptions();
   }
@@ -130,6 +143,10 @@ export class FacadeService {
 
   loadQuizTiles(): Observable<QuizTile[]> {
     return this.quizService.getQuizTranslations();
+  }
+
+  loadUsersToFilters(): Observable<UsersFilterElement[]> {
+    return this.usersService.getUsersToFilters();
   }
 
   loadWordTypes(): Observable<WordType[]> {
