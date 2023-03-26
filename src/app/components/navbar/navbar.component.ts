@@ -50,6 +50,14 @@ export class NavbarComponent implements OnInit {
     this.setAccountType();
   }
 
+  goBackToAdmin(): void {
+    this.auth.undoImpersonateUser();
+  }
+
+  isUserImpersonated(): boolean {
+    return this.auth.isUserImpersonated();
+  }
+
   logout(): void {
     this.auth.logout();
   }

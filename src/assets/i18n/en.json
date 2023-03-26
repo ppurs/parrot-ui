@@ -74,7 +74,8 @@
     "navbar": {
         "from": "From",
         "to": "To",
-        "logout": "Log out"
+        "logout": "Log out",
+        "go-back-to-admin": "Go back to admin account"
     },
 
     "quiz-filter-form": {

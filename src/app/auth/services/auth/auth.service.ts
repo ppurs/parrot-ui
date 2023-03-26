@@ -58,14 +58,13 @@ export class AuthService {
     );
   }
 
+  isUserImpersonated(): boolean {
+    return this.auth.isUserImpersonated();
+  }
+
   logout() {
-    if( this.auth.isUserImpersonated() ) {
-      this.undoImpersonateUser();
-    } 
-    else {
       this.auth.doLogoutUser();
       this.router.navigate([this.LOGIN_PATH]);
-    }
   }
 
   register( payload: POSTRegister ): Observable<RequestResponse> {

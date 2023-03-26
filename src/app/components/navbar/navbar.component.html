@@ -54,6 +54,10 @@
     <ng-template matMenuContent>
         <button mat-menu-item *ngIf="accountType" class="info-item" disabled="true">{{accountType}}</button>
         <mat-divider></mat-divider>
-        <button mat-menu-item class="logout-button" (click)="logout()">{{ 'navbar.logout' | translate }}</button>
+        <button *ngIf="!isUserImpersonated(); else backToAdminButton" mat-menu-item class="logout-button" (click)="logout()">{{ 'navbar.logout' | translate }}</button>
     </ng-template>
 </mat-menu>
+
+<ng-template #backToAdminButton>
+    <button mat-menu-item class="logout-button" (click)="goBackToAdmin()">{{ 'navbar.go-back-to-admin' | translate }}</button>
+</ng-template>
