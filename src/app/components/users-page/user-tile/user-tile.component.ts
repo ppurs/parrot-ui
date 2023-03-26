@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/auth/models/user';
+import { AuthService } from 'src/app/auth/services/auth/auth.service';
 import { AccountState } from 'src/app/models/account-state';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -16,11 +18,16 @@ export class UserTileComponent implements OnInit {
   @Input() user!: User;
 
   accountState: FormControl = new FormControl(<boolean|undefined>undefined);
+  isImpersonatePending: boolean;
 
   private stateSubscription?: Subscription;
 
   constructor(public dialog: MatDialog, 
-              private facade: FacadeService ) {}
+              private auth: AuthService,
+              private facade: FacadeService,
+              private router: Router ) {
+    this.isImpersonatePending = false;
+              }
 
   ngOnInit(): void {
     this.accountState.setValue( this.isActive() );
@@ -41,12 +48,20 @@ export class UserTileComponent implements OnInit {
   }
 
   impersonateUser(): void {
-    //todo
+    if( this.user.userId ) {
+      this.isImpersonatePending = true;
+
+      this.auth.impersonateUser(this.user.userId ).subscribe( res => {
+        if ( res ) {
+          window.location.replace( window.location.origin + this.auth.INITIAL_PATH );
+          //this.isImpersonatePending = false;
+        }
+      });
+    }
   }
 
   private disableUser(): void {
     this.user.accountState = AccountState.Disabled;
-    console.log('disabling user..');
 
     this.openConfirmation().afterClosed().subscribe(result => {
       if ( !result ) {

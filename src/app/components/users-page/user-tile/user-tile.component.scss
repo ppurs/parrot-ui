@@ -1,6 +1,13 @@
-#impersonate-button {
+.impersonate-button {
     line-height: 2em;
+}
+
+.i-button-container {
+    min-width: 9em;
+    min-height: 2em;
     float: right;
+    display: flex;
+    align-items: center;
 }
 
 .margin-tile { 
@@ -14,4 +21,9 @@
 
 .state-col {
     min-width: fit-content;
+}
+
+.impersonate-spinner {
+    margin-left: auto;
+    margin-right: auto;
 }

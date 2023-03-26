@@ -4,6 +4,7 @@ import { RequestResponse } from "src/app/auth/models/request-response";
 import { ResponseError } from "src/app/auth/models/response-error";
 import { Role } from "src/app/auth/models/role";
 import { User } from "src/app/auth/models/user";
+import { ImpersonateResponse } from "src/app/models/requests/impersonate-response";
 import { AuthStrategy } from "./auth.strategy";
 
 interface LoginResponse {
@@ -15,12 +16,9 @@ interface LoginResponse {
   
 }
 
-  //TODO:
-  //check token expiration
-  //session maintenance
-
 export class JwtAuthStrategy implements AuthStrategy {
 
+    private readonly IMPERSONATE_TOKEN = 'IMPERSONATE_TOKEN';
     private readonly JWT_TOKEN = 'JWT_TOKEN';
     private readonly USER = 'USER';
     private readonly ROLES = 'ROLES';
@@ -43,6 +41,20 @@ export class JwtAuthStrategy implements AuthStrategy {
       localStorage.removeItem(this.USER);
       localStorage.removeItem(this.ROLES);
       localStorage.removeItem(this.JWT_TOKEN);
+    }
+
+    doImpersonateUser(data: any): RequestResponse {
+      data = <ImpersonateResponse>data;
+
+      if ( data.result ) {
+        const token: AuthToken = { token: data.token, tokenExpirationDateTime: data.tokenExpirationDateTime };
+        localStorage.setItem(this.IMPERSONATE_TOKEN, JSON.stringify(token));
+         
+        const roles = [Role.USER];
+        localStorage.setItem(this.ROLES, JSON.stringify(roles ?? []));
+      }
+
+      return <RequestResponse>{result: data.result, errors: data.errors};
     }
   
     getCurrentUser(): Observable<User | undefined> {
@@ -67,6 +79,27 @@ export class JwtAuthStrategy implements AuthStrategy {
       return of([]);
     }
 
+    getImpersonateToken(): AuthToken {
+      return localStorage.getItem(this.IMPERSONATE_TOKEN) != null ? 
+                JSON.parse(<string>localStorage.getItem(this.IMPERSONATE_TOKEN)) : null;
+    }
+  
+    getToken(): AuthToken {
+      return localStorage.getItem(this.JWT_TOKEN) != null ? 
+                JSON.parse(<string>localStorage.getItem(this.JWT_TOKEN)) : null;
+    }
+
+    isUserImpersonated(): boolean {
+      return this.getImpersonateToken() ? true : false;
+    }
+
+    undoImpersonateUser(): void {
+      localStorage.removeItem(this.IMPERSONATE_TOKEN);
+        
+      const roles = [Role.ADMIN];
+      localStorage.setItem(this.ROLES, JSON.stringify(roles ?? []));
+    }
+
     private getStoredRoles(): Role[] {
       return localStorage.getItem(this.ROLES) != null ? 
                 JSON.parse(<string>localStorage.getItem(this.ROLES)) : [];
@@ -79,10 +112,5 @@ export class JwtAuthStrategy implements AuthStrategy {
       }
 
       return undefined;
-    }
-  
-    getToken(): AuthToken {
-      return localStorage.getItem(this.JWT_TOKEN) != null ? 
-                JSON.parse(<string>localStorage.getItem(this.JWT_TOKEN)) : null;
     }
   }

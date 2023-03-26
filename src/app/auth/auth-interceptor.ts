@@ -15,7 +15,12 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (environment.auth === 'token' && this.jwt && this.jwt.getToken() ) {
-      request = this.addToken(request, this.jwt.getToken().token);
+      if( this.jwt.getImpersonateToken() ) {
+        request = this.addToken(request, this.jwt.getImpersonateToken().token);
+      }
+      else {
+        request = this.addToken(request, this.jwt.getToken().token);
+      }
     }
 
     return next.handle(request).pipe(catchError(error => {

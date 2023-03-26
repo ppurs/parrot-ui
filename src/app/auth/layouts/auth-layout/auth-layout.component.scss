@@ -83,11 +83,11 @@ img {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--secondary-green);
+    background: var(--primary-green);
     border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-green);
+    background: var(--secondary-green);
 }

@@ -6,7 +6,13 @@
             <mat-slide-toggle [formControl]="accountState">{{ getAccountStateKey() | translate }}</mat-slide-toggle>
         </div>
         <div class="col"> 
-            <button [disabled]="!isActive()" mat-flat-button color="primary" id="impersonate-button" (click)="impersonateUser()">{{ 'users-list.impersonate-button' | translate }}</button>
+            <div class="i-button-container">
+                <button *ngIf="!isImpersonatePending; else spinner" [disabled]="!isActive()" mat-flat-button color="primary" class="impersonate-button" (click)="impersonateUser()">{{ 'users-list.impersonate-button' | translate }}</button>
+            </div>
         </div>
     </div>
 </mat-card>
+
+<ng-template #spinner> 
+    <mat-spinner class="impersonate-spinner" [diameter]="20"></mat-spinner>
+</ng-template>
