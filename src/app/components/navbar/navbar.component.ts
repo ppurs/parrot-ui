@@ -93,7 +93,6 @@ export class NavbarComponent implements OnInit {
           }
           else {
             this.currentLangs = oldLangs;
-            //show error message
           }
         })
       }
@@ -120,6 +119,11 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
+
+  onWheel(event: WheelEvent): void {
+    document.getElementById('navigations')!.scrollLeft += event.deltaY;
+    event.preventDefault();
+ } 
 
   private setAccountType(): void {
     this.auth.getUserRoles$().subscribe(roles => {

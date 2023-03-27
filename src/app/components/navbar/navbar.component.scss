@@ -27,6 +27,21 @@ img {
     height: 24px;
 }
 
+#navigations { 
+    display: flex;
+    overflow-x: scroll;
+    width: fit-content;
+    max-width: 30%;
+    padding: 11px;
+}
+
+#user-button {
+    margin-left: 0.25em;
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    align-items: center;
+}
+
 .mat-toolbar {
     position: fixed;
     z-index: 2;
@@ -61,13 +76,6 @@ img {
     color: var(--primary-green);
 }
 
-#user-button {
-    margin-left: 0.25em;
-    padding-left: 1em !important;
-    padding-right: 1em !important;
-    align-items: center;
-}
-
 .language-choose {
     font-size: 16px !important;
 }
@@ -75,3 +83,23 @@ img {
 .lang-spacer {
     width: 0.5em;
 }
+
+
+ /* Scrollbar styles */
+ ::-webkit-scrollbar {
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    //background: gainsboro;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    //background: var(--secondary-green);
+    border-radius: 4px;
+}
+
+// ::-webkit-scrollbar-thumb:hover {
+//     //background: var(--secondary-green);
+// }

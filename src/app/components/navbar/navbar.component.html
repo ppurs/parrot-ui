@@ -6,10 +6,12 @@
         </a>
     </div>
 
-    <div *ngFor="let link of activeLinks">
-        <a mat-button (click)="onNavigationClick(link)">
-            <span>{{ link.header }}</span> 
-        </a>  
+    <div id="navigations" (wheel)="onWheel($event)">
+        <div *ngFor="let link of activeLinks" >
+            <a mat-button (click)="onNavigationClick(link)">
+                <span>{{ link.header }}</span> 
+            </a>  
+        </div>
     </div>
 
     <span class="spacer"></span>
