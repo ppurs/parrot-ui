@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/auth/services/auth/auth.service';
 
 @Component({
@@ -17,11 +18,13 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   isRequestPending: boolean;
   isSuccess: boolean;
+  errorMsg?: string;
   private valSubscription: any;
 
   constructor(private auth: AuthService,
               private fb: FormBuilder,
-              private router: Router ) {
+              private router: Router,
+              private translate: TranslateService ) {
     this.isRequestPending = false;
     this.isSuccess = true;
   }
@@ -38,9 +41,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       const username = this.loginForm.get('username')?.value;
       const password = this.loginForm.get('password')?.value;
       this.isRequestPending = true;
+      this.isSuccess = true;
 
-      this.auth.login( <string>username, <string>password ).subscribe(
-        res => {
+      this.auth.login( <string>username, <string>password ).subscribe({
+        next: (res) => {
           this.isRequestPending = false;
 
           if( res.result ) {
@@ -49,9 +53,19 @@ export class LoginFormComponent implements OnInit, OnDestroy {
           else {
             //error (different than password/username) statement
             this.isSuccess = false;
-            console.log(res.errors);
+
+            if( res.errors?.at(0)?.message && res.errors?.at(0)?.message != '') {
+              this.errorMsg = res.errors?.at(0)?.message
+            }
+            else {
+              this.translate.get('login-form.errors.negative-response').subscribe( res => this.errorMsg = res );
+            }
           }
+        },
+        error: (e) => {
+          this.isRequestPending = false;
         }
+      }
       )
     }
   }

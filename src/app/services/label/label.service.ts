@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Label } from 'src/app/models/label';
 import { Option } from 'src/app/models/option';
 import { LabelProperties } from 'src/app/models/label-properties';
@@ -9,7 +9,6 @@ import { AddLabelResponse } from 'src/app/models/requests/label/add-label.respon
 import { RequestResponse } from 'src/app/models/requests/request-response';
 import { MainService } from '../main/main.service';
 
-const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +29,7 @@ export class LabelService {
         labelName: label.labelName,
         colorCode: label.colorCode,
         parentLabelId: label.directParentLabelId
-      },
-      {headers: HEADERS} 
-      ).pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
+      }
       );
   }
 
@@ -47,14 +40,7 @@ export class LabelService {
       this.LABEL_API + '/delete/' + label.labelId, 
       {
          params: requestParams, 
-         headers: HEADERS 
-      })
-      .pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
-      );
+      });
   }
 
   editLabel( label: Label ): Observable<AddLabelResponse> {
@@ -64,31 +50,20 @@ export class LabelService {
         labelName: label.labelName,
         colorCode: label.colorCode,
         parentLabelId: label.directParentLabelId
-      },
-      {headers: HEADERS}
-      ).pipe(
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
+      }
       );
   }
 
   getLabelHierarchyOptions(): Observable<Option[]> {
     return this.http.get<{options: Option[]}>(
-      this.LABEL_API + '/filters/place-in-hierarchy',
-      { headers: HEADERS }
+      this.LABEL_API + '/filters/place-in-hierarchy'
     ).pipe(
       map( data => {
         this.hierarchyOptions = data.options;
 
         return data.options 
-      }),
-      catchError((err) => {
-        console.error(err);
-        throw err;
       })
-    );
+      );
   }
   
   getLabelsList( filter?: LabelsFilter, limit?:number, offset?: number ): Observable<Label[]> {
@@ -104,14 +79,9 @@ export class LabelService {
           parentNamePrefix: filter?.parentNamePrefix,
           placeInHierarchy: filter?.placeInHierarchy
         }
-      },
-      { headers: HEADERS } )
+      })
       .pipe(
-        map( data => data.results ),
-        catchError((err) => {
-          console.error(err);
-          throw err;
-        })
+        map( data => data.results )
       );
   }
 }

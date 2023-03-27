@@ -1,0 +1,14 @@
+<div class="toast-container">
+    <mat-icon id="error-icon">cancel icon</mat-icon>
+    &nbsp;
+    <div class="toast-content">
+        <span id="toast-header">{{ 'toast.error.header' | translate }}</span>
+        <span id="toast-message">{{ 'toast.error.message' | translate }}</span>
+    </div>
+    <button mat-icon-button (click)="onClose()" id="close-button" [disableRipple]="true">
+        <mat-icon>close icon</mat-icon>
+    </button>
+</div>
+<span id="details-button">
+    <button mat-button color="warn" (click)="onShowDetails()">{{ 'toast.error.details' | translate }}</button>
+</span>

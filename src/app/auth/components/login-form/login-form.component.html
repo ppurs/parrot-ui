@@ -6,7 +6,7 @@
             <div class="center-content" id="spinner-container">
                 <mat-spinner [diameter]="20" *ngIf="isRequestPending"></mat-spinner>
                 <mat-error *ngIf="!isSuccess">
-                    {{ 'login-form.errors.negative-response' | translate }}
+                    {{ errorMsg }}
                 </mat-error>  
             </div>
         </div>

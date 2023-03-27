@@ -1,12 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CurrentLanguages } from 'src/app/models/current-languages';
 import { Language } from 'src/app/models/language';
 import { NavbarData } from 'src/app/models/navbar-data';
 import { RequestResponse } from 'src/app/models/requests/request-response';
-
-const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
 
 //TODO: roles
 
@@ -40,20 +38,13 @@ export class MainService {
       {
         languageFromId: payload.languageFrom.id,
         languageToId: payload.languageTo.id
-      },
-      {headers: HEADERS} 
-      ).pipe(
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
-    );
+      }
+      );
   }
 
   getNavbarData(): Observable<NavbarData> {
     return this.http.get<GETNavbarResponse>( 
-      this.NAVBAR_API,
-      {headers: HEADERS} 
+      this.NAVBAR_API
       ).pipe(
         map( (res) => {
           const languages: Language[] | undefined = res.languages?.map(lang => {
@@ -72,11 +63,7 @@ export class MainService {
             currentLanguages: currentLanguages,
             languages: languages
           }
-        }),
-      catchError((err) => {
-        console.error(err);
-        throw err;
-      })
+        })
       );
   }
 }

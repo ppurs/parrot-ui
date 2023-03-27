@@ -7,7 +7,6 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'parrot-ui';
 
   constructor( private translate: TranslateService ) {
     translate.setDefaultLang('en');
