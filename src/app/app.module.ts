@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { ConfirmationDialogComponent } from './components/users-page/confirmation-dialog/confirmation-dialog.component';
 import { DeleteConfirmationComponent } from './components/translations-page/translation-tile/delete-confirmation/delete-confirmation.component';
 import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
-import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
 import { ErrorDetailsDialogContentComponent } from './components/shared/error-details-dialog-content/error-details-dialog-content.component';
 import { ErrorToastComponent } from './components/shared/error-toast/error-toast.component';
 import { FilterTileComponent } from './components/shared/filter-tile/filter-tile.component';
@@ -67,7 +66,7 @@ import { DefaultOptionsInterceptor } from './default-options-interceptor';
     AddLabelsComponent,
     AddTranslationsComponent,
     AppComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
     DeleteConfirmationComponent,
     DeleteLabelConfirmationComponent,
     ErrorDetailsDialogContentComponent,
