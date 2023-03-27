@@ -17,12 +17,14 @@ import { NgModule } from '@angular/core';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ForRolesDirective } from './for-roles.directive';
 
 @NgModule({
   declarations: [
     AuthLayoutComponent,
     LoginFormComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    ForRolesDirective
   ],
   imports: [
     AuthRoutingModule,
@@ -39,6 +41,9 @@ import { TranslateModule } from '@ngx-translate/core';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     TranslateModule
+  ],
+  exports: [
+    ForRolesDirective
   ],
   providers: [
     {

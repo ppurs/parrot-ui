@@ -6,28 +6,50 @@ import { TranslationsPageComponent } from './components/translations-page/transl
 import { QuizPageComponent } from './components/quiz-page/quiz-page/quiz-page.component';
 import { AppGuard } from './auth/helpers/app-guard/app-guard.service';
 import { LabelsPageComponent } from './components/labels-page/labels-page/labels-page.component';
+import { Role } from './auth/models/role';
+import { UsersPageComponent } from './components/users-page/users-page/users-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AppGuard],                       
+    canActivate: [AppGuard],                  
     component: MainLayoutComponent,
     children: [
       {
         path: '',
-        component: MainPageComponent   
-      },
-      {
-        path: 'translations',
-        component: TranslationsPageComponent,   
-      }, 
-      {
-        path: 'quiz',
-        component: QuizPageComponent,
+        component: MainPageComponent, 
       },
       {
         path: 'labels',
+        canActivate: [AppGuard],    
+        data: {
+          roles: [Role.USER]
+        },    
         component: LabelsPageComponent
+      },
+      {
+        path: 'quiz',
+        canActivate: [AppGuard],    
+        data: {
+          roles: [Role.USER]
+        },    
+        component: QuizPageComponent,
+      },
+      {
+        path: 'translations',
+        canActivate: [AppGuard],    
+        data: {
+          roles: [Role.USER]
+        },    
+        component: TranslationsPageComponent,   
+      },
+      {
+        path: 'users',
+        canActivate: [AppGuard],    
+        data: {
+          roles: [Role.ADMIN]
+        },                   
+        component: UsersPageComponent,
       },
       { path: '**', redirectTo: '' }
     ]

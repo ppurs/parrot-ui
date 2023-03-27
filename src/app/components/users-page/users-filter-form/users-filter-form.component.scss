@@ -1,0 +1,107 @@
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+    height: 2.5em;
+  }
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+    transform: translateY(+25%) !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+   margin: 0 !important;
+}
+
+::ng-deep .bottom-position-first-filter {
+    margin-top: 1.8em;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-left: 17px;
+    min-width: calc(20em - 4px) !important;
+}
+
+::ng-deep .auto-position {
+    width: calc(100% - 4px) !important;
+    margin-left: 2px;
+    margin-top: 0.7em !important;
+}
+
+#option-icon {
+    margin-right: 0;
+}
+
+.apply-button {
+    background-color: white;
+    float: right;
+    height: 2.5em;
+}
+
+.filter-input {
+    width: 20em;
+}
+
+.filters-container {
+    display: flex;
+}
+
+.filter-input-box {
+    margin-right: 2em;
+}
+
+#radio-input-box {
+    align-items: center;
+    display: flex;
+}
+
+input[type="radio"] {
+    height: 1rem;
+    width: 1rem;
+}
+
+.custom-radio {
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    background:  #d3d3d3;
+    border: 0.2rem solid white;
+  
+    /* The outline will be the outer circle */
+    outline: 1px solid #999;
+}
+
+.custom-radio:focus-visible {
+    outline-offset: 0;
+}
+
+.custom-radio:checked {
+    outline-color: white;
+    background-color: var(--primary-green);
+    border-width: 0.2rem;
+}
+
+.custom-radio:hover {
+    outline-color: white;
+    cursor: pointer;
+}
+
+.radio-label {
+    color: white;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.radio-group-container {
+    display: flex;
+    align-items: center;
+}
+
+.radio-container {
+    margin-right: 0.5rem;
+}

@@ -1,8 +1,11 @@
 import { AddLabelsComponent } from './components/labels-page/add-labels/add-labels.component';
 import { AddTranslationsComponent } from './components/translations-page/add-translations/add-translations.component';
 import { AppComponent } from './app.component';
+import { ConfirmationDialogComponent } from './components/users-page/confirmation-dialog/confirmation-dialog.component';
 import { DeleteConfirmationComponent } from './components/translations-page/translation-tile/delete-confirmation/delete-confirmation.component';
 import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
+import { DeleteLabelConfirmationComponent } from './components/labels-page/label-tile/delete-label-confirmation/delete-label-confirmation.component';
+import { ErrorDetailsDialogContentComponent } from './components/shared/error-details-dialog-content/error-details-dialog-content.component';
 import { ErrorToastComponent } from './components/shared/error-toast/error-toast.component';
 import { FilterTileComponent } from './components/shared/filter-tile/filter-tile.component';
 import { FoundLabelTileComponent } from './components/labels-page/label-tile/found-label-tile/found-label-tile.component';
@@ -22,6 +25,9 @@ import { StatusInfoComponent } from './components/shared/status-info/status-info
 import { TileActionsBarComponent } from './components/shared/tile-actions-bar/tile-actions-bar.component';
 import { TranslationsFilterFormComponent } from './components/translations-page/translations-filter-form/translations-filter-form.component';
 import { TranslationsPageComponent } from './components/translations-page/translations-page//translations-page.component';
+import { UsersFilterFormComponent } from './components/users-page/users-filter-form/users-filter-form.component';
+import { UsersPageComponent } from './components/users-page/users-page/users-page.component';
+import { UserTileComponent } from './components/users-page/user-tile/user-tile.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
@@ -42,17 +48,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { NgxColorsModule } from 'ngx-colors';
+
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 import { ErrorInterceptor } from './error-interceptor';
-import { ErrorDetailsDialogContentComponent } from './components/shared/error-details-dialog-content/error-details-dialog-content.component';
 import { DefaultOptionsInterceptor } from './default-options-interceptor';
 
 
@@ -61,8 +67,10 @@ import { DefaultOptionsInterceptor } from './default-options-interceptor';
     AddLabelsComponent,
     AddTranslationsComponent,
     AppComponent,
+    ConfirmationDialogComponent
     DeleteConfirmationComponent,
     DeleteLabelConfirmationComponent,
+    ErrorDetailsDialogContentComponent,
     ErrorToastComponent,
     FilterTileComponent,
     FoundLabelTileComponent,
@@ -78,11 +86,14 @@ import { DefaultOptionsInterceptor } from './default-options-interceptor';
     QuizPageComponent,
     QuizTileComponent,
     SnackBarContentComponent,
+    SnackBarContentComponent,
     StatusInfoComponent,
     TileActionsBarComponent,
     TranslationsFilterFormComponent,
     TranslationsPageComponent,
-    ErrorDetailsDialogContentComponent
+    UsersFilterFormComponent,
+    UsersPageComponent,
+    UserTileComponent
   ],
   imports: [
     AuthModule,
@@ -103,6 +114,7 @@ import { DefaultOptionsInterceptor } from './default-options-interceptor';
     MatInputModule,
     MatMenuModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTabsModule,
