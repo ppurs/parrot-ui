@@ -18,7 +18,7 @@ const NO_LABEL_OPTION: LabelProperties = {
   templateUrl: './quiz-filter-form.component.html',
   styleUrls: ['./quiz-filter-form.component.scss']
 })
-export class QuizFilterFormComponent implements FilterForm, OnInit {
+export class QuizFilterFormComponent extends FilterForm implements OnInit {
   @Output()
   filterApplied = new EventEmitter<QuizFilter>();
 
@@ -34,6 +34,7 @@ export class QuizFilterFormComponent implements FilterForm, OnInit {
 
   constructor( private facade: FacadeService,
                private fb: FormBuilder ) {
+              super();
     this.Types = [];
     //this.Labels = [NO_LABEL_OPTION];
     this.Labels = [];

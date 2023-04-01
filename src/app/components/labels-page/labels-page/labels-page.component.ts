@@ -99,12 +99,6 @@ export class LabelsPageComponent implements OnInit {
      } );
   }
 
-  reloadList(): void {
-    this.labelList = [];
-    this.getLabelList();
-    this.cdref.detectChanges();
-  }
-
   private getLabelList(): void {
     this.isLoadingList = true;
 
@@ -128,6 +122,12 @@ export class LabelsPageComponent implements OnInit {
 
   private loadLabelSelectList(): void {
     this.facade.loadLabelSelectList().subscribe();
+  }
+
+  private reloadList(): void {
+    this.labelList = [];
+    this.getLabelList();
+    this.cdref.detectChanges();
   }
 
 }

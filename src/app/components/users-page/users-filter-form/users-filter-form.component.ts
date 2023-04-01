@@ -11,7 +11,7 @@ import { FacadeService } from 'src/app/services/facade/facade.service';
   templateUrl: './users-filter-form.component.html',
   styleUrls: ['./users-filter-form.component.scss']
 })
-export class UsersFilterFormComponent implements FilterForm, OnInit {
+export class UsersFilterFormComponent extends FilterForm implements  OnInit {
   @Output()
   filterApplied = new EventEmitter<UsersFilter>();   
   
@@ -23,8 +23,9 @@ export class UsersFilterFormComponent implements FilterForm, OnInit {
   Users: UsersFilterElement[];
   States = AccountState;
 
-  constructor(private fb: FormBuilder,
-              private facade: FacadeService) { 
+  constructor( private fb: FormBuilder,
+               private facade: FacadeService) { 
+              super();
     this.Users = [];
   }
 

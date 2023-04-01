@@ -2,7 +2,11 @@
     <div class="filters-container">
         <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
-                <mat-select disableOptionCentering [placeholder]="'quiz-filter-form.label' | translate" panelClass="bottom-position-first-filter" formControlName="labels" multiple>                 
+                <mat-select disableOptionCentering 
+                            [placeholder]="'quiz-filter-form.label' | translate" 
+                            panelClass="bottom-position-first-filter" 
+                            formControlName="labels" 
+                            multiple>                 
                     <mat-select-trigger>
                         <span *ngFor="let label of labels?.value; let i = index">
                             {{label.labelName}}<span *ngIf="i != labels!.value!.length - 1">, </span>
@@ -17,7 +21,11 @@
         </div>
         <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
-                <mat-select disableOptionCentering [placeholder]="'quiz-filter-form.type' | translate" panelClass="bottom-position-filter" formControlName="wordTypes" multiple>                 
+                <mat-select disableOptionCentering 
+                            [placeholder]="'quiz-filter-form.type' | translate" 
+                            panelClass="bottom-position-filter" 
+                            formControlName="wordTypes" 
+                            multiple>                 
                     <mat-option *ngFor="let type of Types" [value]="type.id">
                         {{type.name}}
                     </mat-option>

@@ -1,4 +1,4 @@
-<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="filterForm">
     <div class="filters-container">
         <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
@@ -6,9 +6,13 @@
                         type="text" 
                         [placeholder]="'translations-filter-form.lang-from' | translate" 
                         formControlName="fromLang" 
-                        [matAutocomplete]="autoFrom">
-                <mat-autocomplete #autoFrom="matAutocomplete" class="auto-position" classList="auto-position">
-                    <mat-option *ngFor="let hint of filteredWordFromHints | async" [value]="hint">
+                        [matAutocomplete]="autoFrom"
+                        (keyup.enter)="onEnterSubmit()">
+                <mat-autocomplete   #autoFrom="matAutocomplete" 
+                                    class="auto-position" 
+                                    classList="auto-position">
+                    <mat-option *ngFor="let hint of filteredWordFromHints | async" 
+                                [value]="hint">
                         {{hint}}
                     </mat-option>
                 </mat-autocomplete>
@@ -21,8 +25,11 @@
                         type="text" 
                         [placeholder]="'translations-filter-form.lang-to' | translate" 
                         formControlName="toLang"
-                        [matAutocomplete]="autoTo">
-                    <mat-autocomplete #autoTo="matAutocomplete" class="auto-position" classList="auto-position">
+                        [matAutocomplete]="autoTo"
+                        (keyup.enter)="onEnterSubmit()">
+                    <mat-autocomplete   #autoTo="matAutocomplete" 
+                                        class="auto-position" 
+                                        classList="auto-position">
                         <mat-option *ngFor="let hint of filteredWordToHints | async" [value]="hint">
                             {{hint}}
                         </mat-option>
@@ -32,7 +39,11 @@
 
         <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
-                <mat-select disableOptionCentering [placeholder]="'translations-filter-form.types' | translate" panelClass="bottom-position-filter" formControlName="types" multiple>                 
+                <mat-select disableOptionCentering 
+                            [placeholder]="'translations-filter-form.types' | translate" 
+                            panelClass="bottom-position-filter" 
+                            formControlName="types" 
+                            multiple>                 
                     <mat-option *ngFor="let type of Types" [value]="type.id">
                         {{type.name}}
                     </mat-option>
@@ -42,7 +53,11 @@
 
         <div class="filter-input-box">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
-                <mat-select disableOptionCentering [placeholder]="'translations-filter-form.labels' | translate" panelClass="bottom-position-filter" formControlName="labels" multiple>                 
+                <mat-select disableOptionCentering 
+                            [placeholder]="'translations-filter-form.labels' | translate" 
+                            panelClass="bottom-position-filter" 
+                            formControlName="labels" 
+                            multiple>                 
                     <mat-select-trigger>
                         <span *ngFor="let label of labels?.value; let i = index">
                             {{label.labelName}}<span *ngIf="i != labels!.value!.length - 1">, </span>

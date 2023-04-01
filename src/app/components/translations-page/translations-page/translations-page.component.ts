@@ -43,9 +43,7 @@ export class TranslationsPageComponent implements OnInit {
 
   applyFilter(event: TranslationsFilter): void {
     this.filter = event;
-    this.wordList = [];
-    this.getWordList();
-    this.cdref.detectChanges();
+    this.reloadList();
   }
 
   clearAdditionHistory(): void {
@@ -111,6 +109,12 @@ export class TranslationsPageComponent implements OnInit {
         this.isLoadingList = false;
       }
     );
+  }
+
+  private reloadList(): void {
+    this.wordList = [];
+    this.getWordList();
+    this.cdref.detectChanges();
   }
 
 }

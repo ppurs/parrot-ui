@@ -5,7 +5,7 @@
                 <mat-select disableOptionCentering 
                             [placeholder]="'users-filter-form.users' | translate" 
                             panelClass="bottom-position-first-filter" 
-                            formControlName="users" 
+                            formControlName="users"          
                             multiple>                 
                     <mat-option *ngFor="let user of Users" [value]="user.userId">
                         {{user.username}}
@@ -13,7 +13,7 @@
                 </mat-select>
             </mat-form-field> 
         </div>
-        <div id="radio-input-box" class="filter-input-box">
+        <div id="radio-input-box" class="filter-input-box" (keyup.enter)="onEnterSubmit()">
             <div class="radio-group-container">
                 <div class="radio-container">
                 <input  type="radio" 

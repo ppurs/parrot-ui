@@ -12,7 +12,7 @@ import { FacadeService } from 'src/app/services/facade/facade.service';
   templateUrl: './labels-filter-form.component.html',
   styleUrls: ['./labels-filter-form.component.scss']
 })
-export class LabelsFilterFormComponent implements FilterForm, OnInit {
+export class LabelsFilterFormComponent extends FilterForm implements OnInit {
   @Output()
   filterApplied = new EventEmitter<LabelsFilter>();
   
@@ -30,6 +30,7 @@ export class LabelsFilterFormComponent implements FilterForm, OnInit {
 
   constructor( private facade: FacadeService,
                private fb: FormBuilder ) {
+              super();
     this.Labels = [];
     this.HierarchyOptions = [];
   }

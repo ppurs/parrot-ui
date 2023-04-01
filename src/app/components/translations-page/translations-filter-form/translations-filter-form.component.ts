@@ -19,7 +19,7 @@ const NO_LABEL_OPTION: LabelProperties = {
   templateUrl: './translations-filter-form.component.html',
   styleUrls: ['./translations-filter-form.component.scss']
 })
-export class TranslationsFilterFormComponent implements FilterForm, OnInit {
+export class TranslationsFilterFormComponent extends FilterForm implements OnInit {
   @Output()
   filterApplied = new EventEmitter<TranslationsFilter>();   
   
@@ -44,6 +44,7 @@ export class TranslationsFilterFormComponent implements FilterForm, OnInit {
 
   constructor( private facade: FacadeService,
                private fb: FormBuilder ) {
+                super();
     this.Types = [];
     //this.Labels = [NO_LABEL_OPTION];
     this.Labels = [];

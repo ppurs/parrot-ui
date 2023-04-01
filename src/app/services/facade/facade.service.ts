@@ -122,7 +122,7 @@ export class FacadeService {
   }
 
   getTranslationsList(filters?: TranslationsFilter, limit?: number, offset?: number): Observable<Translation[]> {
-    return this.translationService.getTranslationsList();
+    return this.translationService.getTranslationsList(filters, limit, offset);
   }
 
   getUsersList( filters?: UsersFilter ): Observable<User[]> {

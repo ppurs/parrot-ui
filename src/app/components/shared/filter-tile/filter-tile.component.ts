@@ -1,5 +1,6 @@
 import { Component, ContentChild, Input, OnInit, ViewChild } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
+import { Subscription } from 'rxjs';
 import { FilterForm } from 'src/app/models/filter-form';
 
 @Component({
@@ -16,12 +17,17 @@ export class FilterTileComponent implements OnInit {
     filterContent!: FilterForm;
 
   isExpanded: boolean;
+  formSubscription?: Subscription;
  
   constructor() {
     this.isExpanded = false;
    }
 
   ngOnInit(): void {
+  }
+
+  ngAfterContentInit(): void {
+    this.formSubscription = this.filterContent.closeFilterTile.subscribe( () => this.tile.close() );
   }
 
   changeArrowIcon(): void {
@@ -35,5 +41,11 @@ export class FilterTileComponent implements OnInit {
   onSubmit(): void {
     this.filterContent.onSubmit();
     this.tile.close();
+  }
+
+  ngOnDestroy(): void {
+    if (this.formSubscription) {
+      this.formSubscription.unsubscribe();
+    }
   }
 }
