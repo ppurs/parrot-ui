@@ -3,6 +3,7 @@ import { QuizFilter } from 'src/app/models/quiz-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { Option } from 'src/app/models/option';
 import { SelectionStrategyOptions } from 'src/app/models/selection-strategy-options';
+import { forkJoin, Observable } from 'rxjs';
 
 const DEFAULT_NO_TILES_ON_PAGE: number = 5;
 
@@ -27,12 +28,12 @@ export class QuizPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSelectionStrategyOptions();
-    this.loadWordTypes();
-    this.loadLabelsList();
 
-    this.facade.resetQuiz();
-    this.facade.setNoQuizTilesOnPage( this.noTiles );
-    this.loadQuizTiles();
+    this.loadFilters().subscribe( () => {
+      this.facade.resetQuiz();
+      this.facade.setNoQuizTilesOnPage( this.noTiles );
+      this.loadQuizTiles();
+    });
   }
 
   applyFilter( event: QuizFilter ): void {
@@ -68,6 +69,13 @@ export class QuizPageComponent implements OnInit {
     });
   }
 
+  private loadFilters(): Observable<any> {
+    return forkJoin([
+      this.facade.loadWordTypes(),
+      this.facade.loadLabelSelectList()
+    ]);
+  }
+
   private loadQuizTiles(): void {
     this.isLoadingList = true;
 
@@ -82,13 +90,4 @@ export class QuizPageComponent implements OnInit {
       }
     )
   }
-
-  private loadWordTypes(): void {
-    this.facade.loadWordTypes().subscribe();
-  }
-
-  private loadLabelsList(): void {
-    this.facade.loadLabelSelectList().subscribe();
-  }
-
 }

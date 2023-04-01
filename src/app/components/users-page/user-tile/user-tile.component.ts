@@ -56,6 +56,9 @@ export class UserTileComponent implements OnInit {
           window.location.replace( window.location.origin + this.auth.INITIAL_PATH );
           //this.isImpersonatePending = false;
         }
+        else {
+          this.isImpersonatePending = false;
+        }
       });
     }
   }

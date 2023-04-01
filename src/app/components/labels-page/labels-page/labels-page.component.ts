@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { forkJoin } from 'rxjs';
 import { Label } from 'src/app/models/label';
 import { LabelsFilter } from 'src/app/models/labels-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
@@ -19,7 +20,6 @@ export class LabelsPageComponent implements OnInit {
   isFetchingMoreLabels: boolean;
   isLoadingPage: boolean;
   isLoadingList: boolean;
-  // service for labelList to async view?
   labelList: Label[];   
   
   private filter?: LabelsFilter;
@@ -37,9 +37,10 @@ export class LabelsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadLabelSelectList();
-    this.loadHierarchyOptions();
-    this.getLabelList();
+    forkJoin([
+      this.facade.loadLabelHierarchyOptions(),
+      this.facade.loadLabelSelectList()
+    ]).subscribe(() => this.getLabelList() )
   }
 
   applyFilter(event: LabelsFilter): void {
@@ -114,14 +115,6 @@ export class LabelsPageComponent implements OnInit {
         this.isLoadingList = false;
       }
     );
-  }
-
-  private loadHierarchyOptions(): void {
-    this.facade.loadLabelHierarchyOptions().subscribe();
-  }
-
-  private loadLabelSelectList(): void {
-    this.facade.loadLabelSelectList().subscribe();
   }
 
   private reloadList(): void {

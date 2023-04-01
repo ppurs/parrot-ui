@@ -3,6 +3,7 @@ import { TranslationsFilter } from 'src/app/models/translations-filter';
 import { Translation } from 'src/app/models/translation';
 import { AddTranslationsComponent } from '../add-translations/add-translations.component';
 import { FacadeService } from 'src/app/services/facade/facade.service';
+import { forkJoin } from 'rxjs';
 
 const DEFAULT_LIMIT: number = 50;
 
@@ -18,7 +19,6 @@ export class TranslationsPageComponent implements OnInit {
   isFetchingMoreWords: boolean;
   isLoadingPage: boolean;
   isLoadingList: boolean;
-  // service for wordList to async view?
   wordList: Translation[];   
   
   private filter?: TranslationsFilter;
@@ -36,9 +36,10 @@ export class TranslationsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadWordTypes();
-    this.loadLabelSelectList();
-    this.getWordList();
+    forkJoin([
+      this.facade.loadLabelSelectList(),
+      this.facade.loadWordTypes()
+    ]).subscribe( () => this.getWordList() );
   }
 
   applyFilter(event: TranslationsFilter): void {
@@ -81,14 +82,6 @@ export class TranslationsPageComponent implements OnInit {
         this.isFetchingMoreWords = false;
       }
     );
-  }
-
-  private loadLabelSelectList(): void {
-    this.facade.loadLabelSelectList().subscribe();
-  }
-
-  private loadWordTypes(): void {
-    this.facade.loadWordTypes().subscribe();
   }
 
   private getWordList(): void {
