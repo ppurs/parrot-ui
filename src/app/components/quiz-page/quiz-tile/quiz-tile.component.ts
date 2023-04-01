@@ -80,6 +80,7 @@ export class QuizTileComponent implements OnInit {
       this.answerStatus = AnswerStatus.CORRECT;
 
       this.facade.notifySuccess( this.tileData!.content.translationId ).subscribe();
+      this.wordReload();
     }
     else {
       const otherAnswer = this.tileData!.otherAnswers
@@ -90,6 +91,7 @@ export class QuizTileComponent implements OnInit {
         this.answerStatus = AnswerStatus.CORRECT;
         
         this.facade.notifySuccess( this.tileData!.content.translationId ).subscribe();
+        this.wordReload();
       }
       else {
         this.answerStatus =  otherAnswer ? AnswerStatus.PARTLY_CORRECT : AnswerStatus.INCORRECT;
@@ -112,10 +114,11 @@ export class QuizTileComponent implements OnInit {
     this.newWordBtnVisible = true;
     this.userAnswer.setValue(this.tileData!.content.wordTo);
     this.facade.notifyRevealed( this.tileData!.content.translationId ).subscribe();
+    this.wordReload();
   }
 
-  onNewWordClick(event: Event): void {
-    event.stopPropagation();
+  onNewWordClick(event?: Event): void {
+    event?.stopPropagation();
 
     this.setNewContent();
     this.enableAnswerActions();
@@ -126,6 +129,12 @@ export class QuizTileComponent implements OnInit {
 
   showNewWordBtn(): boolean {
     return this.newWordBtnVisible;
+  }
+
+  private wordReload(): void {
+    setTimeout( () => {
+      this.onNewWordClick();
+    }, 3000);
   }
 
   private disableAnswerActions(): void {
