@@ -36,14 +36,13 @@ export class QuizService {
     }
 
     this.lastTileIndex++;
-
-   this.checkNumberOfAvailableTiles();
+    this.checkNumberOfAvailableTiles();
 
     return this.quizTiles[ this.lastTileIndex ];
   }
 
-  getQuizTranslations(): Observable<QuizTile[]> {    
-    const tilesCount: number = this.quizTiles.length == 0 ? this.noTilesOnPage * 2 : this.noTilesOnPage;
+  private getMoreQuizTranslations(): Observable<QuizTile[]> {    
+    const tilesCount: number = this.noTilesOnPage;
 
     const notUsedTranslationIds: number[] = this.quizTiles .slice(this.lastTileIndex + 1)
                                               .map( tile => tile.content.translationId );
@@ -76,6 +75,44 @@ export class QuizService {
             );
 
           this.quizTiles.push(...tilesContent);  
+
+          return tilesContent ?? [];
+        })
+      );
+  }
+
+  getNewQuizTranslations(): Observable<QuizTile[]> {  
+    this.resetQuiz();  
+    const tilesCount: number = this.noTilesOnPage * 2;
+
+    const payload: QuizPayload = {
+      languageFromId: this.mainService.currentLanguages.languageFrom.id,
+      languageToId: this.mainService.currentLanguages.languageTo.id,
+      excludeTranslationIds: [],
+      count: tilesCount,
+      wordTypeIds: this.filter?.wordTypeIds,
+      labelIds: this.filter?.labelIds
+    }
+
+    return this.http.post<{results: QuizTileContent[]}>( 
+      this.QUIZ_API + '/new', 
+      {
+        filters: payload
+      })
+      .pipe(
+        map( data => {
+          const tilesContent: QuizTile[] = data.results
+              .filter( obj => obj.useInQuiz === true )
+              .map( obj => ({content: obj, otherAnswers: [] }) );
+
+
+          tilesContent.forEach( tile =>
+             tile.otherAnswers.push(...
+                data.results.filter( obj => obj.wordFrom == tile.content.wordFrom )
+              )
+            );
+
+          this.quizTiles = tilesContent;  
 
           return tilesContent ?? [];
         })
@@ -139,7 +176,7 @@ export class QuizService {
     if ( this.isFetchigMoreTiles.value == false && this.lastTileIndex >= this.quizTiles.length - this.noTilesOnPage ) {
       this.isFetchigMoreTiles.next(true);
 
-      this.getQuizTranslations().subscribe( res => {
+      this.getMoreQuizTranslations().subscribe( res => {
         this.isFetchigMoreTiles.next(false);
       });
     }

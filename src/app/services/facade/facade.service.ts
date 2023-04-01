@@ -141,8 +141,8 @@ export class FacadeService {
     return this.translationService.getLabelsToFilter();
   }
 
-  loadQuizTiles(): Observable<QuizTile[]> {
-    return this.quizService.getQuizTranslations();
+  loadNewQuizTiles(): Observable<QuizTile[]> { 
+    return this.quizService.getNewQuizTranslations();
   }
 
   loadUsersToFilters(): Observable<UsersFilterElement[]> {

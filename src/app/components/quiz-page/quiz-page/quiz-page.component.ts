@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuizFilter } from 'src/app/models/quiz-filter';
 import { FacadeService } from 'src/app/services/facade/facade.service';
 import { Option } from 'src/app/models/option';
 import { SelectionStrategyOptions } from 'src/app/models/selection-strategy-options';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subject, switchMap } from 'rxjs';
 
 const DEFAULT_NO_TILES_ON_PAGE: number = 5;
 
@@ -19,8 +19,9 @@ export class QuizPageComponent implements OnInit {
   selectionStrategyOptions: Option[];
   selectedStrategy!: SelectionStrategyOptions;
 
-  constructor( private cdref: ChangeDetectorRef,
-               private facade: FacadeService ) {
+  private reloadList = new Subject();
+
+  constructor( private facade: FacadeService ) {
     this.isLoadingList = true;
     this.isLoadingPage = true;
     this.selectionStrategyOptions = [];
@@ -28,20 +29,18 @@ export class QuizPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSelectionStrategyOptions();
+    this.loadQuizTiles();
+    this.facade.setNoQuizTilesOnPage( this.noTiles );
 
     this.loadFilters().subscribe( () => {
-      this.facade.resetQuiz();
-      this.facade.setNoQuizTilesOnPage( this.noTiles );
-      this.loadQuizTiles();
+      this.reloadList.next(true);
     });
   }
 
   applyFilter( event: QuizFilter ): void {
     this.facade.setQuizFilters( event );
-    this.facade.resetQuiz();
     this.facade.setNoQuizTilesOnPage( DEFAULT_NO_TILES_ON_PAGE );
-    this.loadQuizTiles();
-    this.cdref.detectChanges();
+    this.reloadList.next(true);
   }
 
   getNumberList( num: number ): number[] {
@@ -51,14 +50,20 @@ export class QuizPageComponent implements OnInit {
   onStrategySelect(strategy: Option, event: Event): void {
     event.stopPropagation();
     
+    if ( this.selectedStrategy == strategy.id ) {
+      return;
+    }
+
     this.selectedStrategy = strategy.id;
     this.selectionStrategyOptions.forEach( option => 
       option.default = ( strategy.id == option.id ) ? true : false )
 
-    this.facade.setSelectionStrategyOption(strategy).subscribe();
-    this.facade.resetQuiz();
-    this.loadQuizTiles();
-    this.cdref.detectChanges();
+    this.isLoadingList = true;
+    this.facade.setSelectionStrategyOption(strategy).subscribe(
+      () => {
+        this.reloadList.next(true);
+      }
+    );  
   }
 
   private getSelectionStrategyOptions(): void {
@@ -77,16 +82,18 @@ export class QuizPageComponent implements OnInit {
   }
 
   private loadQuizTiles(): void {
-    this.isLoadingList = true;
+    this.reloadList.pipe(switchMap( () => {
+        this.isLoadingList = true;
 
-    this.facade.loadQuizTiles().subscribe(
+        return this.facade.loadNewQuizTiles(); 
+      } 
+    )).subscribe(
       res => {
         this.noTiles = res.length < DEFAULT_NO_TILES_ON_PAGE ? res.length : DEFAULT_NO_TILES_ON_PAGE;
         this.facade.setNoQuizTilesOnPage( this.noTiles );
 
         this.isLoadingList = false;
         this.isLoadingPage = false;
-        this.cdref.detectChanges();
       }
     )
   }
