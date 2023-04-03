@@ -1,6 +1,5 @@
 .router-container {
     width: 100%;
-    top: 64px;
     //padding-top: 0.5em;
     padding-bottom: 1em;
     overflow: overlay;
@@ -16,26 +15,62 @@
     height: 100%;
 }
 
- /* Designing for scroll-bar */
- ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+@media ( max-width: 599px ) {
+    #router-top-position {
+        top: 55px;
+    }
+
+    ::-webkit-scrollbar {
+        -webkit-appearance: none !important;
+    }   
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: gainsboro;
-    border-radius: 8px;
+@media ( min-width: 600px ) and ( max-width: 1251px ) {
+    #router-top-position {
+        top: 63px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: gainsboro;
+        border-radius: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary-green);
+        border-radius: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-green);
+    }
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
-    border-radius: 8px;
-}
+@media ( min-width: 1252px ) {
+    #router-top-position {
+        top: 64px;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-green);
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: gainsboro;
+        border-radius: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary-green);
+        border-radius: 8px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-green);
+    }
 }
-

@@ -15,29 +15,6 @@
     max-width: 60%;
 }
 
- /* Designing for scroll-bar */
- ::-webkit-scrollbar {
-    width: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: gainsboro;
-    border-radius: 8px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
-    border-radius: 8px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-green);
-}
-
-
 @media (orientation: landscape) and (min-width: 768px) {
     img {
         display: flex;
@@ -93,6 +70,24 @@
         height: fit-content;
         min-height: 100%;
     }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: gainsboro;
+        border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary-green);
+        border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-green);
+    }
     
 }
   
@@ -146,5 +141,8 @@
         height: fit-content;
         aspect-ratio: 3/2;
     }
-    
+
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }   
 }

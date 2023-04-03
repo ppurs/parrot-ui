@@ -1,10 +1,10 @@
 <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-    <div class="filters-container">
-        <div class="filter-input-box">
+    <div id="filters-container" class="row">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering 
                             [placeholder]="'users-filter-form.users' | translate" 
-                            panelClass="bottom-position-first-filter" 
+                            panelClass="bottom-position-filter bottom-position-filter-first" 
                             formControlName="users"          
                             multiple>                 
                     <mat-option *ngFor="let user of Users" [value]="user.userId">
@@ -13,9 +13,9 @@
                 </mat-select>
             </mat-form-field> 
         </div>
-        <div id="radio-input-box" class="filter-input-box" (keyup.enter)="onEnterSubmit()">
+        <div id="radio-input-box" class="col-sm-12 col-md-6 filter-input-lg" (keyup.enter)="onEnterSubmit()">
             <div class="radio-group-container">
-                <div class="radio-container">
+                <div class="col-4 radio-container">
                 <input  type="radio" 
                         id="stateChoice1" 
                         class="custom-radio" 
@@ -23,7 +23,7 @@
                         [value]="States.Active" />
                 <label for="stateChoice1" class="radio-label">{{ 'users-filter-form.account-state.active' | translate }}</label>
                 </div>
-                <div class="radio-container">
+                <div class="col-4 radio-container">
                 <input  type="radio" 
                         id="contactChoice2" 
                         class="custom-radio"
@@ -31,7 +31,7 @@
                         [value]="States.Disabled" />
                 <label for="stateChoice2" class="radio-label">{{ 'users-filter-form.account-state.disabled' | translate }}</label>
                 </div>
-                <div class="radio-container">
+                <div class="col-4 radio-container">
                 <input  type="radio" 
                         id="contactChoice3" 
                         class="custom-radio"

@@ -4,16 +4,16 @@
   </app-filter-tile>
 
     <div *ngIf="!isLoadingList; else spinner">
-      <div class="row">
-        <div class="col-2"></div>  
-        <div class="col-8">
+      <div class="row page-row">
+        <div class="col"></div>  
+        <div class="col-xl-7 col-lg-8 col-md-10 col-sm-12">
           <mat-accordion multi="false">
             <div *ngFor="let tile of getNumberList( noTiles )">
                 <app-quiz-tile [strategyOption]="selectedStrategy"></app-quiz-tile>
             </div>
           </mat-accordion>
         </div>   
-        <div class="col-2"></div>
+        <div class="col"></div>
       </div>
     </div>
   </div>
