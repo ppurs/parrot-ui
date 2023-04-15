@@ -1,8 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/auth/models/role';
 import { FacadeService } from 'src/app/services/facade/facade.service';
-import { AccountType } from 'src/app/models/account-type';
 import { CurrentLanguages } from 'src/app/models/current-languages';
 import { Language } from 'src/app/models/language';
 import { NavbarNavigation } from 'src/app/models/navbar-navigation';
@@ -15,39 +14,31 @@ import { AuthService } from 'src/app/auth/services/auth/auth.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  @Input() activeLinks: NavbarNavigation[];
+
   @Output() isLoaded = new EventEmitter();
+  @Output() toggleLeftSidenav = new EventEmitter();
+  @Output() toggleRightSidenav = new EventEmitter();
 
   readonly USER_ROLE: Role = Role.USER;
 
-  private readonly ACCOUNT_TYPES: AccountType[] = [
-    { role: Role.USER, type: 'Free account' },
-    { role: Role.ADMIN, type: 'Admin' }
-  ];
-  private readonly NAVIGATIONS: NavbarNavigation[] = [
-    { header: 'Quiz', route: '/quiz', forRoles: [Role.USER] },
-    { header: 'Translations', route: '/translations', forRoles: [Role.USER] },
-    { header: 'Labels', route: '/labels', forRoles: [Role.USER] },
-    { header: 'Users', route: '/users', forRoles: [Role.ADMIN] }
-  ];
-
   accountType?: string;
-  activeLinks: NavbarNavigation[];
   currentLangs?: CurrentLanguages;
   isLoading: boolean;
   languages?: Language[];
   username?: string;
 
   constructor(private facade: FacadeService,
-    private router: Router,
-    private auth: AuthService) {
+              private router: Router,
+              private auth: AuthService) {
     this.activeLinks = [];
     this.isLoading = true;
   }
 
   ngOnInit(): void {
     this.loadNavbarData();
-    this.setNavbarNavigation();
     this.setAccountType();
+    this.setNavigation();
   }
 
   goBackToAdmin(): void {
@@ -103,9 +94,22 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  onMenuButtonClick(): void {
+    this.toggleLeftSidenav.emit();
+  }
+
   onNavigationClick(link: NavbarNavigation): void {
     this.router.navigate([link.route]);
   }
+
+  onUserButtonClick(): void {
+    this.toggleRightSidenav.emit();
+  }
+
+  onWheel(event: WheelEvent): void {
+    document.getElementById('navigations')!.scrollLeft += event.deltaY;
+    event.preventDefault();
+  } 
 
   private loadNavbarData(): void {
     this.facade.getNavbarData().subscribe(
@@ -120,29 +124,16 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  onWheel(event: WheelEvent): void {
-    document.getElementById('navigations')!.scrollLeft += event.deltaY;
-    event.preventDefault();
- } 
-
   private setAccountType(): void {
-    this.auth.getUserRoles$().subscribe(roles => {
-      if (roles) {
-        this.accountType = '';
-        roles.forEach(role => this.accountType += this.ACCOUNT_TYPES.find(val => val.role === role)?.type ?? '')
-      }
-    }
-    )
+    this.facade.getAccountTypes().subscribe( res => {
+      this.accountType = '';
+      res.forEach( type => this.accountType += type.type );
+    })
   }
 
-  private setNavbarNavigation(): void {
-    this.auth.getUserRoles$().subscribe(roles => {
-      if (roles) {
-        this.activeLinks = this.NAVIGATIONS
-          .filter(nav => roles.some(val => nav.forRoles.includes(val)));
-      }
-    }
-    );
+  private setNavigation(): void {
+    this.facade.getNavigations().subscribe( res => {
+      this.activeLinks = res;
+    });
   }
-
 }

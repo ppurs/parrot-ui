@@ -1,4 +1,8 @@
 <mat-toolbar *ngIf="!isLoading" class="mat-elevation-z4"  color="primary">
+    <button mat-icon-button id="menu-icon" (click)="onMenuButtonClick()">
+        <mat-icon>menu</mat-icon>
+    </button>
+
     <div class="logo">
         <a mat-button (click)="onLogoClick()">
             <img src="..\..\assets\img\navbar_logo.png" alt="logo image">
@@ -9,14 +13,14 @@
     <div id="navigations" (wheel)="onWheel($event)">
         <div *ngFor="let link of activeLinks" >
             <a mat-button (click)="onNavigationClick(link)">
-                <span>{{ link.header }}</span> 
+                <span>{{ link.header | translate }}</span> 
             </a>  
         </div>
     </div>
 
     <span class="spacer"></span>
 
-    <span *forRoles="[USER_ROLE]">
+    <span id="navbar-langs" *forRoles="[USER_ROLE]">
         <span class="language-choose">{{ 'navbar.from' | translate }}:</span>
         <a mat-button class="language-choose" [matMenuTriggerFor]="languageFromChoose">
             <span>{{currentLangs?.languageFrom?.name}}</span>
@@ -33,9 +37,13 @@
     </span>
 
     <div>
-        <a mat-button [matMenuTriggerFor]="userAccount" id="user-button">
-            <mat-icon class="person-icon">person</mat-icon>
-            <span>{{username}}</span> 
+        <a mat-button [matMenuTriggerFor]="userAccount" id="user-button-menu">
+            <mat-icon id="person-icon">person</mat-icon>
+            <span id="button-username">{{username}}</span> 
+        </a> 
+        <a mat-button id="user-button-sidenav" (click)="onUserButtonClick()">
+            <mat-icon id="person-icon">person</mat-icon>
+            <span id="button-username">{{username}}</span> 
         </a> 
     </div>
 </mat-toolbar>
@@ -54,7 +62,7 @@
 
 <mat-menu #userAccount="matMenu" class="details-panel" color="primary" xPosition="before">
     <ng-template matMenuContent>
-        <button mat-menu-item *ngIf="accountType" class="info-item" disabled="true">{{accountType}}</button>
+        <button mat-menu-item *ngIf="accountType" class="info-item" disabled="true">{{accountType | translate}}</button>
         <mat-divider></mat-divider>
         <button *ngIf="!isUserImpersonated(); else backToAdminButton" mat-menu-item class="logout-button" (click)="logout()">{{ 'navbar.logout' | translate }}</button>
     </ng-template>

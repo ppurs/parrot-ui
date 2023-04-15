@@ -1,3 +1,43 @@
+#sidenav-navigations {
+    width: 100%;
+}
+
+#user-sidenav {
+    width: 30%;
+}
+
+
+.header-divider {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.lang-button {
+    padding-left: 2em;
+}
+
+.lang-select-button {
+    font-size: small;
+    line-height: 2.2em;
+    width: 100%;
+    text-align: left;
+    padding-left: 6em;
+    color:black;
+}
+
+.logout-button {
+    height: fit-content;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    white-space: normal;
+    line-height: unset;
+}
+
+.mat-sidenav-container {
+    height: 100%;
+    background-color: inherit;
+}
+
 .router-container {
     width: 100%;
     //padding-top: 0.5em;
@@ -8,6 +48,21 @@
     z-index: 1;
 }
 
+.sidenav-arrow {
+    float: right;
+    margin-top: 0.3em;
+}
+
+.sidenav-button {
+    width: 100%;
+    text-align: left;
+    color: var(--primary-green);
+}
+
+.sidenav-header {
+    margin-left: 1em;
+}
+
 .spinner {
     display: flex;
     justify-content: center;
@@ -15,9 +70,15 @@
     height: 100%;
 }
 
+
 @media ( max-width: 599px ) {
     #router-top-position {
         top: 55px;
+    }
+
+    .mat-sidenav {
+        width: 100%;
+        padding-top: 60px;
     }
 
     ::-webkit-scrollbar {
@@ -28,6 +89,11 @@
 @media ( min-width: 600px ) and ( max-width: 1251px ) {
     #router-top-position {
         top: 63px;
+    }
+
+    .mat-sidenav {
+        width: 100%;
+        padding-top: 68px;
     }
 
     ::-webkit-scrollbar {
@@ -55,6 +121,11 @@
         top: 64px;
     }
 
+    .mat-sidenav {
+        width: 100%;
+        padding-top: 69px;
+    }
+
     ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
@@ -74,3 +145,36 @@
         background: var(--secondary-green);
     }
 }
+
+@media (max-width: 767px ) {
+    #menu-sidenav {
+        width: 60%;
+    }
+
+    #sidenav-username {
+        color:black;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+@media ( min-width: 768px ) and ( max-width: 991px ) {
+    #menu-sidenav {
+        width: 35%;
+    }
+
+    #sidenav-username {
+        display: none;
+    }
+}
+
+@media (min-width: 992px ) {
+    #menu-sidenav {
+        display: none;
+    }
+
+    #sidenav-username {
+        display: none;
+    }
+}
+
