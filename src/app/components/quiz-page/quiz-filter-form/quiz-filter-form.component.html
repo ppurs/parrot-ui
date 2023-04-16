@@ -1,10 +1,10 @@
 <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-    <div class="filters-container">
-        <div class="filter-input-box">
+    <div  id="filters-container" class="row">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering 
                             [placeholder]="'quiz-filter-form.label' | translate" 
-                            panelClass="bottom-position-first-filter" 
+                            panelClass="bottom-position-filter bottom-position-filter-first" 
                             formControlName="labels" 
                             multiple>                 
                     <mat-select-trigger>
@@ -19,7 +19,7 @@
                 </mat-select>
             </mat-form-field> 
         </div>
-        <div class="filter-input-box">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering 
                             [placeholder]="'quiz-filter-form.type' | translate" 

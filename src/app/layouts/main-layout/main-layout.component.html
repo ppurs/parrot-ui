@@ -1,12 +1,83 @@
-<app-navbar (isLoaded)="renderLayout()"></app-navbar>
+<app-navbar #navbar
+            (isLoaded)="renderLayout()" 
+            (toggleLeftSidenav)="toggleLeftSidenav()" 
+            (toggleRightSidenav)="toggleRightSidenav()">
+</app-navbar>
 
-<div *ngIf='!isLoaded; else mainContent' class='spinner'>
-    <mat-spinner></mat-spinner>
-</div>
+<mat-sidenav-container>
 
-<ng-template #mainContent>
-    <div *ngIf='isLoaded' class="router-container">
-        <router-outlet></router-outlet>
-    </div>
-</ng-template>
+    <mat-sidenav #leftSidenav id="menu-sidenav" autoFocus="false" mode="over">
+        <div id="sidenav-navigations">
+            <div *ngFor="let link of navbar.activeLinks" >
+                <a  mat-button class="sidenav-button" (click)="navbar.onNavigationClick(link); toggleLeftSidenav();">
+                    <span>{{ link.header | translate }}</span> 
+                </a> 
+                <mat-divider></mat-divider>
+            </div>
+        </div>
 
+        <a mat-button *forRoles="[navbar.USER_ROLE]" class="sidenav-button" (click)="showLangList = !showLangList" >
+            <span>{{ 'navigations.languages' | translate }}</span> 
+            <mat-icon class="sidenav-arrow" *ngIf="!showLangList">keyboard_arrow_down</mat-icon>
+            <mat-icon class="sidenav-arrow" *ngIf="showLangList">keyboard_arrow_up</mat-icon>
+        </a> 
+
+        <div *ngIf="showLangList">
+            <div>
+                <div>
+                    <a mat-button class="sidenav-button lang-button" (click)="langFromExpanded = !langFromExpanded">
+                        <span>{{ 'navbar.from' | translate }}:&nbsp;{{navbar.currentLangs?.languageFrom?.name}}</span>
+                        <mat-icon class="sidenav-arrow">arrow_drop_down</mat-icon>
+                    </a> 
+                </div>
+            </div>
+
+            <div *ngIf="langFromExpanded">
+                <div *ngFor="let lang of navbar.languages">
+                    <a mat-button class="lang-select-button" (click)="onLanguageChoose(lang, 'from')">{{lang.name}}</a>
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <a mat-button class="sidenav-button lang-button" (click)="langToExpanded = !langToExpanded">
+                        <span>{{ 'navbar.to' | translate }}:&nbsp;&nbsp;&nbsp;{{navbar.currentLangs?.languageTo?.name}}</span>
+                        <mat-icon class="sidenav-arrow">arrow_drop_down</mat-icon>
+                    </a> 
+                </div>
+            </div>
+
+            <div *ngIf="langToExpanded">
+                <div *ngFor="let lang of navbar.languages">
+                    <a mat-button class="lang-select-button" (click)="onLanguageChoose(lang, 'to')">{{lang.name}}</a>
+                </div>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+    </mat-sidenav>
+
+    <mat-sidenav #rightSidenav id="user-sidenav" autoFocus="false" mode="over" position="end">
+        <button mat-button id="sidenav-username" disabled="true">{{navbar.username}}</button>
+        <button mat-button *ngIf="navbar.accountType" disabled="true">{{navbar.accountType | translate}}</button>
+        <mat-divider></mat-divider>
+        <button *ngIf="!navbar.isUserImpersonated(); else backToAdminButton" mat-button class="sidenav-button" (click)="navbar.logout()">{{ 'navbar.logout' | translate }}</button>
+        <mat-divider></mat-divider>
+
+        <ng-template #backToAdminButton>
+            <button mat-button class="sidenav-button logout-button" (click)="toggleRightSidenav(); navbar.goBackToAdmin()">{{ 'navbar.go-back-to-admin' | translate }}</button>
+        </ng-template>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div *ngIf='!isLoaded; else mainContent' class='spinner'>
+            <mat-spinner></mat-spinner>
+        </div>
+        
+        <ng-template #mainContent>
+            <div *ngIf='isLoaded' id="router-top-position" class="router-container">
+                <router-outlet></router-outlet>
+            </div>
+        </ng-template>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,38 +1,5 @@
-::ng-deep .mat-menu-panel {
-    border-top-left-radius: 0px !important;
-    border-top-right-radius: 0px !important;
-    border-bottom-left-radius: 1px !important;
-    border-bottom-right-radius: 1px !important;
-    min-width: 6em !important;
-    max-width: none !important;
-}
-
-::ng-deep .details-panel {
-    min-width: 10em !important;
-    width: fit-content;
-    margin-top: 14px;
-}
-
-::ng-deep .language-panel {
-    min-width: 6em;
-    margin-top: 14px;
-}
-
-img {
-    height: 44px;
-    width: auto;
-}
-
 #logo-title {
     height: 24px;
-}
-
-#navigations { 
-    display: flex;
-    overflow-x: scroll;
-    width: fit-content;
-    max-width: 30%;
-    padding: 11px;
 }
 
 #user-button {
@@ -42,11 +9,26 @@ img {
     align-items: center;
 }
 
-.mat-toolbar {
-    position: fixed;
-    z-index: 2;
-    top: 0px;
-    width: 100%;
+
+img {
+    height: 44px;
+    width: auto;
+}
+
+.info-item {
+    color: black;
+}
+
+.language-choose {
+    font-size: 0.8em !important;
+}
+
+.lang-spacer {
+    width: 0.5em;
+}
+
+.logout-button {
+    color: var(--primary-green);
 }
 
 .logo {
@@ -60,6 +42,13 @@ img {
     color: white;
 }
 
+.mat-toolbar {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    width: 100%;
+}
+
 .person-icon {
     margin-right: 0.25em;
 }
@@ -68,38 +57,91 @@ img {
     flex: 1 1 auto;
 }
 
-.info-item {
-    color: black;
-}
 
-.logout-button {
-    color: var(--primary-green);
-}
-
-.language-choose {
-    font-size: 16px !important;
-}
-
-.lang-spacer {
-    width: 0.5em;
-}
-
-
- /* Scrollbar styles */
  ::-webkit-scrollbar {
     height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    //background: gainsboro;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-    //background: var(--secondary-green);
     border-radius: 4px;
 }
 
-// ::-webkit-scrollbar-thumb:hover {
-//     //background: var(--secondary-green);
-// }
+
+@media ( min-width: 992px ) {
+    ::ng-deep .mat-menu-panel {
+        border-top-left-radius: 0px !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-left-radius: 1px !important;
+        border-bottom-right-radius: 1px !important;
+        min-width: 6em !important;
+        max-width: none !important;
+    }
+    
+    ::ng-deep .details-panel {
+        min-width: 10em !important;
+        width: fit-content;
+        margin-top: 14px;
+    }
+
+    ::ng-deep .language-panel {
+        min-width: 6em;
+        margin-top: 14px;
+    }
+    
+    #menu-icon {
+        display: none;
+    }
+
+    #navbar-langs {
+        display: flex;
+        align-items: center;
+    }
+
+    #navigations { 
+        display: flex;
+        overflow-x: scroll;
+        width: fit-content;
+        max-width: 30%;
+        padding: 11px;
+    }
+
+    #user-button-sidenav {
+        display: none;
+    }
+}
+
+@media (max-width: 767px ) {
+    #button-username {
+        display: none;
+    }
+
+    #navbar-langs {
+        display: none;
+    }       
+    
+    #navigations {
+        display: none;
+    }
+
+    #user-button-menu {
+        display: none;
+    }
+}
+
+@media ( min-width: 768px ) and ( max-width: 991px ) {
+    #navbar-langs {
+        display: none;
+    }  
+    
+    #navigations {
+        display: none;
+    }
+
+    #user-button-menu {
+        display: none;
+    }
+}

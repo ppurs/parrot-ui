@@ -11,6 +11,11 @@
     height: calc( 100% - 5em );
 }
 
+.page-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .spinner {
     display: flex;
     justify-content: center;

@@ -44,6 +44,11 @@ button {
     height: calc( 100% - 5em );
 }
 
+.page-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 a:link, a:active, a:hover, a:visited {
     color: green;
     background-color: transparent;

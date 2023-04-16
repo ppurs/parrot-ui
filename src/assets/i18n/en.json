@@ -2,7 +2,11 @@
     "account": {
         "username": "Username",
         "password": "Password",
-        "email": "Email"
+        "email": "Email",
+        "types": {
+            "admin": "Admin",
+            "free": "Free account"
+        }
     },
 
     "confirmation-dialog": {
@@ -76,6 +80,14 @@
         "to": "To",
         "logout": "Log out",
         "go-back-to-admin": "Go back to admin account"
+    },
+
+    "navigations": {
+        "quiz": "Quiz",
+        "translations": "Translations",
+        "labels": "Labels",
+        "users": "Users",
+        "languages": "Languages"
     },
 
     "quiz-filter-form": {

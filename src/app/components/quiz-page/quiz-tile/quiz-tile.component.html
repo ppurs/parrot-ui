@@ -26,47 +26,46 @@
             </div>
         </mat-expansion-panel-header>
         
-            <div class="row">
-                <div class="row">
-                    <div class="col">
-                        <div class="input">
-                            <div class="label">
-                                <span>{{ 'quiz-tile.field.word-from' | translate }}</span>
-                            </div>
-                            <span>{{currentContent.wordFrom}}</span>
+       
+        <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 tile-col">
+                    <div class="input">
+                        <div class="label">
+                            <span>{{ 'quiz-tile.field.word-from' | translate }}</span>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="input">
-                            <div class="label">
-                                <span>{{ 'quiz-tile.field.type' | translate }}</span>
-                            </div>
-                            <span>{{currentContent.wordType}}</span>
-                        </div>
+                        <span>{{currentContent.wordFrom}}</span>
                     </div>
                 </div>
-
-                <div *ngIf="currentContent.description != ''" class="row">
-                    <div class="col">
-                        <div class="input">
-                            <div class="label">
-                                <span>{{ 'quiz-tile.field.description' | translate }}</span>
-                            </div>
-                            <span>{{currentContent.description}}</span>
+                <div class="col-sm-12 col-md-6 col-lg-6 tile-col">
+                    <div class="input">
+                        <div class="label">
+                            <span>{{ 'quiz-tile.field.type' | translate }}</span>
                         </div>
+                        <span>{{currentContent.wordType}}</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="row answer-row">
-                    <div class="col">
-                        <mat-form-field class="answer">
-                            <input type="text" placeholder="{{ 'quiz-tile.answer' | translate }}" matInput [formControl]="userAnswer" (keyup.enter)="onEnter()">
-                        </mat-form-field> 
+            <div *ngIf="currentContent.description != ''" class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 tile-col">
+                    <div class="input">
+                        <div class="label">
+                            <span>{{ 'quiz-tile.field.description' | translate }}</span>
+                        </div>
+                        <span>{{currentContent.description}}</span>
                     </div>
-                    <div class="col answer-buttons">
-                        <button type="submit" mat-raised-button color="primary" (click)="onCheckClick()" [disabled]="answerBtnsDisabled">{{ 'quiz-tile.button.check' | translate }}</button>
-                        <button id="ga-button" mat-raised-button color="primary" (click)="onGiveAnswerClick()" [disabled]="answerBtnsDisabled">{{ 'quiz-tile.button.give-answer' | translate }}</button>
-                    </div>
+                </div>
+            </div>
+
+            <div id="answer-row" class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6 tile-col">
+                    <mat-form-field class="input">
+                        <input type="text" placeholder="{{ 'quiz-tile.answer' | translate }}" matInput [formControl]="userAnswer" (keyup.enter)="onEnter()">
+                    </mat-form-field> 
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 tile-col answer-buttons">
+                    <button id="check-button" type="submit" mat-raised-button color="primary" (click)="onCheckClick()" [disabled]="answerBtnsDisabled">{{ 'quiz-tile.button.check' | translate }}</button>
+                    <button id="ga-button" mat-raised-button color="primary" (click)="onGiveAnswerClick()" [disabled]="answerBtnsDisabled">{{ 'quiz-tile.button.give-answer' | translate }}</button>
                 </div>
             </div>
 

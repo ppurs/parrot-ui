@@ -12,7 +12,7 @@ import { SelectionStrategy } from './strategy/selection.strategy';
 @Component({
   selector: 'app-quiz-tile',
   templateUrl: './quiz-tile.component.html',
-  styleUrls: ['./quiz-tile.component.scss']
+  styleUrls: ['./quiz-tile.component.scss', '../../shared/tile-content.scss']
 })
 export class QuizTileComponent implements OnInit {
   @Input() strategyOption: SelectionStrategyOptions;

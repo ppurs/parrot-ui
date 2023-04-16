@@ -2,14 +2,6 @@
     line-height: 2em;
 }
 
-.i-button-container {
-    min-width: 9em;
-    min-height: 2em;
-    float: right;
-    display: flex;
-    align-items: center;
-}
-
 .margin-tile { 
     margin-top: 0.5em;
     width: 100%;
@@ -26,4 +18,48 @@
 .impersonate-spinner {
     margin-left: auto;
     margin-right: auto;
+}
+
+@media (max-width: 767px ) {
+    .mobile-header {
+        display: inline-block;
+        width: 6em;
+    }
+
+    .i-button-container {
+        min-width: 9em;
+        min-height: 2em;
+        margin-left: 6em;
+        margin-top: 0.5em;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media ( min-width: 768px ) and ( max-width: 991px ) {
+    .mobile-header {
+        display: none;
+    }
+
+    .i-button-container {
+        min-width: 9em;
+        min-height: 2em;
+        float: right;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (min-width: 992px ) {
+    .mobile-header {
+        display: none;
+    }
+
+    .i-button-container {
+        min-width: 9em;
+        min-height: 2em;
+        float: right;
+        display: flex;
+        align-items: center;
+    }
 }

@@ -1,5 +1,6 @@
 .mat-expansion-panel {
-    padding: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     width: 100%;
 }
 
@@ -24,4 +25,38 @@
 .status-info {
     width: 24px;
     margin-left: 0.5em;
+}
+
+.confirm-buttons {
+    max-width: 100%;
+}
+
+@media (max-width: 767px ) {
+    .buttons {
+        width: min-content;
+        margin-right: 0;
+        margin-left: auto;
+        width: 100%
+    }
+
+    .long-btn-span {
+        white-space: pre-wrap;
+        text-align: left;
+    }
+}
+
+@media ( min-width: 768px ) and ( max-width: 991px ) {
+    .buttons {
+        width: min-content;
+        margin-right: 0;
+        margin-left: auto;
+    }
+}
+
+@media (min-width: 992px ) {
+    .buttons {
+        width: min-content;
+        margin-right: 0;
+        margin-left: auto;
+    }
 }

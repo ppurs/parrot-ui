@@ -1,6 +1,6 @@
 <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-    <div class="filters-container">
-        <div class="filter-input-box">
+    <div id="filters-container" class="row">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <input  type="text" 
                         [placeholder]="'labels-filter-form.name' | translate" 
@@ -16,7 +16,7 @@
                 </mat-autocomplete>
             </mat-form-field> 
         </div>
-        <div class="filter-input-box">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <input  type="text" 
                         [placeholder]="'labels-filter-form.parent-name' | translate" 
@@ -32,11 +32,11 @@
                 </mat-autocomplete>
             </mat-form-field> 
         </div>
-        <div class="filter-input-box">
+        <div class="col-sm-12 col-md-12 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering 
                             [placeholder]="'labels-filter-form.hierarchy-options' | translate" 
-                            panelClass="bottom-position-filter" 
+                            panelClass="bottom-position-filter bottom-position-filter-first" 
                             formControlName="hierarchyOptions" 
                             multiple>                 
                     <mat-option *ngFor="let option of HierarchyOptions" 

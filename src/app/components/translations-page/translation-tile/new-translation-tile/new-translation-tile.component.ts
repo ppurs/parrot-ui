@@ -16,7 +16,9 @@ const NEW_OPTIONS: TileActionBarOptions[] = [
 @Component({
   selector: 'app-new-translation-tile',
   templateUrl: './new-translation-tile.component.html',
-  styleUrls: ['./new-translation-tile.component.scss']
+  styleUrls: ['./new-translation-tile.component.scss', 
+              '../../../shared/tile-content.scss', 
+              '../../../shared/list-tile-content.scss' ]
 })
 export class NewTranslationTileComponent extends TranslationTile implements OnInit {
   @Output() createNewTile = new EventEmitter<{labels?: number[]}>();

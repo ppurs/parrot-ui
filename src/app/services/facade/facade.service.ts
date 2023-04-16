@@ -25,6 +25,8 @@ import { UserService } from '../user/user.service';
 import { UsersFilterElement } from 'src/app/models/users-filter-element';
 import { User } from 'src/app/auth/models/user';
 import { UsersFilter } from 'src/app/models/users-filter';
+import { NavbarNavigation } from 'src/app/models/navbar-navigation';
+import { AccountType } from 'src/app/models/account-type';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +75,10 @@ export class FacadeService {
     return this.translationService.editTranslationLabelList( translationId, addedIds, removedIds );
   }  
 
+  getAccountTypes(): Observable<AccountType[]> {
+    return this.mainService.getAccountTypes();
+  }
+
   getFetchMoreQuizTilesStatus(): Observable<boolean> {
     return this.quizService.isFetchingMoreTiles$;
   }
@@ -95,6 +101,10 @@ export class FacadeService {
 
   getLabelSelectList(): LabelProperties[] {
     return this.translationService.labels;
+  }
+
+  getNavigations(): Observable<NavbarNavigation[]> {
+    return this.mainService.getNavigations();
   }
 
   getQuizTile(): QuizTile | null {

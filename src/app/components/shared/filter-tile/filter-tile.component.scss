@@ -1,16 +1,24 @@
-.margintile { 
+#filter-tile-container { 
      margin-bottom: 1em;
+}
+
+#apply-button {
+    background-color: white;
+    height: 2.5em;
 }
 
 .filter-panel {
     background-color: var(--primary-green);
-}
-
-.mat-expansion-panel {
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
+    width: 100%
+}
+
+
+.flex-box {
+    display: flex;
 }
 
 .mat-expansion-panel-header-title { 
@@ -26,20 +34,24 @@
     color: white
   }
 
-.apply-button {
-    background-color: white;
-    height: 2.5em;
-}
-
-#option-box {
-    display: flex;
-    margin-right: 1em;
-}
-
-.flex-box {
-    display: flex;
-}
-
 .settings-button {
     color: white;
+}
+
+@media ( min-width: 992px ) {
+    #filter-form-content {
+        margin-right: 2em;
+    }
+
+    #option-box {
+        display: flex;
+    }
+}
+
+@media (max-width: 991px ) {
+    #option-box {
+        display: flex;
+        flex-direction: column;
+    }
+    
 }

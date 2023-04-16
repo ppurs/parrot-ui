@@ -1,6 +1,6 @@
 <form [formGroup]="filterForm">
-    <div class="filters-container">
-        <div class="filter-input-box">
+    <div id="filters-container" class="row">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <input  matInput 
                         type="text" 
@@ -19,7 +19,7 @@
             </mat-form-field> 
         </div>
 
-        <div class="filter-input-box">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <input  matInput 
                         type="text" 
@@ -37,11 +37,11 @@
             </mat-form-field> 
         </div>
 
-        <div class="filter-input-box">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering 
                             [placeholder]="'translations-filter-form.types' | translate" 
-                            panelClass="bottom-position-filter" 
+                            panelClass="bottom-position-filter bottom-position-filter-first" 
                             formControlName="types" 
                             multiple>                 
                     <mat-option *ngFor="let type of Types" [value]="type.id">
@@ -51,7 +51,7 @@
             </mat-form-field> 
         </div>
 
-        <div class="filter-input-box">
+        <div class="col-sm-12 col-md-6 filter-input-lg">
             <mat-form-field appearance="outline" floatLabel='never' class="filter-input">
                 <mat-select disableOptionCentering 
                             [placeholder]="'translations-filter-form.labels' | translate" 

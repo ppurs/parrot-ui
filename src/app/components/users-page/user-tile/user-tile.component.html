@@ -1,8 +1,9 @@
 <mat-card class="margin-tile user-content">
     <div class="row list-row user-content">
-        <div class="col-3"> {{user.username}} </div>
-        <div class="col-4"> {{user.email}} </div>
-        <div class="col-2 state-col"> 
+        <div class="col-sm-12 col-md-3 col-lg-3"> <span class="mobile-header">{{ 'users-list.username' | translate }}:</span>{{user.username}} </div>
+        <div class="col-sm-12 col-md-4 col-lg-4"> <span class="mobile-header">{{ 'users-list.email' | translate }}:</span>{{user.email}} </div>
+        <div class="col-sm-12 col-md-2 col-lg-2 state-col"> 
+            <span class="mobile-header">{{ 'users-list.account-state.header' | translate }}:</span>
             <mat-slide-toggle [formControl]="accountState">{{ getAccountStateKey() | translate }}</mat-slide-toggle>
         </div>
         <div class="col"> 

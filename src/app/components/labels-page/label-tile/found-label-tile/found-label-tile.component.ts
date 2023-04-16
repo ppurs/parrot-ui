@@ -24,7 +24,9 @@ const FOUND_OPTIONS: TileActionBarOptions[] = [
 @Component({
   selector: 'app-found-label-tile',
   templateUrl: './found-label-tile.component.html',
-  styleUrls: ['./found-label-tile.component.scss']
+  styleUrls: ['./found-label-tile.component.scss', 
+              '../../../shared/tile-content.scss',
+              '../../../shared/list-tile-content.scss']
 })
 export class FoundLabelTileComponent extends LabelTile implements OnInit {
   @Input() override content!: Label;
