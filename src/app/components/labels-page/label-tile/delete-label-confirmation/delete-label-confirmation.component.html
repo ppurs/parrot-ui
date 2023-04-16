@@ -11,8 +11,8 @@
                 <div class="actions">
                     <div class="buttons">
                         <div class="confirm-buttons">
-                            <button mat-button color="primary" (click)="confirm($event, 1)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.confirm.detach-children' | translate }}</button>
-                            <button mat-button color="primary" (click)="confirm($event, 2)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.confirm.attach-children-to-parent' | translate }}</button>
+                            <button class="long-btn-span" mat-button color="primary" (click)="confirm($event, 1)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.confirm.detach-children' | translate }}</button>
+                            <button class="long-btn-span" mat-button color="primary" (click)="confirm($event, 2)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.confirm.attach-children-to-parent' | translate }}</button>
                         </div>
                         
                         <button mat-button class="cancel-button" (click)="cancel($event)" [disabled]="btnDisabled">{{ 'delete-label-confirmation.cancel' | translate }}</button>

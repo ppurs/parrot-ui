@@ -16,7 +16,9 @@ const NEW_OPTIONS: TileActionBarOptions[] = [
 @Component({
   selector: 'app-new-label-tile',
   templateUrl: './new-label-tile.component.html',
-  styleUrls: ['./new-label-tile.component.scss']
+  styleUrls: ['./new-label-tile.component.scss', 
+              '../../../shared/tile-content.scss',
+              '../../../shared/list-tile-content.scss']
 })
 export class NewLabelTileComponent extends LabelTile implements OnInit {
   @Output() createNewTile = new EventEmitter<{color: string}>();

@@ -1,68 +1,5 @@
-::ng-deep .mat-form-field-required-marker {
-    display: none
-}
-
-::ng-deep .bottom-position {
-    margin-top: 1.7em;
-    border-top-left-radius: 0px !important;
-    border-top-right-radius: 0px !important;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    margin-left: 16px;
-    min-width: 20em !important;
-}
-
-// ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-//     stroke: #2c3968;
-// }
-
 .confirmation { 
     width: 100% !important;
-}
-
-.term {
-    margin-top: 1em;
-}
-
-.mat-expansion-panel {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    width: 100%;
-}
-
-.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
-    align-items: center !important;
-}
-
-.input {
-    width: 20em;
-    margin-bottom: 1em;
-}
-
-.submit-button {
-    margin-top: 1em;
-    width: 15em;
-}
-
-.status-info {
-    width: 24px;
-    margin-left: 0.5em;
-}
-
-.center-content { 
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-
-.margintile { 
-    margin-top: 0.5em;
-    width: 100%;
-}
-
-.center-block {
-    width: min-content;
-    margin: auto;
 }
 
 .label {
@@ -70,22 +7,9 @@
     font-size: smaller;
 }
 
-.labels-content {
-    width: 20em;
-}
-
-.stats {
-    width: 20em;
-}
-
-.flex-box {
-    display: flex;
-}
-
-#option-icon {
-    margin-right: 0;
-}
-
-#empty-col {
-    width: 20em;
+@media (max-width: 767px ) {
+    .mat-expansion-panel-header {
+        min-height: 2.5em;
+        height: 100% !important;
+    }
 }

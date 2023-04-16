@@ -9,7 +9,7 @@
     <mat-sidenav #leftSidenav id="menu-sidenav" autoFocus="false" mode="over">
         <div id="sidenav-navigations">
             <div *ngFor="let link of navbar.activeLinks" >
-                <a  mat-button class="sidenav-button" (click)="navbar.onNavigationClick(link)">
+                <a  mat-button class="sidenav-button" (click)="navbar.onNavigationClick(link); toggleLeftSidenav();">
                     <span>{{ link.header | translate }}</span> 
                 </a> 
                 <mat-divider></mat-divider>

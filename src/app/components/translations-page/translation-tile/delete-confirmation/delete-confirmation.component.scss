@@ -6,3 +6,23 @@
     justify-content: space-between;
 }
 
+.confirm-buttons {
+    flex-direction: row;
+    display: flex;
+}
+
+@media (max-width: 767px ) {
+    .confirmation-info {
+        flex-direction: column;
+    }
+
+    .confirm-buttons {
+        margin-left: auto;
+    }
+    
+    .msg {
+        margin-right: auto;
+    }
+}
+
+

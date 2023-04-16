@@ -25,7 +25,9 @@ const FOUND_OPTIONS: TileActionBarOptions[] = [
 @Component({
   selector: 'app-found-translation-tile',
   templateUrl: './found-translation-tile.component.html',
-  styleUrls: ['./found-translation-tile.component.scss']
+  styleUrls: ['./found-translation-tile.component.scss', 
+              '../../../shared/tile-content.scss',
+              '../../../shared/list-tile-content.scss' ]
 })
 export class FoundTranslationTileComponent extends TranslationTile implements OnInit {
   @Input() override content!: Translation;
