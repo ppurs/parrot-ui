@@ -1,0 +1,30 @@
+#main-logo {
+    //position: absolute;
+    top: 5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: fit-content;
+    display: grid;
+}
+
+#main-title {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.main-card {
+    background-color: white;
+    box-shadow: 0 0 10px 10px white;
+    border-radius: 8px;
+    position: absolute;
+    top: 9%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: -moz-fit-content;
+    width: min-content;
+    display: grid;
+}
