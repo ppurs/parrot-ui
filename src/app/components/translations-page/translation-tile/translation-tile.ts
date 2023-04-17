@@ -9,6 +9,7 @@ import { Translation } from "src/app/models/translation";
 import { ListTile } from "../../../models/list-tile";
 import { LabelProperties } from "src/app/models/label-properties";
 import { LabelsChange } from "src/app/models/labels-change";
+import { take } from "rxjs";
 
 export class TranslationTile implements ListTile {
     content: Translation;
@@ -131,7 +132,9 @@ export class TranslationTile implements ListTile {
     }
 
     protected getLabels(): void {
-        this.Labels = this.facade.getLabelSelectList()
+        this.facade.getLabelSelectList().pipe(take(1)).subscribe(res => {
+            this.Labels = res;
+        });
     }
     
     protected getWordTypes(): void {

@@ -111,10 +111,6 @@ export class LabelTile implements ListTile {
         }
     }
 
-    protected getLabels(): void {
-        this.Labels = this.facade.getLabelSelectList()
-    }
-
     protected validationCheck(): boolean {
         if ( this.labelForm.invalid ){
           this.labelForm.markAllAsTouched();

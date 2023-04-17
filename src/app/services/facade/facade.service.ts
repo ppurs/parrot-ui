@@ -84,7 +84,7 @@ export class FacadeService {
   }
 
   getLabelsToTranslationFilter(): Observable<LabelProperties[]> {
-    return this.translationService.getLabelsToFilter();
+    return this.labelService.getLabelsToFilter();
   }
 
   getNavbarData(): Observable<NavbarData> {
@@ -99,8 +99,8 @@ export class FacadeService {
     return this.labelService.getLabelsList( filter, limit, offset );
   }
 
-  getLabelSelectList(): LabelProperties[] {
-    return this.translationService.labels;
+  getLabelSelectList(): Observable<LabelProperties[]> {
+    return this.labelService.labels$;
   }
 
   getNavigations(): Observable<NavbarNavigation[]> {
@@ -148,7 +148,7 @@ export class FacadeService {
   }
 
   loadLabelSelectList(): Observable<LabelProperties[]> {
-    return this.translationService.getLabelsToFilter();
+    return this.labelService.getLabelsToFilter();
   }
 
   loadNewQuizTiles(): Observable<QuizTile[]> { 

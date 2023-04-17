@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { map, Observable, of, startWith } from 'rxjs';
+import { map, Observable, of, startWith, Subscription } from 'rxjs';
 import { FilterForm } from 'src/app/models/filter-form';
 import { Option } from 'src/app/models/option';
 import { LabelProperties } from 'src/app/models/label-properties';
@@ -27,6 +27,7 @@ export class LabelsFilterFormComponent extends FilterForm implements OnInit {
   })
 
   private Labels: LabelProperties[];
+  private labelsSubscription?: Subscription;
 
   constructor( private facade: FacadeService,
                private fb: FormBuilder ) {
@@ -48,7 +49,10 @@ export class LabelsFilterFormComponent extends FilterForm implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getLabels();
+    this.labelsSubscription = this.facade.getLabelSelectList().subscribe( res => {
+      this.Labels = res;
+    })
+    
     this.getPlaceInHierarchyOptions();
 
     this.filteredNameLabels = this.namePrefix?.valueChanges.pipe(
@@ -82,10 +86,6 @@ export class LabelsFilterFormComponent extends FilterForm implements OnInit {
     return this.Labels.filter( hint => hint.labelName.toLowerCase().includes(filterValue) );
   }
 
-  private getLabels(): void {
-    this.Labels = this.facade.getLabelSelectList();
-  }
-
   private getPlaceInHierarchyOptions(): void {
     this.HierarchyOptions = this.facade.getLabelParentHierarchyOptions();
 
@@ -94,6 +94,10 @@ export class LabelsFilterFormComponent extends FilterForm implements OnInit {
                             ?.map( option => option.id ) ?? [];
                             
     this.hierarchyOptions?.setValue(defaultOptions);
+  }
+
+  ngOnDestroy(): void {
+    this.labelsSubscription?.unsubscribe();
   }
 
 }

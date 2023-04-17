@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { map, Observable, of, pairwise, startWith, Subscription } from 'rxjs';
+import { map, Observable, of, pairwise, startWith, Subscription, take } from 'rxjs';
 import { FilterForm } from 'src/app/models/filter-form';
 import { LabelProperties } from 'src/app/models/label-properties';
 import { TranslationFilterHints } from 'src/app/models/translation-filter-hints';
@@ -140,7 +140,9 @@ export class TranslationsFilterFormComponent extends FilterForm implements OnIni
   }
 
   private getLabels(): void {
-    this.Labels.push(...this.facade.getLabelSelectList());
+    this.facade.getLabelSelectList().pipe(take(1)).subscribe( res => {
+      this.Labels.push(...res);
+    })
   }
 
   private onWordTypesChange( val: number[] | null ): void {

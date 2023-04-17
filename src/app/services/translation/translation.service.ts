@@ -7,7 +7,6 @@ import { Translation } from 'src/app/models/translation';
 import { TranslationFilterHints } from 'src/app/models/translation-filter-hints';
 import { WordType } from 'src/app/models/word-type';
 import { MainService } from '../main/main.service';
-import { LabelProperties } from 'src/app/models/label-properties';
 import { AddTranslationResponse } from 'src/app/models/requests/translation/add-translation.response';
 import { EditTranslationLabelResponse } from 'src/app/models/requests/translation/edit-translation-label.response';
 
@@ -30,7 +29,6 @@ export class TranslationService {
   private readonly TRANSLATION_API = '/api/translation';
 
   wordTypes!: WordType[];
-  labels!: LabelProperties[];
 
   constructor(private http: HttpClient, 
               private mainService: MainService) {}
@@ -92,24 +90,6 @@ export class TranslationService {
         };
       })
     );
-  }
-
-  getLabelsToFilter(): Observable<LabelProperties[]> {
-    return this.http.post<{results: LabelProperties[]}>( 
-      this.TRANSLATION_API + '/label-list',
-       {
-        filters: {
-          languageFromId: this.mainService.currentLanguages.languageFrom.id,
-          languageToId: this.mainService.currentLanguages.languageTo.id
-        }
-       }).pipe(
-        map( data =>  {
-          this.labels = data.results;
-
-          return data.results;
-        }
-        )
-      );
   }
 
   getTranslationFilterHints(payload: TranslationFilterHints): Observable<string[]> {

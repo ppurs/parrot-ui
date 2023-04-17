@@ -40,6 +40,7 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   showDeleteMessage: boolean;
 
   private initialState!: TileState;
+  private labelsSubscription?: Subscription;
 
   constructor( facade: FacadeService,
                private cdref: ChangeDetectorRef ) { 
@@ -55,7 +56,10 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
 
     this.changeState(this.initialState);
     this.fillTileForm( this.content );  
-    this.getLabels();
+    
+    this.labelsSubscription = this.facade.getLabelSelectList().subscribe( res => {
+      this.Labels = res;
+    });
   }
 
   deleteConfirmed(event: {confirm: boolean, option?: number}): void {
@@ -177,8 +181,6 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   return false; 
   }
 
-  
-
   private onDelete() {
     this.showDeleteMessage = true;
   }
@@ -193,5 +195,9 @@ export class FoundLabelTileComponent extends LabelTile implements OnInit {
   private onCopyContent(): void {
     this.duplicateFormValues.emit( this.getCurrentFormValue() );
   } 
+
+  ngOnDestroy(): void {
+    this.labelsSubscription?.unsubscribe();
+  }
 
 }

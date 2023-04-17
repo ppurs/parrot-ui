@@ -8,6 +8,7 @@ import { SubmittedState } from 'src/app/components/shared/states/submitted.state
 import { LabelTile } from '../label-tile';
 import { LabelProperties } from 'src/app/models/label-properties';
 import { TileStateStatus } from 'src/app/models/tile-state-status';
+import { Subscription } from 'rxjs';
 
 const NEW_OPTIONS: TileActionBarOptions[] = [
   TileActionBarOptions.COPY_CONTENT
@@ -27,6 +28,8 @@ export class NewLabelTileComponent extends LabelTile implements OnInit {
   first: boolean;
   tileOptions: TileActionBarOptions[];
 
+  private labelsSubscription?: Subscription;
+
   constructor(  facade: FacadeService,
                 private cdref: ChangeDetectorRef ) { 
     super( facade, new FormBuilder );
@@ -39,7 +42,10 @@ export class NewLabelTileComponent extends LabelTile implements OnInit {
     const initialState = new ActiveState();
 
     this.changeState(initialState);
-    this.getLabels();
+    
+    this.labelsSubscription = this.facade.getLabelSelectList().subscribe( res => {
+      this.Labels = res;
+    })
   }
 
   ngAfterViewInit(): void {
@@ -102,5 +108,9 @@ export class NewLabelTileComponent extends LabelTile implements OnInit {
   private onCopyContent(): void {
     this.duplicateFormValues.emit( this.getCurrentFormValue() );
   } 
+
+  ngOnDestroy(): void {
+    this.labelsSubscription?.unsubscribe();
+  }
 }
 

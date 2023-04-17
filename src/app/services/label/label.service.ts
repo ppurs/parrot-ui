@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Label } from 'src/app/models/label';
 import { Option } from 'src/app/models/option';
 import { LabelProperties } from 'src/app/models/label-properties';
@@ -15,8 +15,12 @@ import { MainService } from '../main/main.service';
 })
 export class LabelService {
   private readonly LABEL_API = '/api/labels';
+  private readonly TRANSLATION_API = '/api/translation';
 
   hierarchyOptions!: Option[];
+
+  private labels = new BehaviorSubject<LabelProperties[]>([]);
+  labels$: Observable<LabelProperties[]> = this.labels.asObservable();
 
   constructor( private http: HttpClient,
                private mainService: MainService ) { }
@@ -30,6 +34,20 @@ export class LabelService {
         colorCode: label.colorCode,
         parentLabelId: label.directParentLabelId
       }
+      ).pipe( 
+        tap(
+        res => {
+          if( res.result ) {
+            const newLabel: LabelProperties = {
+              labelName: label.labelName,
+              labelId: res.insertedId,
+              colorCode: label.colorCode
+            };
+
+            this.updateLabelsToFilter(newLabel);
+          }
+        }
+        )
       );
   }
 
@@ -83,5 +101,28 @@ export class LabelService {
       .pipe(
         map( data => data.results )
       );
+  }
+
+  getLabelsToFilter(): Observable<LabelProperties[]> {
+    return this.http.post<{results: LabelProperties[]}>( 
+      this.TRANSLATION_API + '/label-list',
+       {
+        filters: {
+          languageFromId: this.mainService.currentLanguages.languageFrom.id,
+          languageToId: this.mainService.currentLanguages.languageTo.id
+        }
+       }).pipe(
+        map( data =>  {
+          this.labels.next(data.results);
+
+          return data.results;
+        }
+        )
+      );
+  }
+
+  private updateLabelsToFilter(newLabel: LabelProperties): void {
+    const newArray = this.labels.getValue().concat(newLabel);
+    this.labels.next( newArray );
   }
 }
