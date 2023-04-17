@@ -7,5 +7,5 @@ $parrot-ui-accent:  mat-palette(/*$mat-lime, 600*/ $mat-light-green, 900);
 $parrot-ui-theme: mat-light-theme($parrot-ui-primary, $parrot-ui-accent);
 @include angular-material-theme($parrot-ui-theme);
 
-$custom-typography: mat-typography-config($font-family: '"Roboto Mono"');
+$custom-typography: mat-typography-config($font-family: '"Hahmlet"');
 @include mat-core($custom-typography);

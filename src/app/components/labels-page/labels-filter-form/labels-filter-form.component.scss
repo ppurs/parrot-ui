@@ -3,10 +3,12 @@
     background-color: white;
     border-radius: 5px;
     height: 2.5em;
+    line-height: 1.25em;
   }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 0 !important;
+    line-height: 1.25em !important;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
