@@ -80,7 +80,7 @@ export class QuizTileComponent implements OnInit {
       this.answerStatus = AnswerStatus.CORRECT;
 
       this.facade.notifySuccess( this.tileData!.content.translationId ).subscribe();
-      this.wordReload();
+      //this.wordReload();
     }
     else {
       const otherAnswer = this.tileData!.otherAnswers
@@ -91,7 +91,7 @@ export class QuizTileComponent implements OnInit {
         this.answerStatus = AnswerStatus.CORRECT;
         
         this.facade.notifySuccess( this.tileData!.content.translationId ).subscribe();
-        this.wordReload();
+        //this.wordReload();
       }
       else {
         this.answerStatus =  otherAnswer ? AnswerStatus.PARTLY_CORRECT : AnswerStatus.INCORRECT;
